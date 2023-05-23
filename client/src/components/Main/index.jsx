@@ -3,6 +3,8 @@ import styles from "./styles.module.css"
 import categoriesData from "../categoriesData";
 import foodData from "../foodData";
 import Navigation from "../Navigation";
+import { loadCartItemsFromLocalStorage, saveCartItemsToLocalStorage } from "../Scripts/localStorage";
+
 const Main = ({ handleLogout }) => {
 
   const [selectedCategory, setSelectedCategory] = useState(categoriesData[0]);
@@ -15,7 +17,7 @@ const Main = ({ handleLogout }) => {
   }
 
   const filteredFoodData = foodData.filter((food) => food.category === selectedCategory.name);
-
+/*
   useEffect(() => {
     const storedCartItems = localStorage.getItem("cartItems");
     if (storedCartItems) {
@@ -25,8 +27,15 @@ const Main = ({ handleLogout }) => {
 
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  }, [cartItems]);
+  }, [cartItems]);*/
 
+  useEffect(() => {
+    loadCartItemsFromLocalStorage(setCartItems);
+  }, []);
+
+  useEffect(() => {
+    saveCartItemsToLocalStorage(cartItems);
+  }, [cartItems]);
 
 
   const addToCart = (food) => {

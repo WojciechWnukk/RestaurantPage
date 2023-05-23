@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styles from "./styles.module.css"
 import Navigation from "../Navigation";
+import { Link } from "react-router-dom";
+import { calculateTotalPrice } from "../Scripts/calculateTotalPrice";
 
 const Cart = ({ handleLogout }) => {
   const [cartItems, setCartItems] = useState([]);
   console.log("Cart Items:", cartItems);
+  const totalPrice = calculateTotalPrice(cartItems);
 
 
   useEffect(() => {
@@ -24,14 +27,14 @@ const Cart = ({ handleLogout }) => {
     const updatedCartItems = cartItems.filter((item) => item.id !== itemId);
     setCartItems(updatedCartItems);
   };
-
+/*
   const calculateTotalPrice = () => {
     const totalPrice = cartItems.reduce(
       (total, item) => total + parseFloat(item.price) * item.quantity,
       0
     );
     return totalPrice.toFixed(2);
-  };
+  };*/
 
 
   return (
@@ -62,12 +65,13 @@ const Cart = ({ handleLogout }) => {
           ))}
 
           <div className={styles.total_price}>
-            <h3>Total Price: {calculateTotalPrice() + "zł"}</h3>
-
+          <Link to="/order-realize" className={styles.link_btn}>
+              Przejdź do podsumowania
+            </Link>
+            <h3>Total Price: {totalPrice + "zł"}</h3>
           </div>
         </div>
       )}
-
     </div>
   );
 };

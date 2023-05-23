@@ -15,6 +15,7 @@
 	padding: 10px;
 	background-color: #333;
 	color: white;
+	flex-shrink: 0;
   }
   
   .navbar h1 {

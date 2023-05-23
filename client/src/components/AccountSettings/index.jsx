@@ -1,11 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./styles.module.css";
+import Navigation from "../Navigation";
+import { loadCartItemsFromLocalStorage, saveCartItemsToLocalStorage } from "../Scripts/localStorage";
 
-const AccountSettings = () => {
+const AccountSettings = ({ handleLogout }) => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [cartItems, setCartItems] = useState([]);
+
+  useEffect(() => {
+    loadCartItemsFromLocalStorage(setCartItems);
+  }, []);
+
+  useEffect(() => {
+    saveCartItemsToLocalStorage(cartItems);
+  }, [cartItems]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,6 +38,8 @@ const AccountSettings = () => {
 
   return (
     <div className={styles.account_settings_container}>
+      <Navigation cartItemCount={cartItems.length} handleLogout={handleLogout} />
+
       <h2>Account Settings</h2>
       <form onSubmit={handleSubmit}>
         <div className={styles.form_group}>

@@ -11,10 +11,10 @@ const Navigation = ({ cartItemCount }) => {
   const handleLogout = () => {
     localStorage.removeItem("token")
     window.location.reload()
+    //trzeba dodać destroy carta
   }
   return (
     <nav className={styles.navbar}>
-      <h1>Restauracja</h1>
       <div className={styles.nav_links}>
         <button
           className={`${styles.nav_button} ${styles.white_btn}`}
@@ -33,6 +33,18 @@ const Navigation = ({ cartItemCount }) => {
           onClick={() => handleNavigation("/account-settings")}
         >
           Account Settings
+        </button>
+        <button
+          className={`${styles.nav_button} ${styles.white_btn}`}
+          onClick={() => handleNavigation("/reservations")}
+        >
+          Reservations
+        </button>
+        <button
+          className={`${styles.nav_button} ${styles.white_btn}`}
+          onClick={() => handleNavigation("/permision")}
+        >
+          Permisions
         </button>
       </div>
       <button
