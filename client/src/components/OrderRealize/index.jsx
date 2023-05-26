@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styles from "./styles.module.css";
 import Navigation from "../Navigation";
+import axios from "axios"
+import { v4 as uuidv4 } from "uuid";
 import { loadCartItemsFromLocalStorage, saveCartItemsToLocalStorage } from "../Scripts/localStorage";
 import { calculateTotalPrice } from "../Scripts/calculateTotalPrice";
 
@@ -27,28 +29,32 @@ const OrderRealize = ({ handleLogout }) => {
     setComments(event.target.value);
   };
 
-  const handleOrderTimeChange = () => {
-    const currentTime = new Date();
-    const currentHour = currentTime.getHours();
-    let estimatedTime = 40;
 
-    if (currentHour >= 12 && currentHour < 16) {
-      estimatedTime += 20;
-    } else if (currentHour >= 16 && currentHour < 20) {
-      estimatedTime += 30;
-    } else if (currentHour >= 20) {
-      estimatedTime += 40;
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const orderNumber = 123
+    try {
+      const url = "http://localhost:8080/api/orders";
+
+      const data = {
+        //orderNumber,
+        tableNumber,
+        comments,
+        //meals,
+        totalPrice,
+        status: "Zamowiono"
+      };
+
+      const response = await axios.post(url, data);
+
+      console.log("Order created successfully");
+      // Dodać obsługę sukcesu, np. wyświetlenie komunikatu lub przekierowanie
+
+    } catch (error) {
+      console.error("Error creating order:", error);
+      console.log(" numer " + orderNumber)
+      // Dodać obsługę błędu, np. wyświetlenie komunikatu o błędzie
     }
-
-    setOrderTime(`${estimatedTime}min`);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Do something with the form data, e.g., send it to the server
-    console.log("Table Number:", tableNumber);
-    console.log("Comments:", comments);
-    console.log("Order Time:", orderTime);
   };
 
   return (
@@ -106,9 +112,7 @@ const OrderRealize = ({ handleLogout }) => {
         <div className={styles.form_group}>
           <label>Order Time:</label>
           <p>{orderTime}</p>
-          <button type="button" onClick={handleOrderTimeChange}>
-            Update Order Time
-          </button>
+
         </div>
 
         <div className={styles.form_group}>

@@ -1,8 +1,11 @@
 const mongoose = require("mongoose")
 module.exports = () => {
+    const databaseName = process.env.DB_NAME;
+
     const connectionParams = {
         useNewUrlParser: true,
         useUnifiedTopology: true,
+        dbName: process.env.DB_NAME,
     }
     try {
         mongoose.connect(process.env.DB, connectionParams)

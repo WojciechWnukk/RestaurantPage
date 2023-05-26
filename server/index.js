@@ -4,6 +4,7 @@ const app = express()
 const cors = require('cors')
 const userRoutes = require("./routes/users")
 const authRoutes = require("./routes/auth")
+const orderRoutes = require("./routes/orders")
 //middleware
 app.use(express.json())
 app.use(cors())
@@ -13,6 +14,7 @@ connection()
 
 // routes
 app.use("/api/users", userRoutes)
+app.use("/api/orders", orderRoutes)
 app.use("/api/auth", authRoutes)
 
 
