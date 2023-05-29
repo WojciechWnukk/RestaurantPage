@@ -7,6 +7,7 @@ import { loadCartItemsFromLocalStorage, saveCartItemsToLocalStorage } from "../S
 import { calculateTotalPrice } from "../Scripts/calculateTotalPrice";
 
 const OrderRealize = ({ handleLogout }) => {
+  const [meals, setMeals] = useState([])
   const [tableNumber, setTableNumber] = useState("");
   const [comments, setComments] = useState("");
   const [orderTime, setOrderTime] = useState("40min");
@@ -30,17 +31,26 @@ const OrderRealize = ({ handleLogout }) => {
   };
 
 
+  const mealsData = cartItems.map((item) => ({
+    name: item.name,
+    quantity: item.quantity,
+    price: item.price,
+  }));
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const orderNumber = 123
+    console.log(" " + JSON.stringify(mealsData))
     try {
       const url = "http://localhost:8080/api/orders";
+
+      
 
       const data = {
         //orderNumber,
         tableNumber,
         comments,
-        //meals,
+        meals: mealsData,
         totalPrice,
         status: "Zamowiono"
       };
@@ -52,7 +62,7 @@ const OrderRealize = ({ handleLogout }) => {
 
     } catch (error) {
       console.error("Error creating order:", error);
-      console.log(" numer " + orderNumber)
+      console.log(" numer " + orderNumber, meals)
       // Dodać obsługę błędu, np. wyświetlenie komunikatu o błędzie
     }
   };
