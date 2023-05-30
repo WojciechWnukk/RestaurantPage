@@ -10,8 +10,9 @@ const Navigation = ({ cartItemCount }) => {
   };
   const handleLogout = () => {
     localStorage.removeItem("token")
+    localStorage.removeItem("cartItems")
     window.location.reload()
-    //trzeba dodać destroy carta
+    
   }
   return (
     <nav className={styles.navbar}>

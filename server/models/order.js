@@ -17,8 +17,12 @@ const orderSchema = new mongoose.Schema({
     totalPrice: {type: Number, required: true},
     status: {type: String, required: false},
     comments: {type: String, required: false},
+    userToken: {type: String, required: true},
     orderDate: {type: Date, default: Date.now}
 })
+
+
+
 const Order = mongoose.model("Order", orderSchema)
 /*
 const validate = (data) => {

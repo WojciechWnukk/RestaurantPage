@@ -15,6 +15,7 @@ connection()
 // routes
 app.use("/api/users", userRoutes)
 app.use("/api/orders", orderRoutes)
+app.get("/api/orders", orderRoutes)
 app.use("/api/auth", authRoutes)
 
 

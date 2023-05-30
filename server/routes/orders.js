@@ -12,6 +12,19 @@ router.post("/", async (req, res) => {
 });
 
 
+router.get("/", async (req, res) => {
+  //pobranie wszystkich użytkowników z bd:
+  Order.find().exec()
+  .then(async () => {
+  const orders = await Order.find();
+  //konfiguracja odpowiedzi res z przekazaniem listy użytkowników:
+  res.status(200).send({ data: orders, message: "Lista użytkowników" });
+  })
+  .catch(error => {
+  res.status(500).send({ message: error.message });
+  });
+ })
+
 module.exports = router;
 
 

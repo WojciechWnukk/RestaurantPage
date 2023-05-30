@@ -2,18 +2,19 @@ import React, { useState, useEffect } from "react";
 import styles from "./styles.module.css";
 import Navigation from "../Navigation";
 import axios from "axios"
-import { v4 as uuidv4 } from "uuid";
 import { loadCartItemsFromLocalStorage, saveCartItemsToLocalStorage } from "../Scripts/localStorage";
 import { calculateTotalPrice } from "../Scripts/calculateTotalPrice";
+import { useNavigate } from "react-router-dom";
 
 const OrderRealize = ({ handleLogout }) => {
   const [meals, setMeals] = useState([])
-  const [tableNumber, setTableNumber] = useState("");
+  const [tableNumber, setTableNumber] = useState(0);
   const [comments, setComments] = useState("");
   const [orderTime, setOrderTime] = useState("40min");
   const [cartItems, setCartItems] = useState([]);
   const totalPrice = calculateTotalPrice(cartItems);
-
+  const token = localStorage.getItem("token")
+  const navigate = useNavigate()
   useEffect(() => {
     loadCartItemsFromLocalStorage(setCartItems);
   }, []);
@@ -41,6 +42,7 @@ const OrderRealize = ({ handleLogout }) => {
     e.preventDefault();
     const orderNumber = 123
     console.log(" " + JSON.stringify(mealsData))
+    //console.log(token)
     try {
       const url = "http://localhost:8080/api/orders";
 
@@ -52,13 +54,16 @@ const OrderRealize = ({ handleLogout }) => {
         comments,
         meals: mealsData,
         totalPrice,
+        userToken: token,
         status: "Zamowiono"
       };
 
       const response = await axios.post(url, data);
 
       console.log("Order created successfully");
-      // Dodać obsługę sukcesu, np. wyświetlenie komunikatu lub przekierowanie
+      localStorage.removeItem("cartItems")
+      navigate("/order-success")
+
 
     } catch (error) {
       console.error("Error creating order:", error);
