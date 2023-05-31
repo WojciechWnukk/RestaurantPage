@@ -1,44 +1,91 @@
+/* styles.module.css */
+
 .account_settings_container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .account_settings_container h2 {
-    margin-bottom: 20px;
-  }
-  
-  .form_group {
-    margin-bottom: 20px;
-  }
-  
-  label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  input[type="password"] {
-    padding: 10px;
-    width: 300px;
-    font-size: 16px;
-  }
-  
-  .error_message {
-    color: red;
-    margin-top: 10px;
-  }
-  
-  button[type="submit"] {
-    padding: 10px 20px;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  button[type="submit"]:hover {
-    background-color: #45a049;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.account_settings_container h2 {
+  margin-bottom: 20px;
+}
+
+.form_group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input[type="password"] {
+  padding: 10px;
+  width: 100%; /* Zmiana szerokości na 100% */
+  max-width: 300px; /* Ograniczenie maksymalnej szerokości do 300px */
+  font-size: 16px;
+}
+
+.error_message {
+  color: red;
+  margin-top: 10px;
+}
+
+button[type="submit"] {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.delete_account {
+  margin-top: 20px;
+}
+
+.delete_account p {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.delete_account button {
+  background-color: #ff0000;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.delete_account button:hover {
+  background-color: #cc0000;
+}
+
+.button_container {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  width: 100%; 
+  max-width: 300px; 
+}
+
+.delete_account_button {
+  background-color: #ff0000;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.delete_account_button:hover {
+  background-color: #cc0000;
+}

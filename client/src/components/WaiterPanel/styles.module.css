@@ -1,0 +1,56 @@
+.waiter_panel_container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .waiter_panel_title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .order_item {
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .order_number {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .order_status {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  .status_ordered {
+    color: #007bff;
+  }
+  
+  .status_inprogress {
+    color: #28a745;
+  }
+  .order_table {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .order_date {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .status_select {
+    font-size: 14px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    outline: none;
+  }
+  
+  

@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import styles from "./styles.module.css";
 import Navigation from "../Navigation";
 import { loadCartItemsFromLocalStorage, saveCartItemsToLocalStorage } from "../Scripts/localStorage";
+import axios from "axios";
+
 
 const AccountSettings = ({ handleLogout }) => {
   const [currentPassword, setCurrentPassword] = useState("");
@@ -35,6 +37,39 @@ const AccountSettings = ({ handleLogout }) => {
     setConfirmPassword("");
     setErrorMessage("");
   };
+
+  const deleteUser = async (e) => {
+    e.preventDefault()
+    const token = localStorage.getItem("token")
+    console.log("token" + token)
+    const confirmed = window.confirm("Czy na pewno chcesz usunąć swoje konto?")
+
+    if (confirmed) {
+const token = localStorage.getItem("token")
+
+if (token) {
+  try {
+    const config = {
+      method: 'delete',
+      url: 'http://localhost:8080/api/users',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': token
+      }
+    }
+
+    await axios(config)
+    // Usunięcie użytkownika powiodło się
+  } catch (error) {
+
+  }
+}
+localStorage.removeItem("token")
+    localStorage.removeItem("cartItems")
+    window.location.reload()
+}
+
+}
 
   return (
     <div className={styles.account_settings_container}>
@@ -70,7 +105,12 @@ const AccountSettings = ({ handleLogout }) => {
           />
         </div>
         {errorMessage && <p className={styles.error_message}>{errorMessage}</p>}
-        <button type="submit">Change Password</button>
+        <div className={styles.button_container}>
+          <button type="submit">Change Password</button>
+          <button className={styles.delete_account_button} onClick={deleteUser}>
+            Delete Account
+          </button>
+        </div>
       </form>
     </div>
   );
