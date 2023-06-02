@@ -17,6 +17,7 @@ connection()
 // routes
 app.get("/api/users/",tokenVerification)
 app.delete("/api/users", tokenVerification)
+app.get("/api/users/user", tokenVerification)
 app.use("/api/users", userRoutes)
 app.put("/api/orders/:orderId", orderRoutes)
 app.use("/api/orders", orderRoutes)

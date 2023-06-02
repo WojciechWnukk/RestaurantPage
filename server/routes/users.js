@@ -1,6 +1,9 @@
 const router = require("express").Router()
 const { User, validate } = require("../models/user")
 const bcrypt = require("bcrypt")
+
+
+
 router.post("/", async (req, res) => {
     try {
         const { error } = validate(req.body)
@@ -44,5 +47,19 @@ router.delete("/", async (req, res) => {
         res.status(500).send({ message: "Internal Server Error" })
       }
     })
+
+
+    router.get("/user", async (req, res) => {
+        try {
+          const userId = req.user._id;
+          const user = await User.findById(userId);
+          if (!user) {
+            return res.status(404).send({ message: "User not found" });
+          }
+          res.status(200).send({ data: user, message: "User details retrieved successfully" });
+        } catch (error) {
+          res.status(500).send({ message: "Internal Server Error" });
+        }
+      });
 
 module.exports = router

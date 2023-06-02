@@ -38,6 +38,8 @@ const AccountSettings = ({ handleLogout }) => {
     setErrorMessage("");
   };
 
+  
+  
   const deleteUser = async (e) => {
     e.preventDefault()
     const token = localStorage.getItem("token")
