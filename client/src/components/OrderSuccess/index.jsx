@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import styles from "./styles.module.css";
 import Navigation from "../Navigation";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import NavigationForAdmin from "../NavigationForAdmin"
+import CheckRoles from "../CheckRoles";
 
 const OrderSuccess = ({ handleLogout }) => {
 
@@ -30,7 +31,19 @@ const OrderSuccess = ({ handleLogout }) => {
 
   return (
     <div className={styles.order_realize_container}>
-      <Navigation cartItemCount={""} handleLogout={handleLogout} />
+{//<Navigation cartItemCount={cartItems.length} handleLogout={handleLogout} />
+      }
+      
+      <CheckRoles>
+        {(details) => {
+          // Use the details to determine which navigation to render
+          if (details && details.roles === "Admin") {
+            return <NavigationForAdmin handleLogout={handleLogout} />;
+          } else {
+            return <Navigation cartItemCount={"Zamówiono"} handleLogout={handleLogout} />
+          }
+        }}
+      </CheckRoles>
       <h2>Thank you for placing your order!</h2>
       {reversedOrderData.map((order) => (
         <div key={order._id}>

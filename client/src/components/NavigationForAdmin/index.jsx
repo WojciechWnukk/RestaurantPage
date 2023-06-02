@@ -2,7 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 
-const Navigation = ({ cartItemCount }) => {
+const NavigationForAdmin = ({ cartItemCount }) => {
   const navigate = useNavigate();
 
   const handleNavigation = (path) => {
@@ -25,9 +25,9 @@ const Navigation = ({ cartItemCount }) => {
         </button>
         <button
           className={`${styles.nav_button} ${styles.white_btn}`}
-          onClick={() => handleNavigation("/cart")}
+          onClick={() => handleNavigation("/waiter-panel")}
         >
-          WaiterPanel ({cartItemCount})
+          WaiterPanel
         </button>
         <button
           className={`${styles.nav_button} ${styles.white_btn}`}
@@ -58,4 +58,4 @@ const Navigation = ({ cartItemCount }) => {
   );
 };
 
-export default Navigation;
+export default NavigationForAdmin;

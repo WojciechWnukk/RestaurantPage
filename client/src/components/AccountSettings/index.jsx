@@ -3,6 +3,8 @@ import styles from "./styles.module.css";
 import Navigation from "../Navigation";
 import { loadCartItemsFromLocalStorage, saveCartItemsToLocalStorage } from "../Scripts/localStorage";
 import axios from "axios";
+import NavigationForAdmin from "../NavigationForAdmin"
+import CheckRoles from "../CheckRoles";
 
 
 const AccountSettings = ({ handleLogout }) => {
@@ -75,8 +77,19 @@ localStorage.removeItem("token")
 
   return (
     <div className={styles.account_settings_container}>
-      <Navigation cartItemCount={cartItems.length} handleLogout={handleLogout} />
-
+      {//<Navigation cartItemCount={cartItems.length} handleLogout={handleLogout} />
+      }
+      
+      <CheckRoles>
+        {(details) => {
+          // Use the details to determine which navigation to render
+          if (details && details.roles === "Admin") {
+            return <NavigationForAdmin handleLogout={handleLogout} />;
+          } else {
+            return <Navigation cartItemCount={cartItems.length} handleLogout={handleLogout} />
+          }
+        }}
+      </CheckRoles>
       <h2>Account Settings</h2>
       <form onSubmit={handleSubmit}>
         <div className={styles.form_group}>

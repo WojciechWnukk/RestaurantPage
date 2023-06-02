@@ -43,9 +43,9 @@ const Navigation = ({ cartItemCount }) => {
         </button>
         <button
           className={`${styles.nav_button} ${styles.white_btn}`}
-          onClick={() => handleNavigation("/permision")}
+          onClick={() => handleNavigation("/")}
         >
-          Permisions
+          Pusty
         </button>
       </div>
       <button

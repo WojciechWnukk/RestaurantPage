@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./styles.module.css";
+//import checkRoles from "../Scripts/checkRoles";
 
 const WaiterPanel = () => {
   const [orders, setOrders] = useState([]);
   const [showAllOrders, setShowAllOrders] = useState(true);
   const [details, setDetails] = useState(null);
-  const [dane, ustawDane] = useState([]);
 
+  
   
 
   const fetchOrders = async () => {

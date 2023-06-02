@@ -3,6 +3,8 @@ import styles from "./styles.module.css"
 import Navigation from "../Navigation";
 import { Link } from "react-router-dom";
 import { calculateTotalPrice } from "../Scripts/calculateTotalPrice";
+import NavigationForAdmin from "../NavigationForAdmin"
+import CheckRoles from "../CheckRoles";
 
 const Cart = ({ handleLogout }) => {
   const [cartItems, setCartItems] = useState([]);
@@ -39,7 +41,19 @@ const Cart = ({ handleLogout }) => {
 
   return (
     <div className={styles.cart_container}>
-      <Navigation cartItemCount={cartItems.length} handleLogout={handleLogout} />
+{//<Navigation cartItemCount={cartItems.length} handleLogout={handleLogout} />
+      }
+      
+      <CheckRoles>
+        {(details) => {
+          // Use the details to determine which navigation to render
+          if (details && details.roles === "Admin") {
+            return <NavigationForAdmin handleLogout={handleLogout} />;
+          } else {
+            return <Navigation cartItemCount={cartItems.length} handleLogout={handleLogout} />
+          }
+        }}
+      </CheckRoles>
       <h2>Cart</h2>
       {cartItems.length === 0 ? (
         <p>Your cart is empty.</p>

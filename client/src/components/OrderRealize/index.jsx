@@ -5,6 +5,8 @@ import axios from "axios"
 import { loadCartItemsFromLocalStorage, saveCartItemsToLocalStorage } from "../Scripts/localStorage";
 import { calculateTotalPrice } from "../Scripts/calculateTotalPrice";
 import { useNavigate } from "react-router-dom";
+import NavigationForAdmin from "../NavigationForAdmin"
+import CheckRoles from "../CheckRoles";
 
 const OrderRealize = ({ handleLogout }) => {
   const [meals, setMeals] = useState([])
@@ -74,7 +76,19 @@ const OrderRealize = ({ handleLogout }) => {
 
   return (
     <div className={styles.order_realize_container}>
-      <Navigation cartItemCount={cartItems.length} handleLogout={handleLogout} />
+{//<Navigation cartItemCount={cartItems.length} handleLogout={handleLogout} />
+      }
+      
+      <CheckRoles>
+        {(details) => {
+          // Use the details to determine which navigation to render
+          if (details && details.roles === "Admin") {
+            return <NavigationForAdmin handleLogout={handleLogout} />;
+          } else {
+            return <Navigation cartItemCount={cartItems.length} handleLogout={handleLogout} />
+          }
+        }}
+      </CheckRoles>
       <h3>Order Summary</h3>
       {cartItems.length === 0 ? (
         <p>No items in the cart.</p>

@@ -4,6 +4,8 @@ import categoriesData from "../categoriesData";
 import foodData from "../foodData";
 import Navigation from "../Navigation";
 import { loadCartItemsFromLocalStorage, saveCartItemsToLocalStorage } from "../Scripts/localStorage";
+import NavigationForAdmin from "../NavigationForAdmin"
+import CheckRoles from "../CheckRoles";
 
 const Main = ({ handleLogout }) => {
 
@@ -57,8 +59,21 @@ const Main = ({ handleLogout }) => {
 
   return (
     <div className={styles.main_container}>
-      <Navigation cartItemCount={cartItems.length} handleLogout={handleLogout} />
-
+      {//<Navigation cartItemCount={cartItems.length} handleLogout={handleLogout} />
+      }
+      
+      <CheckRoles>
+        {(details) => {
+          // Use the details to determine which navigation to render
+          if (details && details.roles === "Admin") {
+            return <NavigationForAdmin handleLogout={handleLogout} />;
+          } else {
+            return <Navigation cartItemCount={cartItems.length} handleLogout={handleLogout} />
+          }
+        }}
+      </CheckRoles>
+      {/* Other content for the WaiterPanel component */}
+    
       <div className={styles.menu_container}>
         <div className={styles.categories}>
           <h2>Kategorie posiłków</h2>
