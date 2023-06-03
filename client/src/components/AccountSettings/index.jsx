@@ -22,7 +22,7 @@ const AccountSettings = ({ handleLogout }) => {
     saveCartItemsToLocalStorage(cartItems);
   }, [cartItems]);
 
-  const handleSubmit = (e) => {
+  const changePassword = async (e) => {
     e.preventDefault();
 
     // Walidacja pól formularza
@@ -30,8 +30,36 @@ const AccountSettings = ({ handleLogout }) => {
       setErrorMessage("Potwierdzenie hasła nie jest zgodne z nowym hasłem.");
       return;
     }
+    if (!validatePassword(newPassword)) {
+      setErrorMessage("Hasło musi zawierać co najmniej 8 znaków i może zawierać tylko litery i cyfry.");
+      return;
+    }
+    
+    try {
+      const token = localStorage.getItem("token");
 
-    // Przetwarzanie logiki zmiany hasła
+      if (token) {
+        const config = {
+          method: "put",
+          url: "http://localhost:8080/api/users/password",
+          headers: {
+            "Content-Type": "application/json",
+            "x-access-token": token,
+          },
+          data: {
+            currentPassword: currentPassword,
+            newPassword: newPassword,
+          },
+        };
+
+        await axios(config);
+        console.log("Zmieniono hasło");
+      }
+    } catch (error) {
+      console.error("Wystąpił błąd podczas zmiany hasła:", error);
+    }
+
+
 
     // Zresetowanie pól formularza
     setCurrentPassword("");
@@ -40,6 +68,10 @@ const AccountSettings = ({ handleLogout }) => {
     setErrorMessage("");
   };
 
+  const validatePassword = (password) => {
+    const passwordRegex = /^[a-zA-Z0-9.!@#$%^&*()_+-]{8,}$/;
+    return passwordRegex.test(password);
+  }
   
   
   const deleteUser = async (e) => {
@@ -63,7 +95,7 @@ if (token) {
     }
 
     await axios(config)
-    // Usunięcie użytkownika powiodło się
+    console.log("Usunieto konto")
   } catch (error) {
 
   }
@@ -82,7 +114,6 @@ localStorage.removeItem("token")
       
       <CheckRoles>
         {(details) => {
-          // Use the details to determine which navigation to render
           if (details && details.roles === "Admin") {
             return <NavigationForAdmin handleLogout={handleLogout} />;
           } else {
@@ -91,7 +122,7 @@ localStorage.removeItem("token")
         }}
       </CheckRoles>
       <h2>Account Settings</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={changePassword}>
         <div className={styles.form_group}>
           <label htmlFor="currentPassword">Current Password:</label>
           <input

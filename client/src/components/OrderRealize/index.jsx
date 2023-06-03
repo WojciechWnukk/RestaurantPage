@@ -16,6 +16,9 @@ const OrderRealize = ({ handleLogout }) => {
   const [cartItems, setCartItems] = useState([]);
   const totalPrice = calculateTotalPrice(cartItems);
   const token = localStorage.getItem("token")
+  const [isTableNumberValid, setTableNumberValid] = useState(true);
+  const [tableNumberErrorMessage, setTableNumberErrorMessage] = useState("");
+  const [error, setError] = useState("")
   const navigate = useNavigate()
   useEffect(() => {
     loadCartItemsFromLocalStorage(setCartItems);
@@ -26,8 +29,17 @@ const OrderRealize = ({ handleLogout }) => {
   }, [cartItems]);
 
   const handleTableNumberChange = (event) => {
-    setTableNumber(event.target.value);
-  };
+    const value = event.target.value;
+    // Sprawdź, czy wprowadzone dane są liczbą
+    const isValid = !isNaN(value) && value !== "" && parseInt(value) >= 0;
+    setTableNumber(value);
+    setTableNumberValid(isValid);
+    if (!isValid) {
+      setTableNumberErrorMessage("Please enter a valid table number.");
+    } else {
+      setTableNumberErrorMessage("");
+    }
+    };
 
   const handleCommentsChange = (event) => {
     setComments(event.target.value);
@@ -43,12 +55,16 @@ const OrderRealize = ({ handleLogout }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const orderNumber = 123
+    if (tableNumber <= 0) {
+      setTableNumberErrorMessage("Please enter a valid table number.");
+      return;
+    }
     console.log(" " + JSON.stringify(mealsData))
     //console.log(token)
+
+  
     try {
       const url = "http://localhost:8080/api/orders";
-
-      
 
       const data = {
         //orderNumber,
@@ -68,9 +84,13 @@ const OrderRealize = ({ handleLogout }) => {
 
 
     } catch (error) {
-      console.error("Error creating order:", error);
-      console.log(" numer " + orderNumber, meals)
-      // Dodać obsługę błędu, np. wyświetlenie komunikatu o błędzie
+      if (error.response && error.response.data && error.response.data.message) {
+        console.log("Validation error details:", error.response.data.message);
+        setError(error.response.data.message);
+      } else {
+        console.log("Error creating order:", error);
+        setError("An error occurred while creating the order.");
+      }
     }
   };
 
@@ -81,7 +101,6 @@ const OrderRealize = ({ handleLogout }) => {
       
       <CheckRoles>
         {(details) => {
-          // Use the details to determine which navigation to render
           if (details && details.roles === "Admin") {
             return <NavigationForAdmin handleLogout={handleLogout} />;
           } else {
@@ -120,13 +139,18 @@ const OrderRealize = ({ handleLogout }) => {
       )}
       <form onSubmit={handleSubmit}>
         <div className={styles.form_group}>
+        {!isTableNumberValid && (
+  <p className={styles.error_message}>{tableNumberErrorMessage}</p>
+)}
+
           <label htmlFor="tableNumber">Table Number:</label>
           <input
             type="text"
             id="tableNumber"
             value={tableNumber}
             onChange={handleTableNumberChange}
-          />
+            className={`${styles.input} ${isTableNumberValid ? "" : styles.invalid}`}
+            />
         </div>
 
         <div className={styles.form_group}>

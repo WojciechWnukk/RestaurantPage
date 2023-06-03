@@ -1,12 +1,33 @@
 const router = require("express").Router();
-const Order = require("../models/order");
+const {Order, validate} = require("../models/order");
 
 
 router.post("/", async (req, res) => {
   try {
-    await new Order({...req.body}).save()
+    const { error } = validate(req.body);
+    if (error) {
+      const errorMessage = error.details.map((detail) => detail.message).join(", ");
+      return res.status(400).send({ message: errorMessage });
+    }
+
+    const orderData = { ...req.body };
+    if (orderData.comments === "") {
+      orderData.comments = null;
+    }
+
+    const order = new Order(orderData);
+    if (order.comments === null) {
+      order.comments = ""; // Zamień null na pusty string przed zapisaniem
+    }
+
+    await order.save();
     res.status(201).json({ message: "Order created successfully" });
   } catch (error) {
+    if (error.response && error.response.data && error.response.data.message) {
+      console.log("Validation error details:", error.response.data.message);
+    } else {
+      console.log("Error creating order:", error);
+    }
     res.status(500).json({ message: "Internal Server Error" });
   }
 });

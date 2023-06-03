@@ -15,6 +15,7 @@ const connection = require('./db')
 connection()
 
 // routes
+app.put("/api/users/password", tokenVerification)
 app.get("/api/users/",tokenVerification)
 app.delete("/api/users", tokenVerification)
 app.get("/api/users/user", tokenVerification)

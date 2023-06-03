@@ -75,3 +75,12 @@
 .form_group button[type="submit"] {
   width: 100%;
 }
+.invalid {
+  border: 1px solid red;
+}
+.error_message {
+  color: red;
+  margin-top: 5px;
+  font-size: 12px;
+}
+

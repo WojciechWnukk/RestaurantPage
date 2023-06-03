@@ -16,7 +16,7 @@ const orderSchema = new mongoose.Schema({
     tableNumber: {type: Number, required: false},//zmienic na true 
     totalPrice: {type: Number, required: true},
     status: {type: String, required: false},
-    comments: {type: String, required: false},
+    comments: {type: String, default: null},
     userToken: {type: String, required: true},
     orderDate: {type: Date, default: Date.now}
 })
@@ -24,14 +24,23 @@ const orderSchema = new mongoose.Schema({
 
 
 const Order = mongoose.model("Order", orderSchema)
-/*
+
 const validate = (data) => {
     const schema = Joi.object({
-        firstName: Joi.string().required().label("First Name"),
-        lastName: Joi.string().required().label("Last Name"),
-        email: Joi.string().email().required().label("Email"),
-        password: passwordComplexity().required().label("Password"),
+      meals: Joi.array().items(
+        Joi.object({
+          name: Joi.string().required(),
+          quantity: Joi.number().required(),
+          price: Joi.string().required(),
+        })
+      ),
+      tableNumber: Joi.number().required(),
+      totalPrice: Joi.number().required(),
+      status: Joi.string().optional(),
+      comments: Joi.string().allow("", null),
+      userToken: Joi.string().required(),
+      orderDate: Joi.date().optional(),
     })
     return schema.validate(data)
-}*/
-module.exports = Order;
+}
+module.exports = {Order, validate};
