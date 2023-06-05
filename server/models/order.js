@@ -13,7 +13,7 @@ const orderSchema = new mongoose.Schema({
           price: { type: String, required: true },
         },
       ],
-    tableNumber: {type: Number, required: false},//zmienic na true 
+    tableNumber: {type: Number, required: true},
     totalPrice: {type: Number, required: true},
     status: {type: String, required: false},
     comments: {type: String, default: null},

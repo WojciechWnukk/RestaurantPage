@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "./styles.module.css";
-//import checkRoles from "../Scripts/checkRoles";
 
 const WaiterPanel = () => {
   const [orders, setOrders] = useState([]);
@@ -13,7 +12,7 @@ const WaiterPanel = () => {
 
   const fetchOrders = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/orders"); // Zmień URL na odpowiedni
+      const response = await axios.get("http://localhost:8080/api/orders")
       const filteredOrders = response.data.data.filter(
         (order) =>
           showAllOrders || order.status !== "Zamowienie dostarczone"
@@ -29,8 +28,8 @@ const WaiterPanel = () => {
       await axios.put(
         `http://localhost:8080/api/orders/${orderId}`,
         { status: newStatus }
-      ); // Zmień URL na odpowiedni
-      fetchOrders(); // Odśwież listę zamówień po zmianie statusu
+      )
+      fetchOrders()
     } catch (error) {
       console.error("Error updating order status:", error);
     }

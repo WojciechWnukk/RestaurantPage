@@ -34,12 +34,7 @@ const CheckRoles = ({ children }) => {
   useEffect(() => {
     handleGetUserDetails();
   }, []);
-/*
-  if (!details || details.roles !== "Admin") {
-    return null;
-  }*/
 
-  // Render the child component with the details as a prop
   return children(details);
 };
 

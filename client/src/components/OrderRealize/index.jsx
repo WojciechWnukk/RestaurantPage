@@ -9,7 +9,6 @@ import NavigationForAdmin from "../NavigationForAdmin"
 import CheckRoles from "../CheckRoles";
 
 const OrderRealize = ({ handleLogout }) => {
-  const [meals, setMeals] = useState([])
   const [tableNumber, setTableNumber] = useState(0);
   const [comments, setComments] = useState("");
   const [orderTime, setOrderTime] = useState("40min");
@@ -30,7 +29,6 @@ const OrderRealize = ({ handleLogout }) => {
 
   const handleTableNumberChange = (event) => {
     const value = event.target.value;
-    // Sprawdź, czy wprowadzone dane są liczbą
     const isValid = !isNaN(value) && value !== "" && parseInt(value) >= 0;
     setTableNumber(value);
     setTableNumberValid(isValid);
@@ -87,6 +85,7 @@ const OrderRealize = ({ handleLogout }) => {
       if (error.response && error.response.data && error.response.data.message) {
         console.log("Validation error details:", error.response.data.message);
         setError(error.response.data.message);
+        
       } else {
         console.log("Error creating order:", error);
         setError("An error occurred while creating the order.");
@@ -96,7 +95,7 @@ const OrderRealize = ({ handleLogout }) => {
 
   return (
     <div className={styles.order_realize_container}>
-{//<Navigation cartItemCount={cartItems.length} handleLogout={handleLogout} />
+{
       }
       
       <CheckRoles>

@@ -4,39 +4,38 @@ import Navigation from "../Navigation";
 import axios from "axios";
 import NavigationForAdmin from "../NavigationForAdmin"
 import CheckRoles from "../CheckRoles";
-
+//można dodać ikone która po kliknięciu odświeża status zamówienia albo całą strone - chyba lepiej strone bo użytkownik będzie widział że się f5
 const OrderSuccess = ({ handleLogout }) => {
 
-  const [orderData, setOrderData] = useState(null);
+  const [orderData, setOrderData] = useState(null)
   const token = localStorage.getItem("token")
   useEffect(() => {
     const fetchOrderData = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/orders"); // Zmień URL na odpowiedni
-        const orders = response.data.data.filter(order => order.userToken === token);
-        setOrderData(orders);
+        const response = await axios.get("http://localhost:8080/api/orders")
+        const orders = response.data.data.filter(order => order.userToken === token)
+        setOrderData(orders)
       } catch (error) {
-        console.error("Error fetching order data:", error);
+        console.error("Error fetching order data:", error)
       }
     };
 
-    fetchOrderData();
-  }, [token]);
+    fetchOrderData()
+  }, [token])
 
   if (!orderData) {
-    return <p>Loading...</p>;
+    return <p>Loading...</p>
   }
 
   const reversedOrderData = orderData.slice().reverse()
 
   return (
     <div className={styles.order_realize_container}>
-{//<Navigation cartItemCount={cartItems.length} handleLogout={handleLogout} />
+{
       }
       
       <CheckRoles>
         {(details) => {
-          // Use the details to determine which navigation to render
           if (details && details.roles === "Admin") {
             return <NavigationForAdmin handleLogout={handleLogout} />;
           } else {

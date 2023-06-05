@@ -79,8 +79,8 @@
   }
   
   .food_item_image {
-	width: 100%;
-	height: 150px;
+	width: 220px;
+	height: 155px;
 	object-fit: cover;
   }
   

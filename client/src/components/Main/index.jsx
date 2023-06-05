@@ -19,17 +19,6 @@ const Main = ({ handleLogout }) => {
   }
 
   const filteredFoodData = foodData.filter((food) => food.category === selectedCategory.name);
-/*
-  useEffect(() => {
-    const storedCartItems = localStorage.getItem("cartItems");
-    if (storedCartItems) {
-      setCartItems(JSON.parse(storedCartItems));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  }, [cartItems]);*/
 
   useEffect(() => {
     loadCartItemsFromLocalStorage(setCartItems);
@@ -59,12 +48,11 @@ const Main = ({ handleLogout }) => {
 
   return (
     <div className={styles.main_container}>
-      {//<Navigation cartItemCount={cartItems.length} handleLogout={handleLogout} />
+      {
       }
       
       <CheckRoles>
         {(details) => {
-          // Use the details to determine which navigation to render
           if (details && details.roles === "Admin") {
             return <NavigationForAdmin handleLogout={handleLogout} />;
           } else {
@@ -72,7 +60,6 @@ const Main = ({ handleLogout }) => {
           }
         }}
       </CheckRoles>
-      {/* Other content for the WaiterPanel component */}
     
       <div className={styles.menu_container}>
         <div className={styles.categories}>
@@ -80,7 +67,6 @@ const Main = ({ handleLogout }) => {
           <table className={styles.categories_table}>
             <thead>
               <tr>
-
                 <th>Rodzaj</th>
               </tr>
             </thead>
@@ -93,7 +79,6 @@ const Main = ({ handleLogout }) => {
                   }
                   onClick={() => handleCategoryClick(category)}
                 >
-
                   <td>{category.name}</td>
                 </tr>
               ))}

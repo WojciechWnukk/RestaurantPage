@@ -4,7 +4,6 @@ import { Link } from "react-router-dom"
 import styles from "./styles.module.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-//import styles from "startbootstrap-shop-homepage/dist/css/styles.css"
 const Login = () => {
     const [data, setData] = useState({ email: "", password: "" })
     const [error, setError] = useState("")

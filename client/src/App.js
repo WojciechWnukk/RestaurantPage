@@ -7,15 +7,11 @@ import AccountSettings from "./components/AccountSettings"
 import OrderRealize from "./components/OrderRealize"
 import OrderSuccess from "./components/OrderSuccess"
 import WaiterPanel from "./components/WaiterPanel"
-import axios from "axios"
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 function App() {
     const user = localStorage.getItem("token")
     
-
-
-
     return (
         <Routes>
             {user && <Route path="/" exact element={<Main />} />}

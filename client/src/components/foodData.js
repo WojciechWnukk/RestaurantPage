@@ -7,6 +7,10 @@ import coffee from "../images/coffee.jpg";
 import soup from "../images/soup.jpg";
 import cake from "../images/cake.jpg";
 import juice from "../images/juice.jpg";
+import natchos from "../images/natchos.jpg";
+import onionRings from "../images/onion-rings.jpg";
+import pannaCotta from "../images/panna-cotta.jpg";
+import water from "../images/woda.jpg";
 
 const foodData = [
   {
@@ -18,14 +22,14 @@ const foodData = [
   },
   {
     id: 2,
-    name: "Spaghetti Bolognese",
+    name: "Spaghetti",
     image: spaghetti,
     price: "34.99 zł",
     category: "Dania główne"
   },
   {
     id: 3,
-    name: "Hamburger Bekon",
+    name: "Hamburger",
     image: hamburger,
     price: "24.99 zł",
     category: "Dania główne"
@@ -71,8 +75,37 @@ const foodData = [
     image: juice,
     price: "6.99 zł",
     category: "Napoje"
+  },
+  {
+    id: 10,
+    name: "Woda",
+    image: water,
+    price: "9.99 zł",
+    category: "Napoje"
+  },
+  {
+    id: 11,
+    name: "Natchosy",
+    image: natchos,
+    price: "16.99 zł",
+    category: "Przystawki"
+  },
+  {
+    id: 12,
+    name: "Panna Cotta",
+    image: pannaCotta,
+    price: "6.99 zł",
+    category: "Desery"
+  },
+  {
+    id: 13,
+    name: "Krążki cebulowe",
+    image: onionRings,
+    price: "16.99 zł",
+    category: "Przystawki"
   }
-  // Dodaj więcej elementów według potrzeb
+  
+
 ];
 
 export default foodData;

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styles from "./styles.module.css"
 import Navigation from "../Navigation";
-import { Link } from "react-router-dom";
 import { calculateTotalPrice } from "../Scripts/calculateTotalPrice";
 import NavigationForAdmin from "../NavigationForAdmin"
 import CheckRoles from "../CheckRoles";
+import { useNavigate } from "react-router-dom";
+ 
 
 const Cart = ({ handleLogout }) => {
   const [cartItems, setCartItems] = useState([]);
@@ -29,24 +30,21 @@ const Cart = ({ handleLogout }) => {
     const updatedCartItems = cartItems.filter((item) => item.id !== itemId);
     setCartItems(updatedCartItems);
   };
-/*
-  const calculateTotalPrice = () => {
-    const totalPrice = cartItems.reduce(
-      (total, item) => total + parseFloat(item.price) * item.quantity,
-      0
-    );
-    return totalPrice.toFixed(2);
-  };*/
+  
+  const navigate1 = useNavigate();
+
+  const handleNavigation = (path) => {
+    navigate1(path);
+  }
 
 
   return (
     <div className={styles.cart_container}>
-{//<Navigation cartItemCount={cartItems.length} handleLogout={handleLogout} />
+{
       }
       
       <CheckRoles>
         {(details) => {
-          // Use the details to determine which navigation to render
           if (details && details.roles === "Admin") {
             return <NavigationForAdmin handleLogout={handleLogout} />;
           } else {
@@ -79,10 +77,10 @@ const Cart = ({ handleLogout }) => {
           ))}
 
           <div className={styles.total_price}>
-          <Link to="/order-realize" className={styles.link_btn}>
+          <h3 className={styles.total_price_label}>Total Price: {totalPrice + "zł"}</h3>
+            <button className={styles.link_btn} onClick={() => handleNavigation("/order-realize")}>
               Przejdź do podsumowania
-            </Link>
-            <h3>Total Price: {totalPrice + "zł"}</h3>
+            </button>
           </div>
         </div>
       )}

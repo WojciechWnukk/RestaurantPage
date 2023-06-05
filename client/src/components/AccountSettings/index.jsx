@@ -25,7 +25,6 @@ const AccountSettings = ({ handleLogout }) => {
   const changePassword = async (e) => {
     e.preventDefault();
 
-    // Walidacja pól formularza
     if (newPassword !== confirmPassword) {
       setErrorMessage("Potwierdzenie hasła nie jest zgodne z nowym hasłem.");
       return;
@@ -61,7 +60,6 @@ const AccountSettings = ({ handleLogout }) => {
 
 
 
-    // Zresetowanie pól formularza
     setCurrentPassword("");
     setNewPassword("");
     setConfirmPassword("");
@@ -109,9 +107,7 @@ localStorage.removeItem("token")
 
   return (
     <div className={styles.account_settings_container}>
-      {//<Navigation cartItemCount={cartItems.length} handleLogout={handleLogout} />
-      }
-      
+
       <CheckRoles>
         {(details) => {
           if (details && details.roles === "Admin") {
