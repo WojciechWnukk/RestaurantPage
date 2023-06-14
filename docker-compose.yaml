@@ -1,0 +1,35 @@
+version: '3.9'
+services:
+  app:
+    restart: always
+    build: ./server
+    environment:
+      - DB=mongodb://mongodb:27017/restaurantdb?authSource=admin
+      - JWTPRIVATEKEY=abcdefg
+    ports:
+      - '8080:8080'
+    depends_on:
+      - mongodb
+    networks:
+      frontend:
+      backend:
+  mongodb:
+    image: mongo:4.4
+    volumes:
+      - ./data/mongo:/data/db
+    networks:
+      backend:
+  front:
+    build: ./client
+    ports:
+      - "3000:3000"
+    depends_on:
+      - app
+    stdin_open: true
+    tty: true
+    networks:
+      frontend:
+
+networks:
+  frontend:
+  backend:

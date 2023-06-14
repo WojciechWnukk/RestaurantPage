@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+
 module.exports = () => {
     const databaseName = process.env.DB_NAME;
 
