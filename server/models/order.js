@@ -18,6 +18,7 @@ const orderSchema = new mongoose.Schema({
     status: {type: String, required: false},
     comments: {type: String, default: null},
     userToken: {type: String, required: true},
+    userEmail: {type: String, required: true},
     orderDate: {type: Date, default: Date.now}
 })
 
@@ -39,6 +40,7 @@ const validate = (data) => {
       status: Joi.string().optional(),
       comments: Joi.string().allow("", null),
       userToken: Joi.string().required(),
+      userEmail: Joi.string().required(),
       orderDate: Joi.date().optional(),
     })
     return schema.validate(data)

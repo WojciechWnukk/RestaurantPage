@@ -15,6 +15,7 @@ const OrderRealize = ({ handleLogout }) => {
   const [cartItems, setCartItems] = useState([]);
   const totalPrice = calculateTotalPrice(cartItems);
   const token = localStorage.getItem("token")
+  const email = localStorage.getItem("email")
   const [isTableNumberValid, setTableNumberValid] = useState(true);
   const [tableNumberErrorMessage, setTableNumberErrorMessage] = useState("");
   const [error, setError] = useState("")
@@ -71,6 +72,7 @@ const OrderRealize = ({ handleLogout }) => {
         meals: mealsData,
         totalPrice,
         userToken: token,
+        userEmail: email,
         status: "Zamowiono"
       };
 

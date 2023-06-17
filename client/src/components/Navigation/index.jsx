@@ -41,13 +41,13 @@ const Navigation = ({ cartItemCount }) => {
         >
           Reservations
         </button>
-        {/*
+        
         <button
           className={`${styles.nav_button} ${styles.white_btn}`}
-          onClick={() => handleNavigation("/")}
+          onClick={() => handleNavigation("/my-orders")}
         >
-          Pusty
-  </button>*/}
+          Orders
+        </button>
       </div>
       <button
         className={`${styles.nav_button} ${styles.white_btn}`}

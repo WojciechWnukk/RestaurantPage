@@ -8,6 +8,7 @@ import OrderRealize from "./components/OrderRealize"
 import OrderSuccess from "./components/OrderSuccess"
 import WaiterPanel from "./components/WaiterPanel"
 import React from "react";
+import MyOrders from "./components/MyOrders"
 
 function App() {
     const user = localStorage.getItem("token")
@@ -23,6 +24,7 @@ function App() {
              {user && <Route path="/permisions" exact element={<Cart />} />}
              {user && <Route path="/order-realize" exact element={<OrderRealize />} />}
              {user && <Route path="/order-success" exact element={<OrderSuccess />} />}
+             {user && <Route path="/my-orders" exact element={<MyOrders />} />}
              {<Route path="/waiter-panel" element={<WaiterPanel />} />}
             <Route path="/" element={<Navigate replace to="/login" />} />
             <Route path="/cart" element={<Navigate replace to="/login" />} />
@@ -32,6 +34,7 @@ function App() {
             <Route path="/order-realize" element={<Navigate replace to="/login" />} />
             <Route path="/order-success" element={<Navigate replace to="/login" />} />
             <Route path="/waiter-panel" element={<Navigate replace to="/login" />} />
+            <Route path="/my-orders" element={<Navigate replace to="/login" />} />
             
             
         </Routes>

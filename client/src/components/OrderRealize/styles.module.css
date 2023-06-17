@@ -47,7 +47,7 @@
   
   .order_summary_table {
     width: 100%;
-    max-width: 100vw;
+    max-width: 900px;
     table-layout: fixed;
   }
   
@@ -56,6 +56,11 @@
     padding: 10px;
     text-align: left;
     border-bottom: 1px solid #ccc;
+  }
+  
+  .order_summary_table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
   }
   
   .order_summary_table tfoot td {
