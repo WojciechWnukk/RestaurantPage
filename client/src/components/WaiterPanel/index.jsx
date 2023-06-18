@@ -53,6 +53,7 @@ const WaiterPanel = () => {
         };
         const { data: res } = await axios(config);
         setDetails(res.data);
+        console.log(details)
 
       } catch (error) {
         if (
