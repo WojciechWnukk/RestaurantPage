@@ -42,3 +42,16 @@
     display: block;
     margin-bottom: 5px;
   }
+
+  .link_btn {
+    width: 100%;
+    max-width: 900px;
+    background-color: green;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+  

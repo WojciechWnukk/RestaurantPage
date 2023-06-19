@@ -10,6 +10,7 @@ import WaiterPanel from "./components/WaiterPanel"
 import React from "react";
 import MyOrders from "./components/MyOrders"
 import UserPermissions from "./components/UserPermissions"
+import AddEmployee from "./components/AddEmployee"
 function App() {
     const user = localStorage.getItem("token")
     
@@ -27,6 +28,7 @@ function App() {
              {user && <Route path="/my-orders" exact element={<MyOrders />} />}
              {<Route path="/waiter-panel" element={<WaiterPanel />} />}
              {<Route path="/user-permissions" element={<UserPermissions />} />}
+             {<Route path="/add-employee" element={<AddEmployee />} />}
             <Route path="/" element={<Navigate replace to="/login" />} />
             <Route path="/cart" element={<Navigate replace to="/login" />} />
             <Route path="/account-settings" element={<Navigate replace to="/login" />} />
@@ -37,6 +39,7 @@ function App() {
             <Route path="/waiter-panel" element={<Navigate replace to="/login" />} />
             <Route path="/my-orders" element={<Navigate replace to="/login" />} />
             <Route path="/user-permissions" element={<Navigate replace to="/login" />} />
+            <Route path="/add-employee" element={<Navigate replace to="/login" />} />
 
             
         </Routes>

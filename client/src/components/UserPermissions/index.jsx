@@ -4,10 +4,14 @@ import Navigation from "../Navigation";
 import axios from "axios";
 import NavigationForAdmin from "../NavigationForAdmin";
 import CheckRoles from "../CheckRoles";
-
+import { useNavigate } from "react-router-dom";
 const UserPermissions = ({ handleLogout }) => {
   const [users, setUsers] = useState([]);
+  const navigate = useNavigate()
 
+  const handleNavigation = (path) => {
+    navigate(path);
+  }
   const handleGetUsers = async () => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -48,6 +52,9 @@ const UserPermissions = ({ handleLogout }) => {
               <div>
                 <NavigationForAdmin handleLogout={handleLogout} />
                 <h2>User List</h2>
+                <button className={`${styles.link_btn} link_btn`} onClick={() => handleNavigation("/add-employee")}>
+                  Dodaj pracownika
+                </button>
                 <table className={styles.permissions_table}>
                   <thead>
                     <tr>
