@@ -22,6 +22,7 @@ const AddEmployee = ({ handleLogout }) => {
     firstName: "",
     lastName: "",
     email: "",
+    roles: "Employee",
     password: "Marek123.",
   })
   const handleChange = (e) => {
@@ -58,7 +59,11 @@ const AddEmployee = ({ handleLogout }) => {
         console.log(res.message)
         setSuccessMessage("Pracownik " + data.firstName +" został dodany")
         await addUser()
-        window.location.reload()
+        
+        setTimeout(() => {
+          window.location.reload();
+        }, 5000)
+
     } catch (error) {
         if (
             error.response &&

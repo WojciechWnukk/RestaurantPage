@@ -10,6 +10,7 @@ const MyOrders = ({ handleLogout }) => {
   const [orderData, setOrderData] = useState(null);
   const email = localStorage.getItem("email");
   const [cartItems, setCartItems] = useState([]);
+  const [ratings, setRatings] = useState({});
 
   useEffect(() => {
     loadCartItemsFromLocalStorage(setCartItems);
@@ -19,17 +20,17 @@ const MyOrders = ({ handleLogout }) => {
     saveCartItemsToLocalStorage(cartItems);
   }, [cartItems]);
 
-  useEffect(() => {
-    const fetchOrderData = async () => {
-      try {
-        const response = await axios.get("http://localhost:8080/api/orders");
-        const orders = response.data.data.filter((order) => order.userEmail === email);
-        setOrderData(orders);
-      } catch (error) {
-        console.error("Error fetching order data:", error);
-      }
-    };
+  const fetchOrderData = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/api/orders");
+      const orders = response.data.data.filter((order) => order.userEmail === email);
+      setOrderData(orders);
+    } catch (error) {
+      console.error("Error fetching order data:", error);
+    }
+  };
 
+  useEffect(() => {
     fetchOrderData();
   }, [email]);
 
@@ -38,6 +39,34 @@ const MyOrders = ({ handleLogout }) => {
   }
 
   const reversedOrderData = orderData.slice().reverse();
+
+  const handleRateChange = async (orderId, newRate) => {
+    try {
+      await axios.put(
+        `http://localhost:8080/api/orders/${orderId}`,
+        { status: null, orderRate: newRate }
+      )
+      fetchOrderData()
+    } catch (error) {
+      console.error("Error updating order status:", error);
+    }
+  }
+
+  const handleRateOrder = (orderId, rating) => {
+    if (!ratings[orderId]) {
+
+      setRatings((prevRatings) => ({
+        ...prevRatings,
+        [orderId]: rating,
+      }))
+
+      handleRateChange(orderId, rating)
+
+      console.log(rating, orderId);
+    }
+  }
+
+
 
   return (
     <div className={styles.order_realize_container}>
@@ -59,6 +88,7 @@ const MyOrders = ({ handleLogout }) => {
               <th>Date</th>
               <th>Status</th>
               <th>Price</th>
+              <th>Rate</th>
             </tr>
           </thead>
           <tbody>
@@ -76,6 +106,19 @@ const MyOrders = ({ handleLogout }) => {
                   </span>
                 </td>
                 <td>{order.totalPrice + "zł"}</td>
+                <td>
+                  <div className={styles.rating}>
+                    {[0, 1, 2, 3, 4, 5].map((rating) => (
+                      <span
+                        key={rating}
+                        className={`${styles.star} ${ratings[order.orderId] >= rating ? styles.selected : ""}`}
+                        onClick={() => handleRateOrder(order.orderId, rating)}
+                      >
+                        ★
+                      </span>
+                    ))}
+                  </div>
+                </td>
               </tr>
             ))}
           </tbody>

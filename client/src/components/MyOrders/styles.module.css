@@ -42,7 +42,7 @@
 
 .order_summary_table {
   width: 100%;
-  max-width: 900px;
+  max-width: 1200px;
   table-layout: fixed;
 }
 
@@ -100,4 +100,20 @@ button[type="submit"] {
 
 button[type="submit"] {
   background-color: #28a745;
+}
+
+.star {
+  display: inline-block;
+  color: #ccc;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.star:hover,
+.star.selected {
+  color: gold;
+}
+
+.rating {
+  font-size: 20px;
 }

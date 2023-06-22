@@ -7,7 +7,7 @@ const userSchema = new mongoose.Schema({
     lastName: { type: String, required: true },
     email: { type: String, required: true },
     password: { type: String, required: true },
-    roles: { type: String, required: false, default: "User"}
+    roles: { type: String, required: false }
 }, {collection: "users"})
 userSchema.methods.generateAuthToken = function () {
     const token = jwt.sign({ _id: this._id }, process.env.JWTPRIVATEKEY, {
@@ -31,6 +31,10 @@ const validate = (data) => {
         lastName: Joi.string().required().label("Last Name"),
         email: Joi.string().email().required().label("Email"),
         password: passwordComplexity(complexityOptions).required().label("Password"),
+        roles: Joi.string()
+        .valid("User", "Admin", "Employee")
+        .label("Role")
+        .optional(),
     })
     return schema.validate(data)
 }
