@@ -5,7 +5,10 @@ const { ObjectId } = mongoose.Schema.Types;
 
 
 const orderSchema = new mongoose.Schema({
-    orderId: {type: ObjectId, default: () => new mongoose.Types.ObjectId()},
+    //orderId: {type: ObjectId, default: () => new mongoose.Types.ObjectId()},
+    orderId: {
+      type: String
+    },
     meals: [
         {
           name: { type: String, required: true },
@@ -20,10 +23,13 @@ const orderSchema = new mongoose.Schema({
     userToken: {type: String, required: true},
     userEmail: {type: String, required: true},
     orderDate: {type: Date, default: Date.now},
-    orderRate: { type: Number, required: false}
+    orderRate: { type: Number, default: null}
 })
 
-
+orderSchema.pre("save", function (next) {
+  this.orderId = this._id;
+  next();
+})
 
 const Order = mongoose.model("Order", orderSchema)
 
@@ -43,7 +49,7 @@ const validate = (data) => {
       userToken: Joi.string().required(),
       userEmail: Joi.string().required(),
       orderDate: Joi.date().optional(),
-      orderRate: Joi.number().optional(),
+      orderRate: Joi.number().allow(0, null),
     })
     return schema.validate(data)
 }

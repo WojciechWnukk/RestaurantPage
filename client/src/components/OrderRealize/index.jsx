@@ -73,6 +73,7 @@ const OrderRealize = ({ handleLogout }) => {
         totalPrice,
         userToken: token,
         userEmail: email,
+        orderRate: 0,
         status: "Zamowiono"
       };
 

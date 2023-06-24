@@ -25,6 +25,12 @@ const MyOrders = ({ handleLogout }) => {
       const response = await axios.get("http://localhost:8080/api/orders");
       const orders = response.data.data.filter((order) => order.userEmail === email);
       setOrderData(orders);
+
+      const initialRatings = {};
+      orders.forEach((order) => {
+      initialRatings[order.orderId] = order.orderRate;
+    });
+    setRatings(initialRatings);
     } catch (error) {
       console.error("Error fetching order data:", error);
     }
@@ -40,11 +46,11 @@ const MyOrders = ({ handleLogout }) => {
 
   const reversedOrderData = orderData.slice().reverse();
 
-  const handleRateChange = async (orderId, newRate) => {
+  const handleRateChange = async (orderId, rating) => {
     try {
       await axios.put(
         `http://localhost:8080/api/orders/${orderId}`,
-        { status: null, orderRate: newRate }
+        { orderRate: rating }
       )
       fetchOrderData()
     } catch (error) {
@@ -111,7 +117,7 @@ const MyOrders = ({ handleLogout }) => {
                     {[0, 1, 2, 3, 4, 5].map((rating) => (
                       <span
                         key={rating}
-                        className={`${styles.star} ${ratings[order.orderId] >= rating ? styles.selected : ""}`}
+                        className={`${styles.star} ${ratings[order.orderId] >= rating && ratings[order.orderId] > 0 ? styles.selected : ""}`}
                         onClick={() => handleRateOrder(order.orderId, rating)}
                       >
                         ★
