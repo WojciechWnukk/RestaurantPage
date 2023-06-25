@@ -12,7 +12,7 @@
 [ ] Dodanie płatności
 [x] Panel moje zamówienia wyświetlający ładnie wszystkie
 [ ] Obsługa klientów niezalogowanych
-[ ] Dodanie powiadomień email
+[1/3] Dodanie powiadomień email
 [?] upload zdjęć, profilówki dla pracowników
 [ ] Po ocenie zamówienia przyznawanie pkt o x% wartości zamówienia
 
@@ -21,7 +21,7 @@
 [1/2] Chyba trzeba dodać Employee do mongo gdzie będzie się dodawał pracownik po zmianie jego roli przez głównego admina,
  dodatkowo w modelu employee trzeba dać rzeczy typu data urodzenia, czas zatrudnienia, pensja, pesel, data urodzenia, stan zatrudnienia, płeć
 [x] Po kliknięciu zatrudnij niech wyskakuje panel dodawania pracownika w którym trzeba uzupełnić pozostałe dane
-[ ] opcja dodaj pracownika zrób żeby wysyłała na maila losowo wygenerowane hasło do pierwszego zalogowania
+[1/2] opcja dodaj pracownika zrób żeby wysyłała na maila losowo wygenerowane hasło do pierwszego zalogowania
 
 == MyOrders ==
 [x] Przy każdym/dostarczonym zamówieniu dodać możliwość oceny klikaną gwiazdką
