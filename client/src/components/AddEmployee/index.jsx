@@ -23,7 +23,6 @@ const AddEmployee = ({ handleLogout }) => {
     lastName: "",
     email: "",
     roles: "Employee",
-    password: "Marek123.",
   })
   const handleChange = (e) => {
     const { name, value } = e.target;

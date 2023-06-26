@@ -18,10 +18,10 @@
 
 == RozbudowaPaneluUprawnien ==
 [ ] Dodać opcje zmiany roli typu zatrudnij zwolnij pytając czy aby na pewno
-[1/2] Chyba trzeba dodać Employee do mongo gdzie będzie się dodawał pracownik po zmianie jego roli przez głównego admina,
+[x] Chyba trzeba dodać Employee do mongo gdzie będzie się dodawał pracownik po zmianie jego roli przez głównego admina,
  dodatkowo w modelu employee trzeba dać rzeczy typu data urodzenia, czas zatrudnienia, pensja, pesel, data urodzenia, stan zatrudnienia, płeć
 [x] Po kliknięciu zatrudnij niech wyskakuje panel dodawania pracownika w którym trzeba uzupełnić pozostałe dane
-[1/2] opcja dodaj pracownika zrób żeby wysyłała na maila losowo wygenerowane hasło do pierwszego zalogowania
+[x] opcja dodaj pracownika zrób żeby wysyłała na maila losowo wygenerowane hasło do pierwszego zalogowania
 
 == MyOrders ==
 [x] Przy każdym/dostarczonym zamówieniu dodać możliwość oceny klikaną gwiazdką

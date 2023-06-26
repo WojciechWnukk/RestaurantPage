@@ -1,22 +1,79 @@
 const router = require("express").Router()
 const { User, validate } = require("../models/user")
 const bcrypt = require("bcrypt")
+const nodemailer = require('nodemailer');
 
 
+const generateRandomPassword = () => {
+  const length = 8; // Długość generowanego hasła
+  const characters =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let password = "";
+
+  for (let i = 0; i < length; i++) {
+    const randomIndex = Math.floor(Math.random() * characters.length);
+    password += characters.charAt(randomIndex);
+  }
+
+  return password;
+};
+
+const transporter = nodemailer.createTransport({
+    service: 'Gmail',
+    auth: {
+      user: process.env.EMAIL_NAME,
+      pass: process.env.EMAIL_PASSWORD,
+    },
+    tls: {
+        rejectUnauthorized: false
+      }
+  });
+  
+  const sendEmail = (recipient, subject, content) => {
+    const mailOptions = {
+      from: process.env.EMAIL_NAME,
+      to: recipient,
+      subject: subject,
+      text: content,
+    };
+  
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log('Błąd wysyłania e-maila:', error);
+      } else {
+        console.log('E-mail wysłany:', info.response);
+      }
+    });
+  };
 
 router.post("/", async (req, res) => {
     try {
         const { error } = validate(req.body)
         if (error)
             return res.status(400).send({ message: error.details[0].message })
+        const { password, roles } = req.body
         const user = await User.findOne({ email: req.body.email })
-        if (user)
+        if (user){
             return res
                 .status(409)
                 .send({ message: "User with given email already Exist!" })
+        }
+        let generatedPassword = null;
+        if (roles === "Employee") {
+            generatedPassword = generateRandomPassword();
+        }
+
         const salt = await bcrypt.genSalt(Number(process.env.SALT))
-        const hashPassword = await bcrypt.hash(req.body.password, salt)
-        await new User({ ...req.body, password: hashPassword }).save()
+        const hashPassword = await bcrypt.hash(generatedPassword || password, salt)
+        const newUser = new User({ ...req.body, password: hashPassword });
+        await newUser.save()
+        if(roles == "Employee"){
+          console.log(generatedPassword)
+          const recipient = req.body.email
+          const subject = 'Hasło do konta'
+          const content = `Gratulujemy zostania nowym pracownikiem w naszej restauracji, Twoje hasło logowania to: ${generatedPassword}. Zalecamy zmienić to hasło tak szybko jak jest to możliwe.`
+          sendEmail(recipient, subject, content);
+        }
         res.status(201).send({ message: "User created successfully" })
     } catch (error) {
         res.status(500).send({ message: "Internal Server Error" })
