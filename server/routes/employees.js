@@ -21,5 +21,22 @@ router.post("/", async (req, res) => {
     } 
 })
 
-      
+router.delete("/:employeeId?", async (req, res) => {
+    try {
+      const { employeeId } = req.params;
+      const id = req.employee._id;
+  
+      if (employeeId) {
+        // Usuwanie na podstawie przekazanego ID
+        await Employee.findByIdAndRemove(employeeId);
+        res.status(200).send({ message: "Employee deleted successfully" });
+      } else {
+        // Usuwanie na podstawie zalogowanego użytkownika
+        await Employee.findByIdAndRemove(id);
+        res.status(200).send({ message: "Employee deleted successfully" });
+      }
+    } catch (error) {
+      res.status(500).send({ message: "Internal Server Error" });
+    }
+  });
 module.exports = router

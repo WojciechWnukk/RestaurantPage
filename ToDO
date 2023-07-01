@@ -1,5 +1,5 @@
 == Nawczoraj ==
-[ ] Dodać generowanie losowego hasła po stworzeniu pracownika i wysyłać mu na maila, zrobić if empl ma konto usera to zmień aby role
+[x] Dodać generowanie losowego hasła po stworzeniu pracownika i wysyłać mu na maila, zrobić if empl ma konto usera to zmień aby role
 
 == Dozrobienia ==
 [ ] Połączyć z calendar app jako panel rejestracji
@@ -12,7 +12,7 @@
 [ ] Dodanie płatności
 [x] Panel moje zamówienia wyświetlający ładnie wszystkie
 [ ] Obsługa klientów niezalogowanych
-[1/3] Dodanie powiadomień email
+[1/3] Dodanie powiadomień email, formalność - dodanie maila przy rejestracji, złożeniu zamówienia
 [?] upload zdjęć, profilówki dla pracowników
 [ ] Po ocenie zamówienia przyznawanie pkt o x% wartości zamówienia
 

@@ -17,10 +17,11 @@ connection()
 
 // routes
 app.use("/api/employees", employeeRoutes)
-
+app.delete("/api/emplotees/:employeeId?", employeeRoutes)
 app.put("/api/users/password", tokenVerification)
 app.get("/api/users/",tokenVerification)
-app.delete("/api/users", tokenVerification)
+//app.delete("/api/users", tokenVerification)
+app.delete("/api/users/:userId?", tokenVerification)
 app.get("/api/users/user", tokenVerification)
 app.use("/api/users", userRoutes)
 app.put("/api/orders/:orderId", orderRoutes)

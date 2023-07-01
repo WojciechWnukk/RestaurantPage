@@ -30,7 +30,7 @@ const validate = (data) => {
         firstName: Joi.string().required().label("First Name"),
         lastName: Joi.string().required().label("Last Name"),
         email: Joi.string().email().required().label("Email"),
-        password: passwordComplexity(complexityOptions).required().label("Password"),
+        password: passwordComplexity(complexityOptions).optional().label("Password"),
         roles: Joi.string()
         .valid("User", "Admin", "Employee")
         .label("Role")

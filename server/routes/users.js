@@ -90,7 +90,7 @@ router.get("/", async (req, res) => {
     res.status(500).send({ message: error.message });
     });
    })
-
+/*
 router.delete("/", async (req, res) => {
     try {
         const id = req.user._id
@@ -101,8 +101,26 @@ router.delete("/", async (req, res) => {
       } catch (error) {
         res.status(500).send({ message: "Internal Server Error" })
       }
-    })
-
+    })*/
+    router.delete("/:userId?", async (req, res) => {
+      try {
+        const { userId } = req.params;
+        const id = req.user._id;
+    
+        if (userId) {
+          // Usuwanie na podstawie przekazanego ID
+          await User.findByIdAndRemove(userId);
+          res.status(200).send({ message: "User deleted successfully" });
+        } else {
+          // Usuwanie na podstawie zalogowanego użytkownika
+          await User.findByIdAndRemove(id);
+          res.status(200).send({ message: "User deleted successfully" });
+        }
+      } catch (error) {
+        res.status(500).send({ message: "Internal Server Error" });
+      }
+    });
+    
 
     router.get("/user", async (req, res) => {
         try {

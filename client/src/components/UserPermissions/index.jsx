@@ -7,6 +7,7 @@ import CheckRoles from "../CheckRoles";
 import { useNavigate } from "react-router-dom";
 const UserPermissions = ({ handleLogout }) => {
   const [users, setUsers] = useState([]);
+  const [employees, setEmployees] = useState([]);
   const navigate = useNavigate()
 
   const handleNavigation = (path) => {
@@ -39,6 +40,40 @@ const UserPermissions = ({ handleLogout }) => {
     }
   };
 
+
+  const deleteUser = async (userId) => {
+    const confirmed = window.confirm("Czy na pewno chcesz usunąć konto?")
+
+    if (confirmed) {
+
+if (userId) {
+  try {
+    const token = localStorage.getItem("token");
+
+    const config = {
+      method: 'delete',
+      url: `http://localhost:8080/api/users/${userId}`,
+      headers: {
+        'Content-Type': 'application/json',
+        'x-access-token': token
+      }
+    }
+
+    await axios(config)
+    console.log("Usunieto konto")
+  } catch (error) {
+
+  }
+}
+    window.location.reload()
+}
+
+  }
+
+  const deleteEmployee = async (employeeId) => {
+
+  }
+
   useEffect(() => {
     handleGetUsers();
   }, []);
@@ -61,6 +96,7 @@ const UserPermissions = ({ handleLogout }) => {
                       <th>Name</th>
                       <th>Email</th>
                       <th>Roles</th>
+                      <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -69,6 +105,28 @@ const UserPermissions = ({ handleLogout }) => {
                         <td>{user.firstName} {user.lastName}</td>
                         <td>{user.email}</td>
                         <td>{user.roles}</td>
+                        <td><button className={`${styles.link_btn} link_btn`} onClick={() => deleteUser(user._id)}>Usuń konto</button></td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                <h2>Employee List - do zrobienia</h2>
+                <table className={styles.permissions_table}>
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Pension</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {users.map((user) => ( //tutaj trzeba zrobic to samo co dla user
+                      <tr key={user._id}>
+                        <td>{user.firstName} {user.lastName}</td>
+                        <td>{user.email}</td>
+                        <td>{user.roles}</td>
+                        <td><button className={`${styles.link_btn} link_btn`} onClick={() => deleteEmployee(user._id)}>Usuń konto</button></td>
                       </tr>
                     ))}
                   </tbody>
