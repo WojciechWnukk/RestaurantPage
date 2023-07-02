@@ -74,6 +74,12 @@ router.post("/", async (req, res) => {
           const content = `Gratulujemy zostania nowym pracownikiem w naszej restauracji, Twoje hasło logowania to: ${generatedPassword}. Zalecamy zmienić to hasło tak szybko jak jest to możliwe.`
           sendEmail(recipient, subject, content);
         }
+        else {
+          const recipient = req.body.email
+          const subject = 'Rejestracja w restaurantsystemPOS'
+          const content = `Gratulujemy zostania nowym klientem w naszej restauracji, dziękujemy za zaufanie i zachęcamy do składania zamówień!`
+          sendEmail(recipient, subject, content);
+        }
         res.status(201).send({ message: "User created successfully" })
     } catch (error) {
         res.status(500).send({ message: "Internal Server Error" })

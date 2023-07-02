@@ -1,5 +1,39 @@
 const router = require("express").Router();
 const {Order, validate} = require("../models/order");
+const nodemailer = require('nodemailer');
+
+
+
+
+const transporter = nodemailer.createTransport({
+  service: 'Gmail',
+  auth: {
+    user: process.env.EMAIL_NAME,
+    pass: process.env.EMAIL_PASSWORD,
+  },
+  tls: {
+      rejectUnauthorized: false
+    }
+});
+
+const sendEmail = (recipient, subject, content) => {
+  const mailOptions = {
+    from: process.env.EMAIL_NAME,
+    to: recipient,
+    subject: subject,
+    text: content,
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      console.log('Błąd wysyłania e-maila:', error);
+    } else {
+      console.log('E-mail wysłany:', info.response);
+    }
+  });
+};
+
+
 
 
 router.post("/", async (req, res) => {
@@ -22,6 +56,10 @@ router.post("/", async (req, res) => {
 
     await order.save();
     res.status(201).json({ message: "Order created successfully" });
+    const recipient = req.body.userEmail
+    const subject = 'Zamówienie w restaurantsystemPOS'
+    const content = `Dziękujemy za złożenie zamówienia w naszej restauracji. Twoje danie jest już przygotowywane przez naszego szefa kuchni. Życzymy smacznego! :) Całkowita wartość zamówienia to ${req.body.totalPrice}zł`
+    sendEmail(recipient, subject, content);
   } catch (error) {
     if (error.response && error.response.data && error.response.data.message) {
       console.log("Validation error details:", error.response.data.message);
@@ -86,6 +124,7 @@ router.put("/:orderId", async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 })
+
 
 
 module.exports = router;

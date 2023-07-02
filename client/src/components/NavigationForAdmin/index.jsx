@@ -37,7 +37,7 @@ const NavigationForAdmin = ({ cartItemCount }) => {
         </button>
         <button
           className={`${styles.nav_button} ${styles.white_btn}`}
-          onClick={() => handleNavigation("/reservations")}
+          onClick={() => handleNavigation("/reservation")}
         >
           Reservations
         </button>

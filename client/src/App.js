@@ -11,6 +11,7 @@ import React from "react";
 import MyOrders from "./components/MyOrders"
 import UserPermissions from "./components/UserPermissions"
 import AddEmployee from "./components/AddEmployee"
+import Reservation from "./components/Reservation"
 function App() {
     const user = localStorage.getItem("token")
     
@@ -21,7 +22,7 @@ function App() {
             <Route path="/login" exact element={<Login />} />
             {user && <Route path="/cart" exact element={<Cart />} />}
              {user && <Route path="/account-settings" exact element={<AccountSettings />} />}
-             {user && <Route path="/reservation" exact element={<Cart />} />}
+             {user && <Route path="/reservation" exact element={<Reservation />} />}
              {user && <Route path="/permisions" exact element={<Cart />} />}
              {user && <Route path="/order-realize" exact element={<OrderRealize />} />}
              {user && <Route path="/order-success" exact element={<OrderSuccess />} />}
