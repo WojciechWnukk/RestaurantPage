@@ -6,6 +6,7 @@ import axios from "axios";
 import NavigationForAdmin from "../NavigationForAdmin";
 import CheckRoles from "../CheckRoles";
 import { loadCartItemsFromLocalStorage, saveCartItemsToLocalStorage } from "../Scripts/localStorage";
+import NavigationSelector from "../Scripts/NavigationSelector";
 
 const Reservation = ({ handleLogout }) => {
 
@@ -21,14 +22,15 @@ const Reservation = ({ handleLogout }) => {
 
   return (
     <div className={styles.order_realize_container}>
-      <CheckRoles>
-        {(details) => {
-          if (details && details.roles === "Admin") {
-            return <NavigationForAdmin handleLogout={handleLogout} />;
-          } else {
-            return <Navigation cartItemCount={cartItems.length} handleLogout={handleLogout} />;
-          }
-        }}
+<CheckRoles>
+        {(details) => (
+          <NavigationSelector
+            details={details}
+            cartItems={cartItems}
+            handleLogout={handleLogout}
+            token={localStorage.getItem("token")}
+          />
+        )}
       </CheckRoles>
       
     </div>

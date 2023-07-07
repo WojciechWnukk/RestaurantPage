@@ -5,7 +5,8 @@ import { calculateTotalPrice } from "../Scripts/calculateTotalPrice";
 import NavigationForAdmin from "../NavigationForAdmin"
 import CheckRoles from "../CheckRoles";
 import { useNavigate } from "react-router-dom";
- 
+import NavigationNoAcc from "../NavigationNoAcc"
+import NavigationSelector from "../Scripts/NavigationSelector";
 
 const Cart = ({ handleLogout }) => {
   const [cartItems, setCartItems] = useState([]);
@@ -36,21 +37,21 @@ const Cart = ({ handleLogout }) => {
   const handleNavigation = (path) => {
     navigate1(path);
   }
-
+  const token = localStorage.getItem("token");
 
   return (
     <div className={styles.cart_container}>
-{
-      }
+
       
-      <CheckRoles>
-        {(details) => {
-          if (details && details.roles === "Admin") {
-            return <NavigationForAdmin handleLogout={handleLogout} />;
-          } else {
-            return <Navigation cartItemCount={cartItems.length} handleLogout={handleLogout} />
-          }
-        }}
+<CheckRoles>
+        {(details) => (
+          <NavigationSelector
+            details={details}
+            cartItems={cartItems}
+            handleLogout={handleLogout}
+            token={localStorage.getItem("token")}
+          />
+        )}
       </CheckRoles>
       <h2>Cart</h2>
       {cartItems.length === 0 ? (

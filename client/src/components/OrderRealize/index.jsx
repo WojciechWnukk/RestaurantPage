@@ -7,10 +7,12 @@ import { calculateTotalPrice } from "../Scripts/calculateTotalPrice";
 import { useNavigate } from "react-router-dom";
 import NavigationForAdmin from "../NavigationForAdmin"
 import CheckRoles from "../CheckRoles";
+import NavigationSelector from "../Scripts/NavigationSelector";
 
 const OrderRealize = ({ handleLogout }) => {
   const [tableNumber, setTableNumber] = useState(0);
   const [comments, setComments] = useState("");
+  const [emailAddress, setEmailAddress] = useState("")
   const [orderTime, setOrderTime] = useState("40min");
   const [cartItems, setCartItems] = useState([]);
   const totalPrice = calculateTotalPrice(cartItems);
@@ -45,11 +47,17 @@ const OrderRealize = ({ handleLogout }) => {
   };
 
 
+  const handleEmailChange = (event) => {
+    setEmailAddress(event.target.value);
+  };
+
   const mealsData = cartItems.map((item) => ({
     name: item.name,
     quantity: item.quantity,
     price: item.price,
   }));
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -59,9 +67,8 @@ const OrderRealize = ({ handleLogout }) => {
       return;
     }
     console.log(" " + JSON.stringify(mealsData))
-    //console.log(token)
-
-  
+    console.log(token)
+    
     try {
       const url = "http://localhost:8080/api/orders";
 
@@ -71,7 +78,7 @@ const OrderRealize = ({ handleLogout }) => {
         comments,
         meals: mealsData,
         totalPrice,
-        userToken: token,
+        userToken: String(null),
         userEmail: email,
         orderRate: 0,
         status: "Zamowiono"
@@ -80,6 +87,7 @@ const OrderRealize = ({ handleLogout }) => {
       const response = await axios.post(url, data);
 
       console.log("Order created successfully");
+      
       localStorage.removeItem("cartItems")
       navigate("/order-success")
 
@@ -102,13 +110,14 @@ const OrderRealize = ({ handleLogout }) => {
       }
       
       <CheckRoles>
-        {(details) => {
-          if (details && details.roles === "Admin") {
-            return <NavigationForAdmin handleLogout={handleLogout} />;
-          } else {
-            return <Navigation cartItemCount={cartItems.length} handleLogout={handleLogout} />
-          }
-        }}
+        {(details) => (
+          <NavigationSelector
+            details={details}
+            cartItems={cartItems}
+            handleLogout={handleLogout}
+            token={localStorage.getItem("token")}
+          />
+        )}
       </CheckRoles>
       <h3>Order Summary</h3>
       {cartItems.length === 0 ? (
@@ -144,7 +153,6 @@ const OrderRealize = ({ handleLogout }) => {
         {!isTableNumberValid && (
   <p className={styles.error_message}>{tableNumberErrorMessage}</p>
 )}
-
           <label htmlFor="tableNumber">Table Number:</label>
           <input
             type="text"
@@ -154,6 +162,20 @@ const OrderRealize = ({ handleLogout }) => {
             className={`${styles.input} ${isTableNumberValid ? "" : styles.invalid}`}
             />
         </div>
+
+        {!token && (
+          <div className={styles.guestData}>
+              <label htmlFor="email">Email Address:</label>
+              <input
+                type="text"
+                id="email"
+                value={emailAddress}
+                onChange={handleEmailChange}
+                className={styles.input}
+              />
+            
+          </div>
+        )}
 
         <div className={styles.form_group}>
           <label htmlFor="comments">Additional Comments:</label>

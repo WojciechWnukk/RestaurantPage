@@ -35,7 +35,7 @@ const Navigation = ({ cartItemCount }) => {
           className={`${styles.nav_button} ${styles.white_btn}`}
           onClick={() => handleNavigation("/login")}
         >
-          Zaloguj się
+          Login
         </button>
       </div>
     </nav>

@@ -6,6 +6,7 @@ import Navigation from "../Navigation";
 import { loadCartItemsFromLocalStorage, saveCartItemsToLocalStorage } from "../Scripts/localStorage";
 import NavigationForAdmin from "../NavigationForAdmin"
 import CheckRoles from "../CheckRoles";
+import NavigationSelector from "../Scripts/NavigationSelector";
 
 const Main = ({ handleLogout }) => {
 
@@ -52,13 +53,14 @@ const Main = ({ handleLogout }) => {
       }
       
       <CheckRoles>
-        {(details) => {
-          if (details && details.roles === "Admin") {
-            return <NavigationForAdmin handleLogout={handleLogout} />;
-          } else {
-            return <Navigation cartItemCount={cartItems.length} handleLogout={handleLogout} />
-          }
-        }}
+        {(details) => (
+          <NavigationSelector
+            details={details}
+            cartItems={cartItems}
+            handleLogout={handleLogout}
+            token={localStorage.getItem("token")}
+          />
+        )}
       </CheckRoles>
     
       <div className={styles.menu_container}>

@@ -13,7 +13,7 @@
 	align-items: center;
 	width: 100%;
 	padding: 10px;
-	background-color: #333;
+	background-color: grey;
 	color: white;
 	flex-shrink: 0;
   }

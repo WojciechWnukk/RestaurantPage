@@ -101,3 +101,6 @@ button[type="submit"] {
 button[type="submit"] {
   background-color: #28a745;
 }
+.centered {
+  text-align: center;
+}
