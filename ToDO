@@ -16,7 +16,7 @@
 [ ] Po ocenie zamówienia przyznawanie pkt o x% wartości zamówienia
 [x] Dodać generowanie losowego hasła po stworzeniu pracownika i wysyłać mu na maila, zrobić if empl ma konto usera to zmień aby role
 [ ] Możliwość modyfikacji zamówienia: Użytkownicy powinni mieć możliwość modyfikacji swojego zamówienia przed jego akceptacją przez restaurację. 
-
+[ ] Strona raporty z wykresami i pobieralnym plikiem
 
 == RozbudowaPaneluUprawnien ==
 [ ] Dodać opcje zmiany roli typu zatrudnij zwolnij pytając czy aby na pewno

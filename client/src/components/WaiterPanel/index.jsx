@@ -101,7 +101,7 @@ const WaiterPanel = () => {
           <p className={styles.order_meals}>
             Meals:{" "}
             {order.meals.map((meal) => (
-              <span key={meal._id}>{meal.name} </span>
+              <span key={meal._id}>{meal.name} {"(x"}{meal.quantity}{") "} </span>
             ))}
           </p>
           <p className={styles.order_date}>

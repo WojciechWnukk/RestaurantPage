@@ -59,7 +59,7 @@ const MyOrders = ({ handleLogout }) => {
   }
 
   const handleRateOrder = (orderId, rating) => {
-    if (!ratings[orderId]) {
+    if (!ratings[orderId] && orderData.find((order) => order.orderId === orderId).status == "Zamowienie dostarczone") {
 
       setRatings((prevRatings) => ({
         ...prevRatings,
