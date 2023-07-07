@@ -1,9 +1,6 @@
 //Tutaj będzie kalendarz z terminami 
 import React, { useState, useEffect } from "react";
 import styles from "./styles.module.css";
-import Navigation from "../Navigation";
-import axios from "axios";
-import NavigationForAdmin from "../NavigationForAdmin";
 import CheckRoles from "../CheckRoles";
 import { loadCartItemsFromLocalStorage, saveCartItemsToLocalStorage } from "../Scripts/localStorage";
 import NavigationSelector from "../Scripts/NavigationSelector";

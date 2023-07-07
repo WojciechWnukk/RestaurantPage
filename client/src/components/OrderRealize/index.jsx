@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styles from "./styles.module.css";
-import Navigation from "../Navigation";
 import axios from "axios"
 import { loadCartItemsFromLocalStorage, saveCartItemsToLocalStorage } from "../Scripts/localStorage";
 import { calculateTotalPrice } from "../Scripts/calculateTotalPrice";
 import { useNavigate } from "react-router-dom";
-import NavigationForAdmin from "../NavigationForAdmin"
 import CheckRoles from "../CheckRoles";
 import NavigationSelector from "../Scripts/NavigationSelector";
 
@@ -21,6 +19,7 @@ const OrderRealize = ({ handleLogout }) => {
   const [isTableNumberValid, setTableNumberValid] = useState(true);
   const [tableNumberErrorMessage, setTableNumberErrorMessage] = useState("");
   const [error, setError] = useState("")
+  const [checkedToken, setCheckedToken] = useState("")
   const navigate = useNavigate()
   useEffect(() => {
     loadCartItemsFromLocalStorage(setCartItems);
@@ -28,6 +27,11 @@ const OrderRealize = ({ handleLogout }) => {
 
   useEffect(() => {
     saveCartItemsToLocalStorage(cartItems);
+    if(!token){
+      setCheckedToken("Użytkownik niezalogowany")
+    } else {
+      setCheckedToken(token)
+    }
   }, [cartItems]);
 
   const handleTableNumberChange = (event) => {
@@ -51,6 +55,8 @@ const OrderRealize = ({ handleLogout }) => {
     setEmailAddress(event.target.value);
   };
 
+  
+
   const mealsData = cartItems.map((item) => ({
     name: item.name,
     quantity: item.quantity,
@@ -68,6 +74,8 @@ const OrderRealize = ({ handleLogout }) => {
     }
     console.log(" " + JSON.stringify(mealsData))
     console.log(token)
+
+
     
     try {
       const url = "http://localhost:8080/api/orders";
@@ -78,7 +86,7 @@ const OrderRealize = ({ handleLogout }) => {
         comments,
         meals: mealsData,
         totalPrice,
-        userToken: String(null),
+        userToken: checkedToken,
         userEmail: email,
         orderRate: 0,
         status: "Zamowiono"

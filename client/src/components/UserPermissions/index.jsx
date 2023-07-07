@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from "react";
 import styles from "./styles.module.css";
-import Navigation from "../Navigation";
 import axios from "axios";
 import NavigationForAdmin from "../NavigationForAdmin";
 import CheckRoles from "../CheckRoles";
 import { useNavigate } from "react-router-dom";
 const UserPermissions = ({ handleLogout }) => {
   const [users, setUsers] = useState([]);
-  const [employees, setEmployees] = useState([]);
   const navigate = useNavigate()
 
   const handleNavigation = (path) => {

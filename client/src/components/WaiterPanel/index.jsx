@@ -97,6 +97,7 @@ const WaiterPanel = () => {
           >
             Status: {order.status}
           </p>
+          <p className={styles.order_table}>Email: {order.userEmail}</p>
           <p className={styles.order_table}>Table: {order.tableNumber}</p>
           <p className={styles.order_meals}>
             Meals:{" "}

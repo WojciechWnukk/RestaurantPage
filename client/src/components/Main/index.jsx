@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "./styles.module.css"
 import categoriesData from "../categoriesData";
 import foodData from "../foodData";
-import Navigation from "../Navigation";
 import { loadCartItemsFromLocalStorage, saveCartItemsToLocalStorage } from "../Scripts/localStorage";
-import NavigationForAdmin from "../NavigationForAdmin"
 import CheckRoles from "../CheckRoles";
 import NavigationSelector from "../Scripts/NavigationSelector";
 

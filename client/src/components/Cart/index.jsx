@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styles from "./styles.module.css"
-import Navigation from "../Navigation";
 import { calculateTotalPrice } from "../Scripts/calculateTotalPrice";
-import NavigationForAdmin from "../NavigationForAdmin"
 import CheckRoles from "../CheckRoles";
 import { useNavigate } from "react-router-dom";
-import NavigationNoAcc from "../NavigationNoAcc"
 import NavigationSelector from "../Scripts/NavigationSelector";
 
 const Cart = ({ handleLogout }) => {

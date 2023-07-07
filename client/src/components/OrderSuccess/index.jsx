@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import styles from "./styles.module.css";
-import Navigation from "../Navigation";
 import axios from "axios";
-import NavigationForAdmin from "../NavigationForAdmin";
 import CheckRoles from "../CheckRoles";
 import NavigationSelector from "../Scripts/NavigationSelector";
 
 const OrderSuccess = ({ handleLogout }) => {
   const [orderData, setOrderData] = useState(null);
   const token = localStorage.getItem("token");
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchOrderData = async () => {
@@ -18,8 +17,10 @@ const OrderSuccess = ({ handleLogout }) => {
           (order) => order.userToken === token
         );
         setOrderData(orders);
+        setLoading(false)
       } catch (error) {
         console.error("Error fetching order data:", error);
+        setLoading(false)
       }
     };
 
@@ -28,13 +29,17 @@ const OrderSuccess = ({ handleLogout }) => {
     }
   }, [token]);
 
+  if (!orderData && token) {
+    return <p>Loading...</p>
+  }
+
   return (
     <div className={styles.order_realize_container}>
       <CheckRoles>
         {(details) => (
           <NavigationSelector
             details={details}
-            cartItems={orderData ? orderData[0]?.meals : []}
+            cartItemCount={"Zamówiono"}
             handleLogout={handleLogout}
             token={localStorage.getItem("token")}
           />
@@ -46,7 +51,7 @@ const OrderSuccess = ({ handleLogout }) => {
       {orderData && (
         <>
           <h2>Thank you for placing your order!</h2>
-          {orderData.map((order) => (
+          {orderData.slice().reverse().map((order) => (
             <div key={order._id}>
               <p className={styles.order_number}>Order Number: {order.orderId}</p>
               <p
