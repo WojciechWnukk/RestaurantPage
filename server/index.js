@@ -1,20 +1,34 @@
-// index.js
+require('dotenv').config()
 const express = require('express')
-
 const app = express()
-const PORT = 4000
+const cors = require('cors')
+const userRoutes = require("./routes/users")
+const authRoutes = require("./routes/auth")
+const orderRoutes = require("./routes/orders")
+const employeeRoutes = require("./routes/employees")
+//middleware
+app.use(express.json())
+app.use(cors())
 
-app.listen(PORT, () => {
-  console.log(`API listening on PORT ${PORT} `)
-})
+const tokenVerification = require('./middleware/tokenVerification')
 
-app.get('/', (req, res) => {
-  res.send('Hey this is my API running 🥳')
-})
+const connection = require('./db')
+connection()
 
-app.get('/about', (req, res) => {
-  res.send('This is my about route..... ')
-})
+// routes
+app.use("/api/employees", employeeRoutes)
+app.delete("/api/emplotees/:employeeId?", employeeRoutes)
+app.put("/api/users/password", tokenVerification)
+app.get("/api/users/",tokenVerification)
+//app.delete("/api/users", tokenVerification)
+app.delete("/api/users/:userId?", tokenVerification)
+app.get("/api/users/user", tokenVerification)
+app.use("/api/users", userRoutes)
+app.put("/api/orders/:orderId", orderRoutes)
+app.use("/api/orders", orderRoutes)
+app.get("/api/orders", orderRoutes)
+app.use("/api/auth", authRoutes)
 
-// Export the Express API
-module.exports = app
+
+const port = process.env.PORT || 8080
+app.listen(port, () => console.log(`Nasłuchiwanie na porcie ${port}`))
