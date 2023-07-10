@@ -2,14 +2,18 @@
     "version": 2,
     "builds": [
       {
-        "src": "Dockerfile",
+        "src": "server/Dockerfile",
         "use": "@vercel/static-build"
       }
     ],
     "routes": [
       {
+        "src": "/api/(.*)",
+        "dest": "/server/api/$1"
+      },
+      {
         "src": "/(.*)",
-        "dest": "/api/$1"
+        "dest": "/server/$1"
       }
     ]
   }
