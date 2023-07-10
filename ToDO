@@ -10,7 +10,7 @@
 [ ] Panel zarządzania pracownikami
 [ ] Dodanie płatności
 [x] Panel moje zamówienia wyświetlający ładnie wszystkie
-[ ] Obsługa klientów niezalogowanych
+[x] Obsługa klientów niezalogowanych
 [x] Dodanie powiadomień email, formalność - dodanie maila przy rejestracji, złożeniu zamówienia
 [?] upload zdjęć, profilówki dla pracowników
 [ ] Po ocenie zamówienia przyznawanie pkt o x% wartości zamówienia
