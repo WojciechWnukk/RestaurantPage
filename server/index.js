@@ -32,5 +32,3 @@ app.use("/api/auth", authRoutes)
 
 const port = process.env.PORT || 8080
 app.listen(port, () => console.log(`Nasłuchiwanie na porcie ${port}`))
-
-// server.js
