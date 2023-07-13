@@ -1,15 +1,8 @@
 {
-  "version": 2,
-  "builds": [
+  "rewrites": [
     {
-      "src": "Dockerfile",
-      "use": "@vercel/static-build"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/api/$1"
+      "source": "/api",
+      "destination": "https://clownfish-app-df786.ondigitalocean.app"
     }
   ]
 }
