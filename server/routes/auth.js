@@ -2,6 +2,16 @@ const router = require("express").Router()
 const { User } = require("../models/user")
 const bcrypt = require("bcrypt")
 const Joi = require("joi")
+
+// Obsługa nagłówków CORS
+router.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', 'https://restaurant-page-pink.vercel.app'); // Zmień na rzeczywisty adres klienta na Vercel
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    next();
+  });
+
+  
 router.post("/", async (req, res) => {
     try {
         const { error } = validate(req.body);
