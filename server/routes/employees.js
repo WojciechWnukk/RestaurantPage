@@ -10,6 +10,14 @@ router.use((req, res, next) => {
   next();
 });
 
+// Obsługa żądania preflight OPTIONS
+router.options("/", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "https://restaurant-page-pink.vercel.app");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.status(200).send();
+});
+
 
 router.post("/", async (req, res) => {
     try {
