@@ -76,7 +76,7 @@ const OrderRealize = ({ handleLogout }) => {
     console.log(token)
 
 
-    
+    const apiUrl = "https://clownfish-app-df786.ondigitalocean.app/api/orders"
     try {
       const url = "http://localhost:8080/api/orders";
 
@@ -92,7 +92,8 @@ const OrderRealize = ({ handleLogout }) => {
         status: "Zamowiono"
       };
 
-      const response = await axios.post(url, data);
+      //const response = await axios.post(url, data);
+      const response = await axios.post(apiUrl, data);
 
       console.log("Order created successfully");
       
