@@ -12,7 +12,7 @@ const WaiterPanel = () => {
 
   const fetchOrders = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/orders")
+      const response = await axios.get("http://164.90.183.62/api/orders")
       const filteredOrders = response.data.data.filter(
         (order) =>
           showAllOrders || order.status !== "Zamowienie dostarczone"
@@ -26,7 +26,7 @@ const WaiterPanel = () => {
   const handleStatusChange = async (orderId, newStatus) => {
     try {
       await axios.put(
-        `http://localhost:8080/api/orders/${orderId}`,
+        `http://164.90.183.62/api/orders/${orderId}`,
         { status: newStatus }
       )
       fetchOrders()
@@ -45,7 +45,7 @@ const WaiterPanel = () => {
       try {
         const config = {
           method: "get",
-          url: "http://localhost:8080/api/users/user",
+          url: "http://164.90.183.62/api/users/user",
           headers: {
             "Content-Type": "application/json",
             "x-access-token": token,

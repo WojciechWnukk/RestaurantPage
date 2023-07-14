@@ -39,7 +39,7 @@ const AccountSettings = ({ handleLogout }) => {
       if (token) {
         const config = {
           method: "put",
-          url: "http://localhost:8080/api/users/password",
+          url: "http://164.90.183.62/api/users/password",
           headers: {
             "Content-Type": "application/json",
             "x-access-token": token,

@@ -17,7 +17,7 @@ const UserPermissions = ({ handleLogout }) => {
       try {
         const config = {
           method: "get",
-          url: "http://localhost:8080/api/users/",
+          url: "http://164.90.183.62/api/users/",
           headers: {
             "Content-Type": "application/json",
             "x-access-token": token,
@@ -50,7 +50,7 @@ if (userId) {
 
     const config = {
       method: 'delete',
-      url: `http://localhost:8080/api/users/${userId}`,
+      url: `http://164.90.183.62/api/users/${userId}`,
       headers: {
         'Content-Type': 'application/json',
         'x-access-token': token

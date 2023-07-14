@@ -22,7 +22,7 @@ const MyOrders = ({ handleLogout }) => {
 
   const fetchOrderData = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/api/orders");
+      const response = await axios.get("http://164.90.183.62/api/orders");
       const orders = response.data.data.filter((order) => order.userEmail === email);
       setOrderData(orders);
 
@@ -49,7 +49,7 @@ const MyOrders = ({ handleLogout }) => {
   const handleRateChange = async (orderId, rating) => {
     try {
       await axios.put(
-        `http://localhost:8080/api/orders/${orderId}`,
+        `http://164.90.183.62/api/orders/${orderId}`,
         { orderRate: rating }
       )
       fetchOrderData()

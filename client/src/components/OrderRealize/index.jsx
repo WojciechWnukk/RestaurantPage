@@ -76,7 +76,7 @@ const OrderRealize = ({ handleLogout }) => {
     console.log(token)
 
 
-    const apiUrl = "https://orca-app-4ec63.ondigitalocean.app/api/orders"
+    const apiUrl = "http://164.90.183.62/api/orders"
     try {
       const url = "http://localhost:8080/api/orders";
 
