@@ -1,8 +1,0 @@
-{
-  "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "https://clownfish-app-df786.ondigitalocean.app/api/$1"
-    }
-  ]
-}

@@ -3,21 +3,7 @@ const { User } = require("../models/user")
 const bcrypt = require("bcrypt")
 const Joi = require("joi")
 
-// Obsługa nagłówków CORS
-router.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', 'https://restaurant-page-pink.vercel.app'); // Zmień na rzeczywisty adres klienta na Vercel
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-    next();
-  });
 
-  // Obsługa żądania preflight OPTIONS
-router.options("/", (req, res) => {
-    res.header("Access-Control-Allow-Origin", "https://restaurant-page-pink.vercel.app");
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-    res.status(200).send();
-  });
   
 router.post("/", async (req, res) => {
     try {

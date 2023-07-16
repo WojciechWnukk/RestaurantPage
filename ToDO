@@ -1,12 +1,12 @@
 == Nawczoraj ==
 
 == Dozrobienia ==
-[ ] Połączyć z calendar app jako panel rejestracji
+[ ] Połączyć z calendar app jako panel rezerwacji
 [ ] Dodać panel z zestawieniem finansow od miesiaca
 [ ] Panel promocji typu zbieranie punktów za zakupy
 [ ] Panel dla admina w którym będzie mógł edytować dane o produktach zamiast w bazie, dodawać nowe itp CRUD
 [ ] Panel w którym kelner składa zamówienie, typu dostaje telefon od klienta
-[ ] Dodać strone na hosting, zrobić QR przekierowujący
+[x] Dodać strone na hosting, zrobić QR przekierowujący
 [ ] Panel zarządzania pracownikami
 [ ] Dodanie płatności
 [x] Panel moje zamówienia wyświetlający ładnie wszystkie

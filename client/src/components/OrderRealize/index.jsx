@@ -6,6 +6,9 @@ import { calculateTotalPrice } from "../Scripts/calculateTotalPrice";
 import { useNavigate } from "react-router-dom";
 import CheckRoles from "../CheckRoles";
 import NavigationSelector from "../Scripts/NavigationSelector";
+import { loadStripe } from '@stripe/stripe-js';
+const stripePromise = loadStripe('pk_test_51NUCO4CTvIeCfZ48NcnZga4vVwWBjMV21jqsmPWuBgc9i6CSHUQIfC3hIgjBrdOiu5uMosaLlwmEhQzrWPEAdqYZ00NcG5v8jk');
+
 
 const OrderRealize = ({ handleLogout }) => {
   const [tableNumber, setTableNumber] = useState(0);
@@ -20,6 +23,7 @@ const OrderRealize = ({ handleLogout }) => {
   const [tableNumberErrorMessage, setTableNumberErrorMessage] = useState("");
   const [error, setError] = useState("")
   const [checkedToken, setCheckedToken] = useState("")
+  
   const navigate = useNavigate()
   useEffect(() => {
     loadCartItemsFromLocalStorage(setCartItems);
@@ -76,7 +80,7 @@ const OrderRealize = ({ handleLogout }) => {
     console.log(token)
 
 
-    const apiUrl = "http://164.92.133.224/api/orders"
+    //const apiUrl = "http://164.92.133.224/api/orders"
     try {
       const url = "http://localhost:8080/api/orders";
 
@@ -93,7 +97,7 @@ const OrderRealize = ({ handleLogout }) => {
       };
 
       //const response = await axios.post(url, data);
-      const response = await axios.post(apiUrl, data);
+      const response = await axios.post(url, data);
 
       console.log("Order created successfully");
       
@@ -113,10 +117,54 @@ const OrderRealize = ({ handleLogout }) => {
     }
   };
 
+  const handlePayment = async () => {
+    try {
+      const stripe = await stripePromise;
+      const mealsData = cartItems.map((item) => ({
+        name: item.name,
+        quantity: item.quantity,
+        price: parseFloat(item.price.replace(/\D/g, "")),
+      }));
+      const response = await axios.post("http://localhost:8080/api/payment", { meals: mealsData});
+      const { url } = response.data;
+      const session = await stripe.redirectToCheckout({
+        sessionId: url,
+      });
+
+      // Jeśli nastąpi błąd w czasie przekierowania, wyświetl odpowiednie komunikaty
+      if (session.error) {
+        console.error("Błąd podczas przekierowania do płatności:", session.error.message);
+        // Tutaj możesz wyświetlić użytkownikowi komunikat o błędzie
+      } else {
+        const orderData = {
+          tableNumber,
+          comments,
+          meals: mealsData,
+          totalPrice,
+          userToken: checkedToken,
+          userEmail: email,
+          orderRate: 0,
+          status: "Oplacone" // dodać nowe pole w order
+        }
+        const url = "http://localhost:8080/api/orders";
+        const response = await axios.post(url, orderData);
+        console.log("Order created successfully");
+  
+        // Usuń elementy koszyka z local storage
+        localStorage.removeItem("cartItems");
+  
+        // Przejdź do strony z potwierdzeniem zamówienia
+        navigate("/order-success");
+      }
+    } catch (error) {
+      console.error("Błąd podczas tworzenia sesji płatności:", error);
+    }
+  };
+
+
   return (
     <div className={styles.order_realize_container}>
-{
-      }
+
       
       <CheckRoles>
         {(details) => (
@@ -157,8 +205,8 @@ const OrderRealize = ({ handleLogout }) => {
           </tfoot>
         </table>
       )}
-      <form onSubmit={handleSubmit}>
-        <div className={styles.form_group}>
+    <form onSubmit={handleSubmit}>
+              <div className={styles.form_group}>
         {!isTableNumberValid && (
   <p className={styles.error_message}>{tableNumberErrorMessage}</p>
 )}
@@ -202,7 +250,12 @@ const OrderRealize = ({ handleLogout }) => {
         </div>
 
         <div className={styles.form_group}>
-          <button type="submit">Submit</button>
+          <button type="submit">Pay later</button>
+        </div>
+        <div className={styles.form_group}>
+          <button type="button" onClick={handlePayment}>
+            Pay online
+          </button>
         </div>
       </form>
 
