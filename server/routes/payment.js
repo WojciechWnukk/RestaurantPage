@@ -1,7 +1,7 @@
 const router = require("express").Router()
 const nodemailer = require('nodemailer');
 const stripe = require('stripe')(process.env.PRIVATE_STRIPE_KEY);
-
+const { Order } = require("../models/order")
 
 router.post("/", async (req, res) => {
     try {
@@ -12,7 +12,7 @@ router.post("/", async (req, res) => {
               product_data: {
                 name: meal.name,
               },
-              unit_amount: meal.price,
+              unit_amount: parseFloat(meal.price.replace(/\D/g, "")),
             },
             quantity: meal.quantity,
           })),
@@ -21,7 +21,21 @@ router.post("/", async (req, res) => {
           cancel_url: `http://localhost:3000/`,
           automatic_tax: { enabled: true },
         });
-    
+        const orderData = {
+          tableNumber: req.body.tableNumber,
+          comments: req.body.comments,
+          meals: req.body.meals,
+          totalPrice: req.body.totalPrice,
+          userToken: req.body.userToken,
+          userEmail: req.body.userEmail,
+          orderRate: 0,
+          status: "Zamówiono",
+          paymentStatus: "Oplacono",
+          paymentSessionId: session.id,
+        }
+        const order = new Order(orderData)
+        await order.save()
+        
         res.json({ url: session.id });
       } catch (error) {
         console.error("Błąd podczas tworzenia sesji płatności:", error);
@@ -29,4 +43,7 @@ router.post("/", async (req, res) => {
       }
     });
     
+
+
+
     module.exports = router;

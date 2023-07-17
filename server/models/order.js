@@ -23,7 +23,8 @@ const orderSchema = new mongoose.Schema({
     userToken: {type: String, required: true},
     userEmail: {type: String, required: true},
     orderDate: {type: Date, default: Date.now},
-    orderRate: { type: Number, default: null}
+    orderRate: { type: Number, default: null},
+    paymentStatus: { type: String, required: true}
 })
 
 orderSchema.pre("save", function (next) {
@@ -50,6 +51,7 @@ const validate = (data) => {
       userEmail: Joi.string().required(),
       orderDate: Joi.date().optional(),
       orderRate: Joi.number().allow(0, null),
+      paymentStatus: Joi.string().required()
     })
     return schema.validate(data)
 }

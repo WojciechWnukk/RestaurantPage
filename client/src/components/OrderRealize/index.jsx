@@ -93,7 +93,8 @@ const OrderRealize = ({ handleLogout }) => {
         userToken: checkedToken,
         userEmail: email,
         orderRate: 0,
-        status: "Zamowiono"
+        status: "Zamowiono",
+        paymentStatus: "Platne przy odbiorze"
       };
 
       //const response = await axios.post(url, data);
@@ -118,23 +119,26 @@ const OrderRealize = ({ handleLogout }) => {
   };
 
   const handlePayment = async () => {
+    if (tableNumber <= 0) {
+      setTableNumberErrorMessage("Please enter a valid table number.");
+      return;
+    }
     try {
       const stripe = await stripePromise;
       const mealsData = cartItems.map((item) => ({
         name: item.name,
         quantity: item.quantity,
-        price: parseFloat(item.price.replace(/\D/g, "")),
+        price: item.price,
       }));
-      const response = await axios.post("http://localhost:8080/api/payment", { meals: mealsData});
+      const response = await axios.post("http://localhost:8080/api/payment", { tableNumber, comments, meals: mealsData, totalPrice, userToken: checkedToken, userEmail: email });
       const { url } = response.data;
       const session = await stripe.redirectToCheckout({
         sessionId: url,
       });
 
-      // Jeśli nastąpi błąd w czasie przekierowania, wyświetl odpowiednie komunikaty
       if (session.error) {
         console.error("Błąd podczas przekierowania do płatności:", session.error.message);
-        // Tutaj możesz wyświetlić użytkownikowi komunikat o błędzie
+        // komunikat o błędzie
       } else {
         const orderData = {
           tableNumber,
@@ -144,16 +148,13 @@ const OrderRealize = ({ handleLogout }) => {
           userToken: checkedToken,
           userEmail: email,
           orderRate: 0,
-          status: "Oplacone" // dodać nowe pole w order
+          status: "Zamowiono",
+          paymentStatus: "Oplacone"
         }
         const url = "http://localhost:8080/api/orders";
         const response = await axios.post(url, orderData);
         console.log("Order created successfully");
-  
-        // Usuń elementy koszyka z local storage
-        localStorage.removeItem("cartItems");
-  
-        // Przejdź do strony z potwierdzeniem zamówienia
+        
         navigate("/order-success");
       }
     } catch (error) {

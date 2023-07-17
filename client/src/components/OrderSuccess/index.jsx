@@ -10,6 +10,7 @@ const OrderSuccess = ({ handleLogout }) => {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    localStorage.removeItem("cartItems");
     const fetchOrderData = async () => {
       try {
         const response = await axios.get("http://localhost:8080/api/orders");
