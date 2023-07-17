@@ -12,4 +12,4 @@ Some examples of functionality:
 - displaying of order history
 - When creating an employee account in front of the administrator, the system randomly generates a password which it sends to the specified email
 - displaying of navigation depending on account permissions
-
+- paying online with stripe
