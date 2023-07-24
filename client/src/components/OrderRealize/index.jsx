@@ -23,7 +23,7 @@ const OrderRealize = ({ handleLogout }) => {
   const [tableNumberErrorMessage, setTableNumberErrorMessage] = useState("");
   const [error, setError] = useState("")
   const [checkedToken, setCheckedToken] = useState("")
-  
+
   const navigate = useNavigate()
   useEffect(() => {
     loadCartItemsFromLocalStorage(setCartItems);
@@ -31,7 +31,7 @@ const OrderRealize = ({ handleLogout }) => {
 
   useEffect(() => {
     saveCartItemsToLocalStorage(cartItems);
-    if(!token){
+    if (!token) {
       setCheckedToken("Użytkownik niezalogowany")
     } else {
       setCheckedToken(token)
@@ -48,7 +48,7 @@ const OrderRealize = ({ handleLogout }) => {
     } else {
       setTableNumberErrorMessage("");
     }
-    };
+  };
 
   const handleCommentsChange = (event) => {
     setComments(event.target.value);
@@ -59,7 +59,7 @@ const OrderRealize = ({ handleLogout }) => {
     setEmailAddress(event.target.value);
   };
 
-  
+
 
   const mealsData = cartItems.map((item) => ({
     name: item.name,
@@ -101,7 +101,7 @@ const OrderRealize = ({ handleLogout }) => {
       const response = await axios.post(url, data);
 
       console.log("Order created successfully");
-      
+
       localStorage.removeItem("cartItems")
       navigate("/order-success")
 
@@ -110,7 +110,7 @@ const OrderRealize = ({ handleLogout }) => {
       if (error.response && error.response.data && error.response.data.message) {
         console.log("Validation error details:", error.response.data.message);
         setError(error.response.data.message);
-        
+
       } else {
         console.log("Error creating order:", error);
         setError("An error occurred while creating the order.");
@@ -154,7 +154,7 @@ const OrderRealize = ({ handleLogout }) => {
         const url = "http://localhost:8080/api/orders";
         const response = await axios.post(url, orderData);
         console.log("Order created successfully");
-        
+
         navigate("/order-success");
       }
     } catch (error) {
@@ -166,7 +166,7 @@ const OrderRealize = ({ handleLogout }) => {
   return (
     <div className={styles.order_realize_container}>
 
-      
+
       <CheckRoles>
         {(details) => (
           <NavigationSelector
@@ -206,11 +206,11 @@ const OrderRealize = ({ handleLogout }) => {
           </tfoot>
         </table>
       )}
-    <form onSubmit={handleSubmit}>
-              <div className={styles.form_group}>
-        {!isTableNumberValid && (
-  <p className={styles.error_message}>{tableNumberErrorMessage}</p>
-)}
+      <form onSubmit={handleSubmit}>
+        <div className={styles.form_group}>
+          {!isTableNumberValid && (
+            <p className={styles.error_message}>{tableNumberErrorMessage}</p>
+          )}
           <label htmlFor="tableNumber">Table Number:</label>
           <input
             type="text"
@@ -218,20 +218,20 @@ const OrderRealize = ({ handleLogout }) => {
             value={tableNumber}
             onChange={handleTableNumberChange}
             className={`${styles.input} ${isTableNumberValid ? "" : styles.invalid}`}
-            />
+          />
         </div>
 
         {!token && (
           <div className={styles.guestData}>
-              <label htmlFor="email">Email Address:</label>
-              <input
-                type="text"
-                id="email"
-                value={emailAddress}
-                onChange={handleEmailChange}
-                className={styles.input}
-              />
-            
+            <label htmlFor="email">Email Address:</label>
+            <input
+              type="text"
+              id="email"
+              value={emailAddress}
+              onChange={handleEmailChange}
+              className={styles.input}
+            />
+
           </div>
         )}
 

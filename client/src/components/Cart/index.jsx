@@ -28,7 +28,7 @@ const Cart = ({ handleLogout }) => {
     const updatedCartItems = cartItems.filter((item) => item.id !== itemId);
     setCartItems(updatedCartItems);
   };
-  
+
   const navigate1 = useNavigate();
 
   const handleNavigation = (path) => {
@@ -39,8 +39,8 @@ const Cart = ({ handleLogout }) => {
   return (
     <div className={styles.cart_container}>
 
-      
-<CheckRoles>
+
+      <CheckRoles>
         {(details) => (
           <NavigationSelector
             details={details}
@@ -75,7 +75,7 @@ const Cart = ({ handleLogout }) => {
           ))}
 
           <div className={styles.total_price}>
-          <h3 className={styles.total_price_label}>Total Price: {totalPrice + "zł"}</h3>
+            <h3 className={styles.total_price_label}>Total Price: {totalPrice + "zł"}</h3>
             <button className={styles.link_btn} onClick={() => handleNavigation("/order-realize")}>
               Przejdź do podsumowania
             </button>

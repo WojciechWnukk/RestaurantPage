@@ -7,7 +7,7 @@ import { calculateTotalPrice } from "../Scripts/calculateTotalPrice";
 import { useNavigate } from "react-router-dom";
 
 const X = ({ handleLogout }) => {
-  
+
   const navigate = useNavigate()
 
 

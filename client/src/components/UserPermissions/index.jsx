@@ -44,27 +44,27 @@ const UserPermissions = ({ handleLogout }) => {
 
     if (confirmed) {
 
-if (userId) {
-  try {
-    const token = localStorage.getItem("token");
+      if (userId) {
+        try {
+          const token = localStorage.getItem("token");
 
-    const config = {
-      method: 'delete',
-      url: `http://localhost:8080/api/users/${userId}`,
-      headers: {
-        'Content-Type': 'application/json',
-        'x-access-token': token
+          const config = {
+            method: 'delete',
+            url: `http://localhost:8080/api/users/${userId}`,
+            headers: {
+              'Content-Type': 'application/json',
+              'x-access-token': token
+            }
+          }
+
+          await axios(config)
+          console.log("Usunieto konto")
+        } catch (error) {
+
+        }
       }
+      window.location.reload()
     }
-
-    await axios(config)
-    console.log("Usunieto konto")
-  } catch (error) {
-
-  }
-}
-    window.location.reload()
-}
 
   }
 

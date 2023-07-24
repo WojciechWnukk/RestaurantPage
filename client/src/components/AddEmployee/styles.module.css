@@ -1,57 +1,58 @@
 .AddEmployee_container {
-    display: 100%;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-  }
-  
-  .AddEmployee_container form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 300px;
-    margin: 0 auto;
-  }
-  
-  .AddEmployee_container label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: bold;
-    text-align: left;
-    width: 100%;
-  }
-  
-  .AddEmployee_container input,
-  .AddEmployee_container select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-  
-  .AddEmployee_container button[type="submit"] {
-    padding: 10px 20px;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .AddEmployee_container button[type="submit"]:hover {
-    background-color: #45a049;
-  }
-  
-  .AddEmployee_container button[type="submit"]:focus {
-    outline: none;
-  }
-  
-  .AddEmployee_container button[type="submit"]:active {
-    background-color: #3e8e41;
-  }
-  .successMessage {
-    color: green;
-    font-weight: bold;
-  }
+  display: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.AddEmployee_container form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  margin: 0 auto;
+}
+
+.AddEmployee_container label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+  text-align: left;
+  width: 100%;
+}
+
+.AddEmployee_container input,
+.AddEmployee_container select {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.AddEmployee_container button[type="submit"] {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.AddEmployee_container button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.AddEmployee_container button[type="submit"]:focus {
+  outline: none;
+}
+
+.AddEmployee_container button[type="submit"]:active {
+  background-color: #3e8e41;
+}
+
+.successMessage {
+  color: green;
+  font-weight: bold;
+}

@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
     email: { type: String, required: true },
     password: { type: String, required: false },
     roles: { type: String, required: false }
-}, {collection: "users"})
+}, { collection: "users" })
 userSchema.methods.generateAuthToken = function () {
     const token = jwt.sign({ _id: this._id }, process.env.JWTPRIVATEKEY, {
         expiresIn: "7d",
@@ -24,7 +24,7 @@ const validate = (data) => {
         upperCase: 1,
         numeric: 1,
         symbol: 1,
-      };
+    };
 
     const schema = Joi.object({
         firstName: Joi.string().required().label("First Name"),
@@ -32,9 +32,9 @@ const validate = (data) => {
         email: Joi.string().email().required().label("Email"),
         password: passwordComplexity(complexityOptions).optional().label("Password"),
         roles: Joi.string()
-        .valid("User", "Admin", "Employee")
-        .label("Role")
-        .optional(),
+            .valid("User", "Admin", "Employee")
+            .label("Role")
+            .optional(),
     })
     return schema.validate(data)
 }

@@ -22,8 +22,10 @@ label {
 
 input[type="password"] {
   padding: 10px;
-  width: 100%; /* Zmiana szerokości na 100% */
-  max-width: 300px; /* Ograniczenie maksymalnej szerokości do 300px */
+  width: 100%;
+  /* Zmiana szerokości na 100% */
+  max-width: 300px;
+  /* Ograniczenie maksymalnej szerokości do 300px */
   font-size: 16px;
 }
 
@@ -72,8 +74,8 @@ button[type="submit"]:hover {
   display: flex;
   gap: 10px;
   margin-top: 20px;
-  width: 100%; 
-  max-width: 300px; 
+  width: 100%;
+  max-width: 300px;
 }
 
 .delete_account_button {

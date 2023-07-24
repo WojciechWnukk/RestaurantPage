@@ -49,7 +49,7 @@ const Main = ({ handleLogout }) => {
     <div className={styles.main_container}>
       {
       }
-      
+
       <CheckRoles>
         {(details) => (
           <NavigationSelector
@@ -60,7 +60,7 @@ const Main = ({ handleLogout }) => {
           />
         )}
       </CheckRoles>
-    
+
       <div className={styles.menu_container}>
         <div className={styles.categories}>
           <h2>Kategorie posiłków</h2>

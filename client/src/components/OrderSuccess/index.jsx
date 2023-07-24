@@ -56,11 +56,10 @@ const OrderSuccess = ({ handleLogout }) => {
             <div key={order._id}>
               <p className={styles.order_number}>Order Number: {order.orderId}</p>
               <p
-                className={`${styles.status} ${
-                  order.status === "Zamowiono"
-                    ? styles.status_ordered
-                    : styles.status_completed
-                }`}
+                className={`${styles.status} ${order.status === "Zamowiono"
+                  ? styles.status_ordered
+                  : styles.status_completed
+                  }`}
               >
                 Status: {order.status}
               </p>

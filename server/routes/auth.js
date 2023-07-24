@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt")
 const Joi = require("joi")
 
 
-  
+
 router.post("/", async (req, res) => {
     try {
         const { error } = validate(req.body);

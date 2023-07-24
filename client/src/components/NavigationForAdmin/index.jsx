@@ -12,7 +12,7 @@ const NavigationForAdmin = ({ cartItemCount }) => {
     localStorage.removeItem("token")
     localStorage.removeItem("cartItems")
     window.location.reload()
-    
+
   }
   return (
     <nav className={styles.navbar}>

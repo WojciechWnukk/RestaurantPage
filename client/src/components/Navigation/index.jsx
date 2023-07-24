@@ -12,7 +12,7 @@ const Navigation = ({ cartItemCount }) => {
     localStorage.removeItem("token")
     localStorage.removeItem("cartItems")
     window.location.reload()
-    
+
   }
   return (
     <nav className={styles.navbar}>
@@ -41,7 +41,7 @@ const Navigation = ({ cartItemCount }) => {
         >
           Reservations
         </button>
-        
+
         <button
           className={`${styles.nav_button} ${styles.white_btn}`}
           onClick={() => handleNavigation("/my-orders")}

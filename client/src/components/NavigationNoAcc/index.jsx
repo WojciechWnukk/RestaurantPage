@@ -30,7 +30,7 @@ const Navigation = ({ cartItemCount }) => {
         >
           Reservations
         </button>
-        
+
         <button
           className={`${styles.nav_button} ${styles.white_btn}`}
           onClick={() => handleNavigation("/login")}

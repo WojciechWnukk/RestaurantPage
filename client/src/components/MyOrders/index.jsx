@@ -28,9 +28,9 @@ const MyOrders = ({ handleLogout }) => {
 
       const initialRatings = {};
       orders.forEach((order) => {
-      initialRatings[order.orderId] = order.orderRate;
-    });
-    setRatings(initialRatings);
+        initialRatings[order.orderId] = order.orderRate;
+      });
+      setRatings(initialRatings);
     } catch (error) {
       console.error("Error fetching order data:", error);
     }
@@ -104,9 +104,8 @@ const MyOrders = ({ handleLogout }) => {
                 <td>{new Date(order.orderDate).toLocaleString()}</td>
                 <td>
                   <span
-                    className={`${styles.status} ${
-                      order.status === "Zamowiono" ? styles.status_ordered : styles.status_completed
-                    }`}
+                    className={`${styles.status} ${order.status === "Zamowiono" ? styles.status_ordered : styles.status_completed
+                      }`}
                   >
                     {order.status}
                   </span>

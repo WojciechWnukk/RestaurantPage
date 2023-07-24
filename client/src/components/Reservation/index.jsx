@@ -19,7 +19,7 @@ const Reservation = ({ handleLogout }) => {
 
   return (
     <div className={styles.order_realize_container}>
-<CheckRoles>
+      <CheckRoles>
         {(details) => (
           <NavigationSelector
             details={details}
@@ -29,7 +29,7 @@ const Reservation = ({ handleLogout }) => {
           />
         )}
       </CheckRoles>
-      
+
     </div>
   );
 };

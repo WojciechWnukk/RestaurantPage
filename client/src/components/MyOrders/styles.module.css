@@ -58,9 +58,9 @@
 }
 
 .order_summary_table th {
-    background-color: #f2f2f2;
-    font-weight: bold;
-  }
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
 
 .order_summary_table tfoot td:last-child {
   text-align: right;

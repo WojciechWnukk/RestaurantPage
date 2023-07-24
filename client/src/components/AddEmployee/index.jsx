@@ -31,17 +31,17 @@ const AddEmployee = ({ handleLogout }) => {
       [name]: value,
     }));
     if (name === 'firstName' || name === 'lastName' || name === 'email') {
-        setDataUser((prevDataUser) => ({
-          ...prevDataUser,
-          [name]: value,
-        }));
-      }
+      setDataUser((prevDataUser) => ({
+        ...prevDataUser,
+        [name]: value,
+      }));
+    }
   };
 
   const addUser = async () => {
     try {
       const userUrl = "http://localhost:8080/api/users";
-        console.log(dataUser)
+      console.log(dataUser)
       await axios.post(userUrl, dataUser);
       console.log("Użytkownik został dodany");
     } catch (error) {
@@ -53,25 +53,25 @@ const AddEmployee = ({ handleLogout }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-        const url = "http://localhost:8080/api/employees"
-        const { data: res } = await axios.post(url, data)
-        console.log(res.message)
-        setSuccessMessage("Pracownik " + data.firstName +" został dodany")
-        await addUser()
-        
-        setTimeout(() => {
-          window.location.reload();
-        }, 5000)
+      const url = "http://localhost:8080/api/employees"
+      const { data: res } = await axios.post(url, data)
+      console.log(res.message)
+      setSuccessMessage("Pracownik " + data.firstName + " został dodany")
+      await addUser()
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 5000)
 
     } catch (error) {
-        if (
-            error.response &&
-            error.response.status >= 400 &&
-            error.response.status <= 500
-        ) {
-            setError(error.response.data.message)
-        }
-    }    
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status <= 500
+      ) {
+        setError(error.response.data.message)
+      }
+    }
     console.log(data);
   };
 
@@ -84,29 +84,29 @@ const AddEmployee = ({ handleLogout }) => {
               <div>
                 <NavigationForAdmin handleLogout={handleLogout} />
                 <div>
-                    <h2>Dodaj pracownika</h2>
-                <form onSubmit={handleSubmit}>
-      <label>
-        Imię:
-        <input
-          type="text"
-          name="firstName"
-          value={data.firstName}
-          onChange={handleChange}
-          required
-        />
-      </label>
-      <label>
-        Nazwisko:
-        <input
-          type="text"
-          name="lastName"
-          value={data.lastName}
-          onChange={handleChange}
-          required
-        />
-      </label>
-      <label>
+                  <h2>Dodaj pracownika</h2>
+                  <form onSubmit={handleSubmit}>
+                    <label>
+                      Imię:
+                      <input
+                        type="text"
+                        name="firstName"
+                        value={data.firstName}
+                        onChange={handleChange}
+                        required
+                      />
+                    </label>
+                    <label>
+                      Nazwisko:
+                      <input
+                        type="text"
+                        name="lastName"
+                        value={data.lastName}
+                        onChange={handleChange}
+                        required
+                      />
+                    </label>
+                    <label>
                       Email:
                       <input
                         type="email"
@@ -116,50 +116,50 @@ const AddEmployee = ({ handleLogout }) => {
                         required
                       />
                     </label>
-      <label>
-        Data urodzenia:
-        <input
-          type="date"
-          name="birthDate"
-          value={data.birthDate}
-          onChange={handleChange}
-          required
-        />
-      </label>
-      <label>
-        PESEL:
-        <input
-          type="text"
-          name="pesel"
-          value={data.pesel}
-          onChange={handleChange}
-          required
-        />
-      </label>
-      <label>
-        Płeć:
-        <select name="gender" value={data.gender} onChange={handleChange} required>
-          <option value="">Wybierz płeć</option>
-          <option value="Mężczyzna">Mężczyzna</option>
-          <option value="Kobieta">Kobieta</option>
-        </select>
-      </label>
-      <label>
-        Pensja:
-        <input
-          type="number"
-          name="salary"
-          value={data.salary}
-          onChange={handleChange}
-          required
-        />
-      </label>
-      <button type="submit">Dodaj pracownika</button>
-    </form>
-    {successMessage && <p className={styles.successMessage}>{successMessage}</p>}
+                    <label>
+                      Data urodzenia:
+                      <input
+                        type="date"
+                        name="birthDate"
+                        value={data.birthDate}
+                        onChange={handleChange}
+                        required
+                      />
+                    </label>
+                    <label>
+                      PESEL:
+                      <input
+                        type="text"
+                        name="pesel"
+                        value={data.pesel}
+                        onChange={handleChange}
+                        required
+                      />
+                    </label>
+                    <label>
+                      Płeć:
+                      <select name="gender" value={data.gender} onChange={handleChange} required>
+                        <option value="">Wybierz płeć</option>
+                        <option value="Mężczyzna">Mężczyzna</option>
+                        <option value="Kobieta">Kobieta</option>
+                      </select>
+                    </label>
+                    <label>
+                      Pensja:
+                      <input
+                        type="number"
+                        name="salary"
+                        value={data.salary}
+                        onChange={handleChange}
+                        required
+                      />
+                    </label>
+                    <button type="submit">Dodaj pracownika</button>
+                  </form>
+                  {successMessage && <p className={styles.successMessage}>{successMessage}</p>}
                 </div>
               </div>
-              
+
             );
           } else {
             return "Brak uprawnień";

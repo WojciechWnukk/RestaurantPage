@@ -32,7 +32,7 @@ const AccountSettings = ({ handleLogout }) => {
       setErrorMessage("Hasło musi zawierać co najmniej 8 znaków i może zawierać tylko litery i cyfry.");
       return;
     }
-    
+
     try {
       const token = localStorage.getItem("token");
 
@@ -69,8 +69,8 @@ const AccountSettings = ({ handleLogout }) => {
     const passwordRegex = /^[a-zA-Z0-9.!@#$%^&*()_+-]{8,}$/;
     return passwordRegex.test(password);
   }
-  
-  
+
+
   const deleteUser = async (e) => {
     e.preventDefault()
     const token = localStorage.getItem("token")
@@ -78,31 +78,31 @@ const AccountSettings = ({ handleLogout }) => {
     const confirmed = window.confirm("Czy na pewno chcesz usunąć swoje konto?")
 
     if (confirmed) {
-const token = localStorage.getItem("token")
+      const token = localStorage.getItem("token")
 
-if (token) {
-  try {
-    const config = {
-      method: 'delete',
-      url: 'http://localhost:8080/api/users',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-access-token': token
+      if (token) {
+        try {
+          const config = {
+            method: 'delete',
+            url: 'http://localhost:8080/api/users',
+            headers: {
+              'Content-Type': 'application/json',
+              'x-access-token': token
+            }
+          }
+
+          await axios(config)
+          console.log("Usunieto konto")
+        } catch (error) {
+
+        }
       }
+      localStorage.removeItem("token")
+      localStorage.removeItem("cartItems")
+      window.location.reload()
     }
 
-    await axios(config)
-    console.log("Usunieto konto")
-  } catch (error) {
-
   }
-}
-localStorage.removeItem("token")
-    localStorage.removeItem("cartItems")
-    window.location.reload()
-}
-
-}
 
   return (
     <div className={styles.account_settings_container}>

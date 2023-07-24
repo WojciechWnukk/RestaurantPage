@@ -7,8 +7,8 @@ const WaiterPanel = () => {
   const [showAllOrders, setShowAllOrders] = useState(true);
   const [details, setDetails] = useState(null);
 
-  
-  
+
+
 
   const fetchOrders = async () => {
     try {
@@ -61,7 +61,7 @@ const WaiterPanel = () => {
           error.response.status >= 400 &&
           error.response.status <= 500
         ) {
-          
+
           localStorage.removeItem("token");
           window.location.reload();
         }
@@ -72,7 +72,7 @@ const WaiterPanel = () => {
     fetchOrders();
     handleGetUserDetails();
   }, [showAllOrders]);
-  
+
   if (!details || details.roles !== "Admin") {
     return <p>Brak uprawnień</p>;
   }
@@ -89,11 +89,10 @@ const WaiterPanel = () => {
         <div key={order._id} className={styles.order_item}>
           <p className={styles.order_number}>Order Number: {order.orderId}</p>
           <p
-            className={`${styles.status} ${
-              order.status === "Przygotowanie zamowienia"
-                ? styles.status_ordered
-                : styles.status_inprogress
-            }`}
+            className={`${styles.status} ${order.status === "Przygotowanie zamowienia"
+              ? styles.status_ordered
+              : styles.status_inprogress
+              }`}
           >
             Status: {order.status}
           </p>

@@ -28,7 +28,7 @@ const x = ({ handleLogout }) => {
           }
         }}
       </CheckRoles>
-      
+
     </div>
   );
 };

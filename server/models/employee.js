@@ -7,12 +7,12 @@ const employeeSchema = new mongoose.Schema({
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     email: { type: String, required: true },
-    birthDate: { type: Date, required: true},
-    hireDate: { type: Date, default: Date.now},
-    pesel: { type: String, required: true},
-    gender: {type: String, required: true},
-    salary: { type: Number, required: true},
-}, {collection: "employee"})
+    birthDate: { type: Date, required: true },
+    hireDate: { type: Date, default: Date.now },
+    pesel: { type: String, required: true },
+    gender: { type: String, required: true },
+    salary: { type: Number, required: true },
+}, { collection: "employee" })
 
 const Employee = mongoose.model("Employee", employeeSchema)
 const validate = (data) => {

@@ -7,9 +7,9 @@
 	height: 100vh;
 	background-image: url("baner.jpg");
 	background-size: cover;
-  }
-  
-  .login_form_container {
+}
+
+.login_form_container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -18,36 +18,36 @@
 	padding: 40px;
 	border-radius: 10px;
 	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  .left {
+}
+
+.left {
 	margin-right: 30px;
-  }
-  
-  .form_container {
+}
+
+.form_container {
 	width: 100%;
-  }
-  
-  .form_container h1 {
+}
+
+.form_container h1 {
 	font-size: 24px;
 	margin-bottom: 20px;
-  }
-  
-  .input {
+}
+
+.input {
 	width: 100%;
 	padding: 10px;
 	margin-bottom: 20px;
 	border: none;
 	border-radius: 5px;
 	background-color: #f1f1f1;
-  }
-  
-  .error_msg {
+}
+
+.error_msg {
 	color: red;
 	margin-bottom: 20px;
-  }
-  
-  .green_btn {
+}
+
+.green_btn {
 	width: 100%;
 	padding: 10px;
 	border: none;
@@ -56,22 +56,22 @@
 	color: white;
 	font-weight: bold;
 	cursor: pointer;
-  }
-  
-  .green_btn:hover {
+}
+
+.green_btn:hover {
 	background-color: #218838;
-  }
-  
-  .right {
+}
+
+.right {
 	text-align: center;
-  }
-  
-  .right h1 {
+}
+
+.right h1 {
 	font-size: 24px;
 	margin-bottom: 20px;
-  }
-  
-  .white_btn {
+}
+
+.white_btn {
 	padding: 10px 20px;
 	border: 2px solid #fff;
 	border-radius: 5px;
@@ -79,10 +79,9 @@
 	color: #fff;
 	font-weight: bold;
 	cursor: pointer;
-  }
-  
-  .white_btn:hover {
+}
+
+.white_btn:hover {
 	background-color: #fff;
 	color: #000;
-  }
-  
+}

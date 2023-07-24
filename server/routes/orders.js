@@ -1,8 +1,6 @@
 const router = require("express").Router();
-const {Order, validate} = require("../models/order");
+const { Order, validate } = require("../models/order");
 const nodemailer = require('nodemailer');
-
-
 
 
 const transporter = nodemailer.createTransport({
@@ -12,8 +10,8 @@ const transporter = nodemailer.createTransport({
     pass: process.env.EMAIL_PASSWORD,
   },
   tls: {
-      rejectUnauthorized: false
-    }
+    rejectUnauthorized: false
+  }
 });
 
 const sendEmail = (recipient, subject, content) => {
@@ -71,14 +69,14 @@ router.post("/", async (req, res) => {
 
 router.get("/", async (req, res) => {
   Order.find().exec()
-  .then(async () => {
-  const orders = await Order.find();
-  res.status(200).send({ data: orders, message: "Lista użytkowników" });
-  })
-  .catch(error => {
-  res.status(500).send({ message: error.message });
-  });
- })
+    .then(async () => {
+      const orders = await Order.find();
+      res.status(200).send({ data: orders, message: "Lista użytkowników" });
+    })
+    .catch(error => {
+      res.status(500).send({ message: error.message });
+    });
+})
 /*
 router.put("/:orderId", async (req, res) => {
   try{
@@ -97,7 +95,7 @@ router.put("/:orderId", async (req, res) => {
 })*/
 
 router.put("/:orderId", async (req, res) => {
-  try{
+  try {
     const { orderId } = req.params
     const { status, orderRate } = req.body
 

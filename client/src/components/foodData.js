@@ -104,7 +104,7 @@ const foodData = [
     price: "16.99 zł",
     category: "Przystawki"
   }
-  
+
 
 ];
 
