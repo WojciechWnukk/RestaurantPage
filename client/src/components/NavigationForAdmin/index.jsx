@@ -11,6 +11,7 @@ const NavigationForAdmin = ({ cartItemCount }) => {
   const handleLogout = () => {
     localStorage.removeItem("token")
     localStorage.removeItem("cartItems")
+    localStorage.removeItem("email")
     window.location.reload()
 
   }
@@ -21,38 +22,44 @@ const NavigationForAdmin = ({ cartItemCount }) => {
           className={`${styles.nav_button} ${styles.white_btn}`}
           onClick={() => handleNavigation("/")}
         >
-          Home
+          Start
         </button>
         <button
           className={`${styles.nav_button} ${styles.white_btn}`}
           onClick={() => handleNavigation("/waiter-panel")}
         >
-          WaiterPanel
+          Panel kelnera
         </button>
         <button
           className={`${styles.nav_button} ${styles.white_btn}`}
           onClick={() => handleNavigation("/account-settings")}
         >
-          Account Settings
+          Ustawienia konta
         </button>
         <button
           className={`${styles.nav_button} ${styles.white_btn}`}
           onClick={() => handleNavigation("/reservation")}
         >
-          Reservations
+          Rezerwacje
         </button>
         <button
           className={`${styles.nav_button} ${styles.white_btn}`}
           onClick={() => handleNavigation("/user-permissions")}
         >
-          Permisions
+          Uprawnienia
+        </button>
+        <button
+          className={`${styles.nav_button} ${styles.white_btn}`}
+          onClick={() => handleNavigation("/food-panel")}
+        >
+          Panel produktów
         </button>
       </div>
       <button
         className={`${styles.nav_button} ${styles.white_btn}`}
         onClick={handleLogout}
       >
-        Logout
+        Wyloguj
       </button>
     </nav>
   );

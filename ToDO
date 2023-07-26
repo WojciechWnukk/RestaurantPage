@@ -1,5 +1,5 @@
 == Nawczoraj ==
-[ ] Panel admina z dodawaniem posiłków ze zdjęciami 
+ 
 
 == Dozrobienia ==
 [ ] Połączyć z calendar app jako panel rezerwacji
@@ -13,13 +13,14 @@
 [x] Panel moje zamówienia wyświetlający ładnie wszystkie
 [x] Obsługa klientów niezalogowanych
 [x] Dodanie powiadomień email, formalność - dodanie maila przy rejestracji, złożeniu zamówienia
-[?] upload zdjęć, profilówki dla pracowników
+[?] upload zdjęć, profilówki dla pracowników - można to załatwić w ten sam sposób jak jedzenie z tym że prywatny hosting trzeba
 [ ] Po ocenie zamówienia przyznawanie pkt o x% wartości zamówienia
 [x] Dodać generowanie losowego hasła po stworzeniu pracownika i wysyłać mu na maila, zrobić if empl ma konto usera to zmień aby role
 [ ] Możliwość modyfikacji zamówienia: Użytkownicy powinni mieć możliwość modyfikacji swojego zamówienia przed jego akceptacją przez restaurację. 
 [ ] Strona raporty z wykresami i pobieralnym plikiem
 [x] Dodawanie do db po płatności online, nowe pole w order z statusem płatności
 [ ] Dodanie w .env danych serwera i clienta hosting/nie aby szybko zmieniać między dev a prod
+[x] Panel admina z dodawaniem posiłków ze zdjęciami
 
 == RozbudowaPaneluUprawnien ==
 [ ] Dodać opcje zmiany roli typu zatrudnij zwolnij pytając czy aby na pewno

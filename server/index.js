@@ -35,6 +35,7 @@ app.use("/api/auth", authRoutes)
 app.use("/api/payment", paymentRoutes)
 
 app.use("/api/products", productRoutes)
+app.get("/api/products", productRoutes)
 
 const port = process.env.PORT || 8080
 app.listen(port, () => console.log(`Nasłuchiwanie na porcie ${port}`))

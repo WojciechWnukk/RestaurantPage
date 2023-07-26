@@ -11,6 +11,7 @@ const Navigation = ({ cartItemCount }) => {
   const handleLogout = () => {
     localStorage.removeItem("token")
     localStorage.removeItem("cartItems")
+    localStorage.removeItem("email")
     window.location.reload()
 
   }
@@ -21,39 +22,39 @@ const Navigation = ({ cartItemCount }) => {
           className={`${styles.nav_button} ${styles.white_btn}`}
           onClick={() => handleNavigation("/")}
         >
-          Home
+          Start
         </button>
         <button
           className={`${styles.nav_button} ${styles.white_btn}`}
           onClick={() => handleNavigation("/cart")}
         >
-          Cart ({cartItemCount})
+          Koszyk ({cartItemCount})
         </button>
         <button
           className={`${styles.nav_button} ${styles.white_btn}`}
           onClick={() => handleNavigation("/account-settings")}
         >
-          Account Settings
+          Ustawienia konta
         </button>
         <button
           className={`${styles.nav_button} ${styles.white_btn}`}
           onClick={() => handleNavigation("/reservation")}
         >
-          Reservations
+          Rezerwacje
         </button>
 
         <button
           className={`${styles.nav_button} ${styles.white_btn}`}
           onClick={() => handleNavigation("/my-orders")}
         >
-          Orders
+          Zamówienia
         </button>
       </div>
       <button
         className={`${styles.nav_button} ${styles.white_btn}`}
         onClick={handleLogout}
       >
-        Logout
+        Wyloguj
       </button>
     </nav>
   );

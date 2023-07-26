@@ -25,7 +25,7 @@ const Cart = ({ handleLogout }) => {
 
 
   const removeFromCart = (itemId) => {
-    const updatedCartItems = cartItems.filter((item) => item.id !== itemId);
+    const updatedCartItems = cartItems.filter((item) => item._id !== itemId);
     setCartItems(updatedCartItems);
   };
 
@@ -56,18 +56,18 @@ const Cart = ({ handleLogout }) => {
       ) : (
         <div className={styles.cart_items}>
           {cartItems.map((item) => (
-            <div className={styles.cart_item} key={item.id}>
+            <div className={styles.cart_item} key={item._id}>
               <div className={styles.item_info}>
-                <img src={item.image} alt={item.name} className={styles.item_image} />
+                <img src={item.productImage} alt={item.productName} className={styles.item_image} />
                 <div className={styles.item_details}>
-                  <h3>{item.name}</h3>
-                  <p>{item.price}</p>
+                  <h3>{item.productName}</h3>
+                  <p>{item.productPrice + " zł"}</p>
                   <p>Quantity: {item.quantity}</p> { }
                 </div>
               </div>
               <button
                 className={styles.remove_btn}
-                onClick={() => removeFromCart(item.id)}
+                onClick={() => removeFromCart(item._id)}
               >
                 Remove
               </button>

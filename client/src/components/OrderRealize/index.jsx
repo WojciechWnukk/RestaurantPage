@@ -18,7 +18,6 @@ const OrderRealize = ({ handleLogout }) => {
   const [cartItems, setCartItems] = useState([]);
   const totalPrice = calculateTotalPrice(cartItems);
   const token = localStorage.getItem("token")
-  const email = localStorage.getItem("email")
   const [isTableNumberValid, setTableNumberValid] = useState(true);
   const [tableNumberErrorMessage, setTableNumberErrorMessage] = useState("");
   const [error, setError] = useState("")
@@ -27,7 +26,11 @@ const OrderRealize = ({ handleLogout }) => {
   const navigate = useNavigate()
   useEffect(() => {
     loadCartItemsFromLocalStorage(setCartItems);
-  }, []);
+    const storedEmail = localStorage.getItem("email");
+    if (token && storedEmail) {
+      setEmailAddress(storedEmail);
+    }
+  }, [token])
 
   useEffect(() => {
     saveCartItemsToLocalStorage(cartItems);
@@ -36,7 +39,7 @@ const OrderRealize = ({ handleLogout }) => {
     } else {
       setCheckedToken(token)
     }
-  }, [cartItems]);
+  }, [cartItems, token]);
 
   const handleTableNumberChange = (event) => {
     const value = event.target.value;
@@ -62,9 +65,9 @@ const OrderRealize = ({ handleLogout }) => {
 
 
   const mealsData = cartItems.map((item) => ({
-    name: item.name,
+    name: item.productName,
     quantity: item.quantity,
-    price: item.price,
+    price: item.productPrice + " zł",
   }));
 
 
@@ -79,11 +82,11 @@ const OrderRealize = ({ handleLogout }) => {
     console.log(" " + JSON.stringify(mealsData))
     console.log(token)
 
+    
 
     //const apiUrl = "http://164.92.133.224/api/orders"
     try {
       const url = "http://localhost:8080/api/orders";
-
       const data = {
         //orderNumber,
         tableNumber,
@@ -91,7 +94,7 @@ const OrderRealize = ({ handleLogout }) => {
         meals: mealsData,
         totalPrice,
         userToken: checkedToken,
-        userEmail: email,
+        userEmail: emailAddress,
         orderRate: 0,
         status: "Zamowiono",
         paymentStatus: "Platne przy odbiorze"
@@ -126,11 +129,11 @@ const OrderRealize = ({ handleLogout }) => {
     try {
       const stripe = await stripePromise;
       const mealsData = cartItems.map((item) => ({
-        name: item.name,
+        name: item.productName,
         quantity: item.quantity,
-        price: item.price,
+        price: item.productPrice,
       }));
-      const response = await axios.post("http://localhost:8080/api/payment", { tableNumber, comments, meals: mealsData, totalPrice, userToken: checkedToken, userEmail: email });
+      const response = await axios.post("http://localhost:8080/api/payment", { tableNumber, comments, meals: mealsData, totalPrice, userToken: checkedToken, userEmail: emailAddress });
       const { url } = response.data;
       const session = await stripe.redirectToCheckout({
         sessionId: url,
@@ -140,13 +143,14 @@ const OrderRealize = ({ handleLogout }) => {
         console.error("Błąd podczas przekierowania do płatności:", session.error.message);
         // komunikat o błędzie
       } else {
+        const email = token ? email : emailAddress
         const orderData = {
           tableNumber,
           comments,
           meals: mealsData,
           totalPrice,
           userToken: checkedToken,
-          userEmail: email,
+          userEmail: emailAddress,
           orderRate: 0,
           status: "Zamowiono",
           paymentStatus: "Oplacone"
@@ -191,10 +195,10 @@ const OrderRealize = ({ handleLogout }) => {
           </thead>
           <tbody>
             {cartItems.map((item) => (
-              <tr key={item.id}>
-                <td>{item.name}</td>
+              <tr key={item._id}>
+                <td>{item.productName}</td>
                 <td>{item.quantity}</td>
-                <td>{item.price}</td>
+                <td>{item.productPrice + "zł"}</td>
               </tr>
             ))}
           </tbody>

@@ -5,9 +5,11 @@ import axios from "axios";
 import NavigationForAdmin from "../NavigationForAdmin";
 import CheckRoles from "../CheckRoles";
 
-const AddProduct = ({ handleLogout }) => {
+
+const UpdateProduct = ({ handleLogout }) => {
     const [details, setDetails] = useState(null)
     const [cartItems, setCartItems] = useState([]);
+
     const [data, setData] = useState({
         productName: "",
         productPrice: "",
@@ -15,7 +17,6 @@ const AddProduct = ({ handleLogout }) => {
         productCategory: "",
         productImage: ""
     })
-
     const handleGetUserDetails = async () => {
         const token = localStorage.getItem("token");
         if (token) {
@@ -49,10 +50,12 @@ const AddProduct = ({ handleLogout }) => {
     useEffect(() => {
         handleGetUserDetails()
     }, []);
+
+    
     if (!details || details.roles !== "Admin") {
         return <p>Brak uprawnień</p>;
     }
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
@@ -106,7 +109,7 @@ const AddProduct = ({ handleLogout }) => {
                 }}
             </CheckRoles>
             <div className={styles.addproduct_container}>
-                <h3>Dodaj produkt</h3>
+                <h3>Edytuj produkt</h3>
                 <form onSubmit={handleSubmit}>
                     <label>
                         Nazwa produktu:
@@ -148,7 +151,7 @@ const AddProduct = ({ handleLogout }) => {
                             required
                         />
                     </label>
-                    <button type="submit">Dodaj produkt</button>
+                    <button type="submit">Edytuj produkt</button>
                 </form>
 
             </div>
@@ -156,4 +159,4 @@ const AddProduct = ({ handleLogout }) => {
     );
 };
 
-export default AddProduct;
+export default UpdateProduct;

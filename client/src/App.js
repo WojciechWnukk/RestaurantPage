@@ -14,6 +14,7 @@ import AddEmployee from "./components/AddEmployee"
 import Reservation from "./components/Reservation"
 import FoodPanel from "./components/FoodPanel"
 import AddProduct from "./components/AddProduct"
+import UpdateProduct from "./components/UpdateProduct"
 function App() {
     const user = localStorage.getItem("token")
     
@@ -33,6 +34,7 @@ function App() {
              {user && <Route path="/add-employee" element={<AddEmployee />} />}
              {user && <Route path="/food-panel" element={<FoodPanel />} />}
              {user && <Route path="/new-product" element={<AddProduct />} />}
+             {user && <Route path="/update-product" element={<UpdateProduct />} />}
 
             <Route path="/account-settings" element={<Navigate replace to="/login" />} />
             <Route path="/reservation" element={<Navigate replace to="/login" />} />
@@ -42,7 +44,7 @@ function App() {
             <Route path="/add-employee" element={<Navigate replace to="/login" />} />
             <Route path="/food-panel" element={<Navigate replace to="/login" />} />
             <Route path="/new-product" element={<Navigate replace to="/login" />} />
-            
+            <Route path="/update-product" element={<Navigate replace to="/login" />} />
 
             
         </Routes>

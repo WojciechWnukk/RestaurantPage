@@ -107,6 +107,9 @@ const WaiterPanel = () => {
           <p className={styles.order_date}>
             Date: {new Date(order.orderDate).toLocaleString()}
           </p>
+          <p className={styles.order_table}>
+              Płatność: {order.paymentStatus==="Oplacono" ? order.paymentStatus : order.totalPrice}
+          </p>
           <select
             className={styles.status_select}
             value={order.status}

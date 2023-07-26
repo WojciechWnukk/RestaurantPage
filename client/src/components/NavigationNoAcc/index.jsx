@@ -16,26 +16,26 @@ const Navigation = ({ cartItemCount }) => {
           className={`${styles.nav_button} ${styles.white_btn}`}
           onClick={() => handleNavigation("/")}
         >
-          Home
+          Start
         </button>
         <button
           className={`${styles.nav_button} ${styles.white_btn}`}
           onClick={() => handleNavigation("/cart")}
         >
-          Cart ({cartItemCount})
+          Koszyk ({cartItemCount})
         </button>
         <button
           className={`${styles.nav_button} ${styles.white_btn}`}
           onClick={() => handleNavigation("/reservation")}
         >
-          Reservations
+          Rezerwacje
         </button>
 
         <button
           className={`${styles.nav_button} ${styles.white_btn}`}
           onClick={() => handleNavigation("/login")}
         >
-          Login
+          Zaloguj
         </button>
       </div>
     </nav>

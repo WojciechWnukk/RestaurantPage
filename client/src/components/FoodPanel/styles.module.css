@@ -91,4 +91,13 @@
     cursor: pointer;
 }
 
+.new_product_btn{
+    padding: 10px;
+    background-color: #26c1b6;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 300px;
+}
+
 /* ... */
