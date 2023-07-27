@@ -1,33 +1,30 @@
 == Nawczoraj ==
- 
+ [ ] Panel dla admina w którym będzie mógł edytować dane o produktach zamiast w bazie, dodawać nowe itp CRUD
 
 == Dozrobienia ==
 [ ] Połączyć z calendar app jako panel rezerwacji
 [ ] Dodać panel z zestawieniem finansow od miesiaca
 [ ] Panel promocji typu zbieranie punktów za zakupy
-[ ] Panel dla admina w którym będzie mógł edytować dane o produktach zamiast w bazie, dodawać nowe itp CRUD
 [ ] Panel w którym kelner składa zamówienie, typu dostaje telefon od klienta
-[x] Dodać strone na hosting, zrobić QR przekierowujący, chip nfc
 [ ] Panel zarządzania pracownikami
+[?] upload zdjęć, profilówki dla pracowników - można to załatwić w ten sam sposób jak jedzenie z tym że prywatny hosting trzeba
+[ ] Po ocenie zamówienia przyznawanie pkt o x% wartości zamówienia
+[ ] Możliwość modyfikacji zamówienia: Użytkownicy powinni mieć możliwość modyfikacji swojego zamówienia przed jego akceptacją przez restaurację. 
+[ ] Strona raporty z wykresami i pobieralnym plikiem
+[ ] Dodanie w .env danych serwera i clienta hosting/nie aby szybko zmieniać między dev a prod
+
+== Zrobione ==
+[x] Przy każdym/dostarczonym zamówieniu dodać możliwość oceny klikaną gwiazdką
+[x] Po kliknięciu zatrudnij niech wyskakuje panel dodawania pracownika w którym trzeba uzupełnić pozostałe dane
+[x] opcja dodaj pracownika zrób żeby wysyłała na maila losowo wygenerowane hasło do pierwszego zalogowania
+[x] Chyba trzeba dodać Employee do mongo gdzie będzie się dodawał pracownik po zmianie jego roli przez głównego admina,
+ dodatkowo w modelu employee trzeba dać rzeczy typu data urodzenia, czas zatrudnienia, pensja, pesel, data urodzenia, stan zatrudnienia, płeć
+[x] Dodać opcje zmiany roli typu zatrudnij zwolnij pytając czy aby na pewno
+[x] Panel admina z dodawaniem posiłków ze zdjęciami
+[x] Dodawanie do db po płatności online, nowe pole w order z statusem płatności
+[x] Dodać generowanie losowego hasła po stworzeniu pracownika i wysyłać mu na maila, zrobić if empl ma konto usera to zmień aby role
 [x] Dodanie płatności
 [x] Panel moje zamówienia wyświetlający ładnie wszystkie
 [x] Obsługa klientów niezalogowanych
 [x] Dodanie powiadomień email, formalność - dodanie maila przy rejestracji, złożeniu zamówienia
-[?] upload zdjęć, profilówki dla pracowników - można to załatwić w ten sam sposób jak jedzenie z tym że prywatny hosting trzeba
-[ ] Po ocenie zamówienia przyznawanie pkt o x% wartości zamówienia
-[x] Dodać generowanie losowego hasła po stworzeniu pracownika i wysyłać mu na maila, zrobić if empl ma konto usera to zmień aby role
-[ ] Możliwość modyfikacji zamówienia: Użytkownicy powinni mieć możliwość modyfikacji swojego zamówienia przed jego akceptacją przez restaurację. 
-[ ] Strona raporty z wykresami i pobieralnym plikiem
-[x] Dodawanie do db po płatności online, nowe pole w order z statusem płatności
-[ ] Dodanie w .env danych serwera i clienta hosting/nie aby szybko zmieniać między dev a prod
-[x] Panel admina z dodawaniem posiłków ze zdjęciami
-
-== RozbudowaPaneluUprawnien ==
-[ ] Dodać opcje zmiany roli typu zatrudnij zwolnij pytając czy aby na pewno
-[x] Chyba trzeba dodać Employee do mongo gdzie będzie się dodawał pracownik po zmianie jego roli przez głównego admina,
- dodatkowo w modelu employee trzeba dać rzeczy typu data urodzenia, czas zatrudnienia, pensja, pesel, data urodzenia, stan zatrudnienia, płeć
-[x] Po kliknięciu zatrudnij niech wyskakuje panel dodawania pracownika w którym trzeba uzupełnić pozostałe dane
-[x] opcja dodaj pracownika zrób żeby wysyłała na maila losowo wygenerowane hasło do pierwszego zalogowania
-
-== MyOrders ==
-[x] Przy każdym/dostarczonym zamówieniu dodać możliwość oceny klikaną gwiazdką
+[x] Dodać strone na hosting, zrobić QR przekierowujący, chip nfc

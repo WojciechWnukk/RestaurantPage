@@ -52,7 +52,7 @@ const Cart = ({ handleLogout }) => {
       </CheckRoles>
       <h2>Cart</h2>
       {cartItems.length === 0 ? (
-        <p>Your cart is empty.</p>
+        <p>Najpierw coś dodaj do koszyka! :D</p>
       ) : (
         <div className={styles.cart_items}>
           {cartItems.map((item) => (
@@ -62,20 +62,20 @@ const Cart = ({ handleLogout }) => {
                 <div className={styles.item_details}>
                   <h3>{item.productName}</h3>
                   <p>{item.productPrice + " zł"}</p>
-                  <p>Quantity: {item.quantity}</p> { }
+                  <p>Ilość: {item.quantity}</p> { }
                 </div>
               </div>
               <button
                 className={styles.remove_btn}
                 onClick={() => removeFromCart(item._id)}
               >
-                Remove
+                Usuń z koszyka
               </button>
             </div>
           ))}
 
           <div className={styles.total_price}>
-            <h3 className={styles.total_price_label}>Total Price: {totalPrice + "zł"}</h3>
+            <h3 className={styles.total_price_label}>Całkowita cena: {totalPrice + "zł"}</h3>
             <button className={styles.link_btn} onClick={() => handleNavigation("/order-realize")}>
               Przejdź do podsumowania
             </button>

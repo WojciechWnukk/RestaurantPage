@@ -6,6 +6,8 @@ import CheckRoles from "../CheckRoles";
 import { useNavigate } from "react-router-dom";
 const UserPermissions = ({ handleLogout }) => {
   const [users, setUsers] = useState([]);
+  const [employees, setEmployees] = useState([]);
+  const [showUsers, setShowUsers] = useState(true)
   const navigate = useNavigate()
 
   const handleNavigation = (path) => {
@@ -38,6 +40,31 @@ const UserPermissions = ({ handleLogout }) => {
     }
   };
 
+  const handleGetEmployees = async () => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      try {
+        const config = {
+          method: "get",
+          url: "http://localhost:8080/api/employees/",
+          headers: {
+            "Content-Type": "application/json",
+            "x-access-token": token,
+          },
+        };
+        const { data: res } = await axios(config);
+        setEmployees(res.data);
+      } catch (error) {
+        if (
+          error.response &&
+          error.response.status >= 400 &&
+          error.response.status <= 500
+        ) {
+          console.log("Error przy wyświetlaniu emplo")
+        }
+      }
+    }
+  };
 
   const deleteUser = async (userId) => {
     const confirmed = window.confirm("Czy na pewno chcesz usunąć konto?")
@@ -72,8 +99,10 @@ const UserPermissions = ({ handleLogout }) => {
 
   }
 
+
   useEffect(() => {
-    handleGetUsers();
+    handleGetEmployees()
+    handleGetUsers()
   }, []);
 
   return (
@@ -84,17 +113,24 @@ const UserPermissions = ({ handleLogout }) => {
             return (
               <div>
                 <NavigationForAdmin handleLogout={handleLogout} />
-                <h2>User List</h2>
-                <button className={`${styles.link_btn} link_btn`} onClick={() => handleNavigation("/add-employee")}>
-                  Dodaj pracownika
+
+              <button
+                className={styles.link_btn}
+                onClick={() => setShowUsers(!showUsers)}
+              >
+                {showUsers ? "Pokaż pracowników" : "Pokaż użytkowników"}
                 </button>
+                {showUsers ? (
+                  <div>
+                <h2>Lista użytkowników</h2>
                 <table className={styles.permissions_table}>
                   <thead>
                     <tr>
-                      <th>Name</th>
+                      <th>Imię i nazwisko</th>
                       <th>Email</th>
-                      <th>Roles</th>
-                      <th>Action</th>
+                      <th>Uprawnienia</th>
+                      <th>Edytuj</th>
+                      <th>Usuń</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -103,32 +139,43 @@ const UserPermissions = ({ handleLogout }) => {
                         <td>{user.firstName} {user.lastName}</td>
                         <td>{user.email}</td>
                         <td>{user.roles}</td>
+                        <td><button className={`${styles.edit_btn} link_btn`} onClick={() => deleteUser(user._id)}>Tu będzie edytuj</button></td>
                         <td><button className={`${styles.link_btn} link_btn`} onClick={() => deleteUser(user._id)}>Usuń konto</button></td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
-                <h2>Employee List - do zrobienia</h2>
+                </div>
+                ) : (
+                <div>
+                <h2>Lista pracowników</h2>
+                <button className={`${styles.link_btn} link_btn`} onClick={() => handleNavigation("/add-employee")}>
+                  Dodaj pracownika
+                </button>
                 <table className={styles.permissions_table}>
                   <thead>
                     <tr>
-                      <th>Name</th>
+                      <th>Imię i nazwisko</th>
                       <th>Email</th>
-                      <th>Pension</th>
-                      <th>Action</th>
+                      <th>Pensja</th>
+                      <th>Edytuj</th>
+                      <th>Usuń</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {users.map((user) => ( //tutaj trzeba zrobic to samo co dla user
-                      <tr key={user._id}>
-                        <td>{user.firstName} {user.lastName}</td>
-                        <td>{user.email}</td>
-                        <td>{user.roles}</td>
-                        <td><button className={`${styles.link_btn} link_btn`} onClick={() => deleteEmployee(user._id)}>Usuń konto</button></td>
+                    {employees.map((employee) => (
+                      <tr key={employee._id}>
+                        <td>{employee.firstName} {employee.lastName}</td>
+                        <td>{employee.email}</td>
+                        <td>{employee.salary + " zł"}</td>
+                        <td><button className={`${styles.edit_btn} link_btn`} onClick={() => deleteEmployee(employee._id)}>Tu będzie edytuj</button></td>
+                        <td><button className={`${styles.link_btn} link_btn`} onClick={() => deleteEmployee(employee._id)}>Usuń konto</button></td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
+                </div>
+                )}
               </div>
             );
           } else {

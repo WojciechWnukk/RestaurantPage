@@ -54,3 +54,14 @@ label {
   cursor: pointer;
   margin-bottom: 10px;
 }
+.edit_btn {
+  width: 100%;
+  max-width: 900px;
+  background-color: rgb(111, 0, 255);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}

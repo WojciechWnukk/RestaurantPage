@@ -64,7 +64,7 @@ const AddProduct = ({ handleLogout }) => {
 
             setTimeout(() => {
                 window.location.reload();
-            }, 5000)
+            }, 2000)
 
             console.log(url)
         } catch (error) {

@@ -79,7 +79,7 @@ const WaiterPanel = () => {
 
   return (
     <div className={styles.waiter_panel_container}>
-      <h2 className={styles.waiter_panel_title}>Waiter Panel</h2>
+      <h2 className={styles.waiter_panel_title}>Panel kelnera</h2>
       <div className={styles.order_filter}>
         <button onClick={toggleShowAllOrders}>
           {showAllOrders ? "Show Undelivered Orders" : "Show All Orders"}
@@ -87,7 +87,7 @@ const WaiterPanel = () => {
       </div>
       {orders.map((order) => (
         <div key={order._id} className={styles.order_item}>
-          <p className={styles.order_number}>Order Number: {order.orderId}</p>
+          <p className={styles.order_number}>Numer zamówienia: {order.orderId}</p>
           <p
             className={`${styles.status} ${order.status === "Przygotowanie zamowienia"
               ? styles.status_ordered
@@ -97,18 +97,21 @@ const WaiterPanel = () => {
             Status: {order.status}
           </p>
           <p className={styles.order_table}>Email: {order.userEmail}</p>
-          <p className={styles.order_table}>Table: {order.tableNumber}</p>
+          <p className={styles.order_table}>Stolik: {order.tableNumber}</p>
           <p className={styles.order_meals}>
-            Meals:{" "}
+            Zamówiono:{" "}
             {order.meals.map((meal) => (
               <span key={meal._id}>{meal.name} {"(x"}{meal.quantity}{") "} </span>
             ))}
           </p>
+          <p className={styles.order_table}>
+              Komentarze: {order.comments ? order.comments : " - "}
+          </p>
           <p className={styles.order_date}>
-            Date: {new Date(order.orderDate).toLocaleString()}
+            Czas: {new Date(order.orderDate).toLocaleString()}
           </p>
           <p className={styles.order_table}>
-              Płatność: {order.paymentStatus==="Oplacono" ? order.paymentStatus : order.totalPrice}
+              Płatność: {order.paymentStatus==="Oplacono" ? order.paymentStatus : order.totalPrice + " zł"}
           </p>
           <select
             className={styles.status_select}

@@ -47,14 +47,14 @@ const OrderSuccess = ({ handleLogout }) => {
         )}
       </CheckRoles>
       {!orderData && (
-        <h2 className={styles.centered}>Thank you for placing your order!<br />We will deliver them to you as soon as possible.<br />In order to see the details of your order in the future, we recommend that you register.</h2>
+        <h2 className={styles.centered}>Dziękujemy za złożenie zamówienia!<br />Dostarczymy je do Ciebie tak szybko jak to jest możliwe.<br />Aby w przyszłości otrzymywać więcej szczegółów o zamówieniu zalecamy rejestracje.</h2>
       )}
       {orderData && (
         <>
-          <h2>Thank you for placing your order!</h2>
+          <h2>Dziękujemy za złożenie zamówienia!</h2>
           {orderData.slice().reverse().map((order) => (
             <div key={order._id}>
-              <p className={styles.order_number}>Order Number: {order.orderId}</p>
+              <p className={styles.order_number}>Numer stolika: {order.orderId}</p>
               <p
                 className={`${styles.status} ${order.status === "Zamowiono"
                   ? styles.status_ordered
@@ -63,16 +63,16 @@ const OrderSuccess = ({ handleLogout }) => {
               >
                 Status: {order.status}
               </p>
-              <p className={styles.order_table}>Table: {order.tableNumber}</p>
+              <p className={styles.order_table}>Stolik: {order.tableNumber}</p>
               <p className={styles.order_date}>
-                Date: {new Date(order.orderDate).toLocaleString()}
+                Data: {new Date(order.orderDate).toLocaleString()}
               </p>
               <table className={styles.order_summary_table}>
                 <thead>
                   <tr>
-                    <th>Meal Name</th>
-                    <th>Quantity</th>
-                    <th>Price</th>
+                    <th>Jedzonko</th>
+                    <th>Ilość</th>
+                    <th>Cena</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -86,7 +86,7 @@ const OrderSuccess = ({ handleLogout }) => {
                 </tbody>
                 <tfoot>
                   <tr>
-                    <td colSpan="2">Total Price:</td>
+                    <td colSpan="2">Całkowita cena:</td>
                     <td>{order.totalPrice} zł</td>
                   </tr>
                 </tfoot>

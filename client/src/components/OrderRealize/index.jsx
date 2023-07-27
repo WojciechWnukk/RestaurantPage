@@ -183,14 +183,14 @@ const OrderRealize = ({ handleLogout }) => {
       </CheckRoles>
       <h3>Order Summary</h3>
       {cartItems.length === 0 ? (
-        <p>No items in the cart.</p>
+        <p>Najpierw dodaj coś do koszyka! :D</p>
       ) : (
         <table className={styles.order_summary_table}>
           <thead>
             <tr>
-              <th>Meal Name</th>
-              <th>Quantity</th>
-              <th>Price</th>
+              <th>Jedzonko</th>
+              <th>Ilość</th>
+              <th>Cena</th>
             </tr>
           </thead>
           <tbody>
@@ -204,7 +204,7 @@ const OrderRealize = ({ handleLogout }) => {
           </tbody>
           <tfoot>
             <tr>
-              <td colSpan="2">Total Price:</td>
+              <td colSpan="2">Całkowita cena:</td>
               <td>{totalPrice} zł</td>
             </tr>
           </tfoot>
@@ -215,7 +215,7 @@ const OrderRealize = ({ handleLogout }) => {
           {!isTableNumberValid && (
             <p className={styles.error_message}>{tableNumberErrorMessage}</p>
           )}
-          <label htmlFor="tableNumber">Table Number:</label>
+          <label htmlFor="tableNumber">Number stolika:</label>
           <input
             type="text"
             id="tableNumber"
@@ -227,7 +227,7 @@ const OrderRealize = ({ handleLogout }) => {
 
         {!token && (
           <div className={styles.guestData}>
-            <label htmlFor="email">Email Address:</label>
+            <label htmlFor="email">Podaj maila:</label>
             <input
               type="text"
               id="email"
@@ -240,7 +240,7 @@ const OrderRealize = ({ handleLogout }) => {
         )}
 
         <div className={styles.form_group}>
-          <label htmlFor="comments">Additional Comments:</label>
+          <label htmlFor="comments">Dodatkowe komentarze:</label>
           <textarea
             id="comments"
             value={comments}
@@ -249,17 +249,17 @@ const OrderRealize = ({ handleLogout }) => {
         </div>
 
         <div className={styles.form_group}>
-          <label>Order Time:</label>
+          <label>Czas zamówienia:</label>
           <p>{orderTime}</p>
 
         </div>
 
         <div className={styles.form_group}>
-          <button type="submit">Pay later</button>
+          <button type="submit">Płacę przy odbiorze!</button>
         </div>
         <div className={styles.form_group}>
           <button type="button" onClick={handlePayment}>
-            Pay online
+            Płacę online!
           </button>
         </div>
       </form>

@@ -20,6 +20,17 @@ router.post("/", async (req, res) => {
   }
 })
 
+router.get("/", async (req, res) => {
+  Employee.find().exec()
+    .then(async () => {
+      const employees = await Employee.find();
+      res.status(200).send({ data: employees, message: "Lista pracowników" });
+    })
+    .catch(error => {
+      res.status(500).send({ message: error.message });
+    });
+})
+
 router.delete("/:employeeId?", async (req, res) => {
   try {
     const { employeeId } = req.params;

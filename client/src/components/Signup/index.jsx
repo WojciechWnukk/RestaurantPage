@@ -36,21 +36,21 @@ const Signup = () => {
         <div className={styles.signup_container}>
             <div className={styles.signup_form_container}>
                 <div className={styles.left}>
-                    <h1>Welcome Back</h1>
+                    <h1>Witamy ponownie</h1>
                     <Link to="/login">
                         <button type="button"
                             className={styles.white_btn}>
-                            Sing in
+                            Zaloguj się
                         </button>
                     </Link>
                 </div>
                 <div className={styles.right}>
                     <form className={styles.form_container}
                         onSubmit={handleSubmit}>
-                        <h1>Create Account</h1>
+                        <h1>Utwórz konto</h1>
                         <input
                             type="text"
-                            placeholder="First Name"
+                            placeholder="Imię"
                             name="firstName"
                             onChange={handleChange}
                             value={data.firstName}
@@ -59,7 +59,7 @@ const Signup = () => {
                         />
                         <input
                             type="text"
-                            placeholder="Last Name"
+                            placeholder="Nazwisko"
                             name="lastName"
                             onChange={handleChange}
                             value={data.lastName}
@@ -77,7 +77,7 @@ const Signup = () => {
                         />
                         <input
                             type="password"
-                            placeholder="Password"
+                            placeholder="Hasło"
                             name="password"
                             onChange={handleChange}
                             value={data.password}
@@ -88,7 +88,7 @@ const Signup = () => {
                             className={styles.error_msg}>{error}</div>}
                         <button type="submit"
                             className={styles.green_btn}>
-                            Sing Up
+                            Zarejestruj
                         </button>
                     </form>
                 </div>

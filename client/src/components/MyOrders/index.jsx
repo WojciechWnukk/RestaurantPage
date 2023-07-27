@@ -90,11 +90,11 @@ const MyOrders = ({ handleLogout }) => {
         <table className={styles.order_summary_table}>
           <thead>
             <tr>
-              <th>Order number</th>
-              <th>Date</th>
+              <th>Numer zamówienia</th>
+              <th>Czas</th>
               <th>Status</th>
-              <th>Price</th>
-              <th>Rate</th>
+              <th>Cena</th>
+              <th>Oceń!</th>
             </tr>
           </thead>
           <tbody>

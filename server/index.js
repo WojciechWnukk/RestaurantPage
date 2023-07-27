@@ -21,6 +21,7 @@ connection()
 
 // routes
 app.use("/api/employees", employeeRoutes)
+app.get("/api/employees", employeeRoutes)
 app.delete("/api/employees/:employeeId?", employeeRoutes)
 app.put("/api/users/password", tokenVerification)
 app.get("/api/users/", tokenVerification)

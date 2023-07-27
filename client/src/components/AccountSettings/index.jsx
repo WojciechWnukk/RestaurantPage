@@ -116,10 +116,10 @@ const AccountSettings = ({ handleLogout }) => {
           }
         }}
       </CheckRoles>
-      <h2>Account Settings</h2>
+      <h2>Ustawienia konta</h2>
       <form onSubmit={changePassword}>
         <div className={styles.form_group}>
-          <label htmlFor="currentPassword">Current Password:</label>
+          <label htmlFor="currentPassword">Aktualne hasło:</label>
           <input
             type="password"
             id="currentPassword"
@@ -128,7 +128,7 @@ const AccountSettings = ({ handleLogout }) => {
           />
         </div>
         <div className={styles.form_group}>
-          <label htmlFor="newPassword">New Password:</label>
+          <label htmlFor="newPassword">Nowe hasło:</label>
           <input
             type="password"
             id="newPassword"
@@ -137,7 +137,7 @@ const AccountSettings = ({ handleLogout }) => {
           />
         </div>
         <div className={styles.form_group}>
-          <label htmlFor="confirmPassword">Confirm Password:</label>
+          <label htmlFor="confirmPassword">Powtórz nowe hasło:</label>
           <input
             type="password"
             id="confirmPassword"
@@ -147,9 +147,9 @@ const AccountSettings = ({ handleLogout }) => {
         </div>
         {errorMessage && <p className={styles.error_message}>{errorMessage}</p>}
         <div className={styles.button_container}>
-          <button type="submit">Change Password</button>
+          <button type="submit">Zmień hasło</button>
           <button className={styles.delete_account_button} onClick={deleteUser}>
-            Delete Account
+            Usuń konto
           </button>
         </div>
       </form>

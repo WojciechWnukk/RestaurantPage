@@ -71,16 +71,18 @@ useEffect(() => {
       {
       }
 
-      <CheckRoles>
-        {(details) => (
-          <NavigationSelector
-            details={details}
-            cartItems={cartItems}
-            handleLogout={handleLogout}
-            token={localStorage.getItem("token")}
-          />
-        )}
-      </CheckRoles>
+<div>
+        <CheckRoles>
+          {(details) => (
+            <NavigationSelector
+              details={details}
+              cartItems={cartItems}
+              handleLogout={handleLogout}
+              token={localStorage.getItem("token")}
+            />
+          )}
+        </CheckRoles>
+      </div>
 
       <div className={styles.menu_container}>
         <div className={styles.categories}>
