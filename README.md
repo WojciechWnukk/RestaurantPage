@@ -12,4 +12,7 @@ Some examples of functionality:
 - displaying of order history
 - When creating an employee account in front of the administrator, the system randomly generates a password which it sends to the specified email
 - displaying of navigation depending on account permissions
+
+New (after 14.07):
+- Adding products by admin (now they are in DB)
 - paying online with stripe
