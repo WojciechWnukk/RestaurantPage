@@ -1,12 +1,12 @@
 == Nawczoraj ==
- [ ] Panel dla admina w którym będzie mógł edytować dane o produktach zamiast w bazie, dodawać nowe itp CRUD
+[ ] Panel dla admina w którym będzie mógł edytować dane o produktach zamiast w bazie, dodawać nowe itp CRUD
+[ ] Panel zarządzania pracownikami
 
 == Dozrobienia ==
 [ ] Połączyć z calendar app jako panel rezerwacji
 [ ] Dodać panel z zestawieniem finansow od miesiaca
 [ ] Panel promocji typu zbieranie punktów za zakupy
 [ ] Panel w którym kelner składa zamówienie, typu dostaje telefon od klienta
-[ ] Panel zarządzania pracownikami
 [?] upload zdjęć, profilówki dla pracowników - można to załatwić w ten sam sposób jak jedzenie z tym że prywatny hosting trzeba
 [ ] Po ocenie zamówienia przyznawanie pkt o x% wartości zamówienia
 [ ] Możliwość modyfikacji zamówienia: Użytkownicy powinni mieć możliwość modyfikacji swojego zamówienia przed jego akceptacją przez restaurację. 

@@ -50,7 +50,7 @@ const Cart = ({ handleLogout }) => {
           />
         )}
       </CheckRoles>
-      <h2>Cart</h2>
+      <h2>Koszyk</h2>
       {cartItems.length === 0 ? (
         <p>Najpierw coś dodaj do koszyka! :D</p>
       ) : (

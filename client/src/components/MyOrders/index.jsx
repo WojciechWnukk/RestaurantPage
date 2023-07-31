@@ -5,13 +5,19 @@ import axios from "axios";
 import NavigationForAdmin from "../NavigationForAdmin";
 import CheckRoles from "../CheckRoles";
 import { loadCartItemsFromLocalStorage, saveCartItemsToLocalStorage } from "../Scripts/localStorage";
+import Modal from "react-modal";
+
+Modal.setAppElement("#root");
 
 const MyOrders = ({ handleLogout }) => {
   const [orderData, setOrderData] = useState(null);
   const email = localStorage.getItem("email");
   const [cartItems, setCartItems] = useState([]);
   const [ratings, setRatings] = useState({});
+  const [selectedOrderId, setSelectedOrderId] = useState(null)
+  const [comments, setComments] = useState("");
 
+ 
   useEffect(() => {
     loadCartItemsFromLocalStorage(setCartItems);
   }, []);
@@ -72,6 +78,9 @@ const MyOrders = ({ handleLogout }) => {
     }
   }
 
+  const handleCommentsChange = (event) => {
+    setComments(event.target.value);
+  };
 
 
   return (
@@ -95,6 +104,7 @@ const MyOrders = ({ handleLogout }) => {
               <th>Status</th>
               <th>Cena</th>
               <th>Oceń!</th>
+              <th>Zmień coś!</th>
             </tr>
           </thead>
           <tbody>
@@ -104,7 +114,7 @@ const MyOrders = ({ handleLogout }) => {
                 <td>{new Date(order.orderDate).toLocaleString()}</td>
                 <td>
                   <span
-                    className={`${styles.status} ${order.status === "Zamowiono" ? styles.status_ordered : styles.status_completed
+                    className={`${styles.status} ${order.status === "Zamówiono" ? styles.status_ordered : styles.status_completed
                       }`}
                   >
                     {order.status}
@@ -124,11 +134,40 @@ const MyOrders = ({ handleLogout }) => {
                     ))}
                   </div>
                 </td>
+                <td>
+                  {order.status === "Zamówiono" ? (
+                    <button className={styles.btn_edit} onClick={() => setSelectedOrderId(order.orderId)}>
+                      Edytuj
+                    </button>
+                  ) : (
+                    <button disabled className={styles.btn_disabled}>
+                      Niedostępne
+                    </button>
+                  )}
+
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+      <Modal
+        isOpen={selectedOrderId !== null}
+        onRequestClose={() => setSelectedOrderId(null)}
+        contentLabel="Edycja zamówienia"
+        className={styles.modal_content}
+        overlayClassName={styles.modal_overlay}
+      >
+        <h2>Chcesz coś zmienić w zamówieniu {selectedOrderId}? Pisz!</h2>
+        <label htmlFor="comments">Dodatkowe komentarze:</label>
+          <textarea
+            id="comments"
+            value={comments}
+            onChange={handleCommentsChange}
+          ></textarea>
+        <button onClick={() => setSelectedOrderId(null)}>Zamknij</button>
+        <button onClick={() => setSelectedOrderId(null)}>Prześlij</button>
+      </Modal>
     </div>
   );
 };

@@ -96,7 +96,7 @@ const OrderRealize = ({ handleLogout }) => {
         userToken: checkedToken,
         userEmail: emailAddress,
         orderRate: 0,
-        status: "Zamowiono",
+        status: "Zamówiono",
         paymentStatus: "Platne przy odbiorze"
       };
 
@@ -152,7 +152,7 @@ const OrderRealize = ({ handleLogout }) => {
           userToken: checkedToken,
           userEmail: emailAddress,
           orderRate: 0,
-          status: "Zamowiono",
+          status: "Zamówiono",
           paymentStatus: "Oplacone"
         }
         const url = "http://localhost:8080/api/orders";
