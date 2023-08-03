@@ -15,7 +15,7 @@ const MyOrders = ({ handleLogout }) => {
   const [cartItems, setCartItems] = useState([]);
   const [ratings, setRatings] = useState({});
   const [selectedOrderId, setSelectedOrderId] = useState(null)
-  const [comments, setComments] = useState("");
+  const [modify, setModify] = useState("");
 
  
   useEffect(() => {
@@ -65,7 +65,7 @@ const MyOrders = ({ handleLogout }) => {
   }
 
   const handleRateOrder = (orderId, rating) => {
-    if (!ratings[orderId] && orderData.find((order) => order.orderId === orderId).status == "Zamowienie dostarczone") {
+    if (!ratings[orderId] && orderData.find((order) => order.orderId === orderId).status === "Zamowienie dostarczone") {
 
       setRatings((prevRatings) => ({
         ...prevRatings,
@@ -78,10 +78,21 @@ const MyOrders = ({ handleLogout }) => {
     }
   }
 
-  const handleCommentsChange = (event) => {
-    setComments(event.target.value);
+  const handleModifyChange = (event) => {
+    setModify(event.target.value);
   };
 
+  const modifyOrder = async (orderId, newModify) => {
+    console.log("Wchodzi tu")
+    try {
+      await axios.put(
+        `http://localhost:8080/api/orders/${orderId}`,
+        { modifyOrder: newModify }
+      )
+    } catch (error) {
+      console.error("Error updating order comments:", error);
+    }
+  };
 
   return (
     <div className={styles.order_realize_container}>
@@ -153,20 +164,29 @@ const MyOrders = ({ handleLogout }) => {
       </div>
       <Modal
         isOpen={selectedOrderId !== null}
-        onRequestClose={() => setSelectedOrderId(null)}
+        onRequestClose={() => {
+          setSelectedOrderId(null)
+          setModify("")
+        }}
         contentLabel="Edycja zamówienia"
         className={styles.modal_content}
         overlayClassName={styles.modal_overlay}
       >
-        <h2>Chcesz coś zmienić w zamówieniu {selectedOrderId}? Pisz!</h2>
+        <h2>Chcesz coś zmienić w zamówieniu {selectedOrderId}? <br></br>Pisz!</h2>
         <label htmlFor="comments">Dodatkowe komentarze:</label>
           <textarea
             id="comments"
-            value={comments}
-            onChange={handleCommentsChange}
+            value={modify}
+            onChange={handleModifyChange}
           ></textarea>
-        <button onClick={() => setSelectedOrderId(null)}>Zamknij</button>
-        <button onClick={() => setSelectedOrderId(null)}>Prześlij</button>
+        <button className={styles.btn_close} onClick={() => {
+          setSelectedOrderId(null)
+          setModify("")
+        }}>Zamknij</button>
+        <button className={styles.btn_send} onClick={() => {
+          setSelectedOrderId(null)
+          modifyOrder(selectedOrderId, modify)
+        }}>Prześlij</button>
       </Modal>
     </div>
   );

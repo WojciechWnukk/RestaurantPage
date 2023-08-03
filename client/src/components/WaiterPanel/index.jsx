@@ -105,7 +105,10 @@ const WaiterPanel = () => {
             ))}
           </p>
           <p className={styles.order_table}>
-              Komentarze: {order.comments ? order.comments : " - "}
+              {order.comments ? "Komentarze: " + order.comments : ""}
+          </p>
+          <p className={styles.order_table}>
+              {order.modifyOrder ? "Zmiany w zamówieniu: " + order.modifyOrder : ""}
           </p>
           <p className={styles.order_date}>
             Czas: {new Date(order.orderDate).toLocaleString()}

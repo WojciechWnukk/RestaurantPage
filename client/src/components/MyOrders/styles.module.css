@@ -138,6 +138,26 @@ button[type="submit"] {
   margin: 0 auto;
 }
 
+.btn_close {
+  padding: 10px;
+	background-color: #ff0000;
+	color: white;
+	border: none;
+	cursor: pointer;
+  width: 200px;
+  margin: 0 auto;
+}
+
+.btn_send {
+  padding: 10px;
+	background-color: #4caf50;
+	color: white;
+	border: none;
+	cursor: pointer;
+  width: 200px;
+  margin: 0 auto;
+}
+
 .modal_content {
   /* Styles for the modal content */
   background-color: #fff;
