@@ -5,6 +5,8 @@ import categoriesData from "../categoriesData";
 import CheckRoles from "../CheckRoles";
 import NavigationSelector from "../Scripts/NavigationSelector";
 import { useNavigate } from "react-router-dom";
+import Modal from "react-modal";
+
 
 const FoodPanel = ({ handleLogout }) => {
     const [selectedCategory, setSelectedCategory] = useState(categoriesData[0]);
@@ -13,6 +15,23 @@ const FoodPanel = ({ handleLogout }) => {
     const [products, setProducts] = useState([]);
     const [filteredFoodData, setFilteredFoodData] = useState([])
     const [selectedProduct, setSelectedProduct] = useState(null);
+    const [data, setData] = useState({})
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        // Zamiana przecinka na kropkę w polu "Cena"
+        if (name === "productPrice") {
+            setData((prevData) => ({
+                ...prevData,
+                [name]: value.replace(",", "."),
+            }));
+        } else {
+            setData((prevData) => ({
+                ...prevData,
+                [name]: value,
+            }));
+        }
+    }
 
 
     const navigate = useNavigate()
@@ -72,14 +91,26 @@ const FoodPanel = ({ handleLogout }) => {
         }
     }
 
-
-
-    const updateFood = (product) => {
-        handleNavigation("/update-product")
+    const modifyProduct = async (productId, newProduct) => {
+        console.log(productId)
+        try {
+            await axios.put(
+                `http://localhost:8080/api/products/${productId}`,
+                { 
+                    productName: newProduct.productName,
+                    productPrice: newProduct.productPrice,
+                    productCategory: newProduct.productCategory,
+                    productImage: newProduct.productImage
+                }
+            )
+            fetchProducts()
+        } catch (error) {
+            console.error("Error updating product")
+        }
     }
-
-
     
+
+
     useEffect(() => {
         handleGetUserDetails()
         fetchProducts()
@@ -148,7 +179,10 @@ const FoodPanel = ({ handleLogout }) => {
                                     <h3>{product.productName}</h3>
                                     <p>{product.productPrice + " zł"}</p>
                                     <button className={styles.add_to_cart_btn}
-                                        onClick={() => updateFood(product)}>
+                                        onClick={() => {
+                                        setSelectedProduct(product)
+                                        setData(product)
+                                        }}>
                                         Edytuj
                                     </button>
                                 </div>
@@ -157,6 +191,66 @@ const FoodPanel = ({ handleLogout }) => {
                     </div>
                 </div>
             </div>
+
+            <Modal
+                isOpen={selectedProduct !== null}
+                onRequestClose={() => {
+                    setSelectedProduct(null)
+                }}
+                contentLabel="Edycja produktu"
+                className={styles.modal_content}
+                overlayClassName={styles.modal_overlay}
+            >
+                <h2>Edytuj produkt {data.productName}</h2>
+                    <label>
+                        Nazwa produktu:
+                        <input
+                            type="text"
+                            name="productName"
+                            value={data.productName}
+                            onChange={handleChange}
+                            required
+                        />
+                    </label>
+                    <label>
+                        Cena:
+                        <input
+                            type="text"
+                            name="productPrice"
+                            value={data.productPrice}
+                            onChange={handleChange}
+                            required
+                        />
+                    </label>
+                    <label>
+                        Kategoria:
+                        <select name="productCategory" value={data.productCategory} onChange={handleChange} required>
+                            <option value="">Wybierz kategorie</option> {/* trzeba zrobic integracje z bazą potem */}
+                            <option value="Przystawki">Przystawki</option>
+                            <option value="Dania główne">Dania główne</option>
+                            <option value="Desery">Desery</option>
+                            <option value="Napoje">Napoje</option>
+                        </select>
+                    </label>
+                    <label>
+                        Link do obrazka:
+                        <input
+                            type="text"
+                            name="productImage"
+                            value={data.productImage}
+                            onChange={handleChange}
+                            required
+                        />
+                    </label>
+                <button className={styles.btn_close} onClick={() => {
+                    setSelectedProduct(null)
+                }}>Zamknij</button>
+                <button className={styles.btn_send} onClick={() => {
+                    modifyProduct(data._id, data)
+                    setSelectedProduct(null)
+                }}>Prześlij</button>
+
+            </Modal>
 
         </div>
     );

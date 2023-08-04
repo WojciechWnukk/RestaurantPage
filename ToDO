@@ -1,5 +1,4 @@
 == Nawczoraj ==
-[ ] Panel dla admina w którym będzie mógł edytować dane o produktach zamiast w bazie, dodawać nowe itp CRUD
 [ ] Panel zarządzania pracownikami
 [ ] To wyżej modalem
 
@@ -29,3 +28,4 @@
 [x] Dodanie powiadomień email, formalność - dodanie maila przy rejestracji, złożeniu zamówienia
 [x] Dodać strone na hosting, zrobić QR przekierowujący, chip nfc
 [x] Możliwość modyfikacji zamówienia: Użytkownicy powinni mieć możliwość modyfikacji swojego zamówienia przed jego akceptacją przez restaurację. 
+[x] Panel dla admina w którym będzie mógł edytować dane o produktach zamiast w bazie, dodawać nowe itp CRUD

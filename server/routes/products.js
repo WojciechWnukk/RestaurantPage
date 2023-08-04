@@ -28,4 +28,22 @@ router.get("/", async (req, res) => {
         })
 })
 
+
+router.put("/:productId", async (req, res) => {
+    try {
+        const { productId } = req.params
+        const { productName, productPrice, productCategory, productImage } = req.body
+        if (productName && productPrice && productCategory && productImage) {
+            const product = await Product.findByIdAndUpdate(productId, { productName: productName, productPrice: productPrice, productCategory: productCategory, productImage: productImage }, { new: true })
+            
+            if (!product) {
+                return res.status(404).json({ message: "Product not found" });
+            }
+            res.status(200).json({ data: product, message: "Product updated successfully" });
+        }
+    } catch (error) {
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+})
+
 module.exports = router

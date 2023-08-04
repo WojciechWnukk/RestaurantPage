@@ -65,3 +65,62 @@ label {
   cursor: pointer;
   margin-bottom: 10px;
 }
+
+.btn_close {
+	padding: 10px;
+	  background-color: #ff0000;
+	  color: white;
+	  border: none;
+	  cursor: pointer;
+	width: 200px;
+	margin: 0 auto;
+  }
+  
+  .btn_send {
+	padding: 10px;
+	  background-color: #4caf50;
+	  color: white;
+	  border: none;
+	  cursor: pointer;
+	width: 200px;
+	margin: 0 auto;
+  }
+  
+  .modal_content {
+	/* Styles for the modal content */
+	background-color: #fff;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	max-width: 400px;
+	padding: 20px;
+	position: relative;
+	top: 0;
+	transform: translateY(0);
+	transition: top 0.3s, transform 0.3s;
+	margin: 0 auto;
+	outline: none;
+  }
+  
+  .modal_content__after-open {
+	top: 50%;
+	transform: translateY(-50%);
+  }
+  
+  .modal_content__before_close {
+	top: 0;
+	transform: translateY(0);
+  }
+  
+  .modal_overlay {
+	/* Styles for the modal overlay */
+	background-color: rgba(0, 0, 0, 0.7);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+  }
+  

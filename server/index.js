@@ -23,18 +23,24 @@ connection()
 app.use("/api/employees", employeeRoutes)
 app.get("/api/employees", employeeRoutes)
 app.delete("/api/employees/:employeeId?", employeeRoutes)
+
+app.put("/api/users/:userId", userRoutes)
 app.put("/api/users/password", tokenVerification)
 app.get("/api/users/", tokenVerification)
 //app.delete("/api/users", tokenVerification)
 app.delete("/api/users/:userId?", tokenVerification)
 app.get("/api/users/user", tokenVerification)
 app.use("/api/users", userRoutes)
+
 app.put("/api/orders/:orderId", orderRoutes)
 app.use("/api/orders", orderRoutes)
 app.get("/api/orders", orderRoutes)
+
 app.use("/api/auth", authRoutes)
+
 app.use("/api/payment", paymentRoutes)
 
+app.put("/api/products/:productId", productRoutes)
 app.use("/api/products", productRoutes)
 app.get("/api/products", productRoutes)
 

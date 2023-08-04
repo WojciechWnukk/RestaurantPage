@@ -167,4 +167,21 @@ router.put("/password", async (req, res) => {
   }
 });
 
+router.put("/:userId", async (req, res) => {
+  try {
+    const { userId } = req.params
+    const { firstName, lastName, email, password, roles } = req.body
+    if(firstName && lastName && email && password && roles) {
+      const user = await User.findByIdAndUpdate(userId, { firstName: firstName, lastName: lastName, email: email, password: password, roles: roles })
+    
+      if(!user){
+        return res.status(404).json({ message: "User not found" });
+      }
+      res.status(200).json({ data: user, message: "User updated successfully" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+})
+
 module.exports = router
