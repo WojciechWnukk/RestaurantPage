@@ -60,7 +60,14 @@ const UserPermissions = ({ handleLogout }) => {
           },
         };
         const { data: res } = await axios(config);
-        setEmployees(res.data);
+
+        // Convert birthDate format before setting in state
+        const employeesWithFormattedDate = res.data.map((employee) => ({
+          ...employee,
+          birthDate: new Date(employee.birthDate).toISOString().split("T")[0],
+        }));
+
+        setEmployees(employeesWithFormattedDate);
       } catch (error) {
         if (
           error.response &&
@@ -73,7 +80,7 @@ const UserPermissions = ({ handleLogout }) => {
     }
   };
 
-  const deleteUser = async (userId) => {
+  const deleteUser = async (userId, userEmail, userRole) => {
     const confirmed = window.confirm("Czy na pewno chcesz usunąć konto?")
 
     if (confirmed) {
@@ -90,24 +97,46 @@ const UserPermissions = ({ handleLogout }) => {
               'x-access-token': token
             }
           }
-
           await axios(config)
-          console.log("Usunieto konto")
+          console.log("Usunieto konto usera")
+          if(userRole === "Employee") {
+            const findEmployee = employees.find((employee) => employee.email === userEmail)
+            deleteEmployee(findEmployee._id)
+            console.log("Usunieto empl")
+          }
+          handleGetUsers()
+          handleGetEmployees()
         } catch (error) {
 
         }
       }
-      window.location.reload()
     }
 
   }
 
-  const deleteEmployee = async (employeeId) => {
+  const deleteEmployee = async (employeeId, employeeEmail, control) => {
+    const confirmed = window.confirm("Czy na pewno chcesz zwolnić pracownika?")
+    if (confirmed) {
+      if (employeeId) {
+        try {
+          const response = await axios.delete(`http://localhost:8080/api/employees/${employeeId}`)
+          if (control === true) {
+            const findUser = users.find((user) => user.email === employeeEmail)
+            const newRoles = { ...findUser, roles: "User" }
+            modifyUser(findUser._id, newRoles)
+          }
+          handleGetEmployees()
+          handleGetUsers()
+        } catch (error) {
 
+        }
+      }
+    }
   }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+
     setDataPerson((prevData) => ({
       ...prevData,
       [name]: value,
@@ -121,22 +150,41 @@ const UserPermissions = ({ handleLogout }) => {
   const modifyUser = async (userId, modifyUser) => {
     console.log(userId)
     try {
-        await axios.put(
-            `http://localhost:8080/api/users/${userId}`,
-            { 
-                firstName: modifyUser.firstName,
-                lastName: modifyUser.lastName,
-                email: modifyUser.email,
-                password: modifyUser.password,
-                roles: modifyUser.roles
-            }
-        )
-        handleGetUsers()
+      await axios.put(
+        `http://localhost:8080/api/users/${userId}`,
+        {
+          firstName: modifyUser.firstName,
+          lastName: modifyUser.lastName,
+          email: modifyUser.email,
+          password: modifyUser.password,
+          roles: modifyUser.roles
+        }
+      )
+      handleGetUsers()
     } catch (error) {
-        console.error("Error updating product")
+      console.error("Error updating user")
     }
-}
+  }
 
+  const modifyEmployee = async (employeeId, modifyEmployee) => {
+    console.log(employeeId)
+    try {
+      await axios.put(
+        `http://localhost:8080/api/employees/${employeeId}`,
+        {
+          firstName: modifyEmployee.firstName,
+          lastName: modifyEmployee.lastName,
+          email: modifyEmployee.email,
+          birthDate: modifyEmployee.birthDate,
+          pesel: modifyEmployee.pesel,
+          salary: modifyEmployee.salary
+        }
+      )
+      handleGetEmployees()
+    } catch (error) {
+      console.error("Error updating employee")
+    }
+  }
 
   useEffect(() => {
     handleGetEmployees()
@@ -177,12 +225,11 @@ const UserPermissions = ({ handleLogout }) => {
                             <td>{user.firstName} {user.lastName}</td>
                             <td>{user.email}</td>
                             <td>{user.roles}</td>
-                            <td><button className={`${styles.edit_btn} link_btn`} onClick={() => 
-                              {
-                                setSelectedPerson(user._id)
-                                setDataPerson(user)
-                              }}>Edytuj</button></td>
-                            <td><button className={`${styles.link_btn} link_btn`} onClick={() => deleteUser(user._id)}>Usuń konto</button></td>
+                            <td><button className={`${styles.edit_btn} link_btn`} onClick={() => {
+                              setSelectedPerson(user._id)
+                              setDataPerson(user)
+                            }}>Edytuj</button></td>
+                            <td><button className={`${styles.link_btn} link_btn`} onClick={() => deleteUser(user._id, user.email, user.roles)}>Usuń konto</button></td>
                           </tr>
                         ))}
                       </tbody>
@@ -210,12 +257,11 @@ const UserPermissions = ({ handleLogout }) => {
                             <td>{employee.firstName} {employee.lastName}</td>
                             <td>{employee.email}</td>
                             <td>{employee.salary + " zł"}</td>
-                            <td><button className={`${styles.edit_btn} link_btn`} onClick={() => 
-                              {
-                                setSelectedEmployee(employee._id)
-                                setDataEmployee(employee)
-                              }}>Edytuj</button></td>
-                            <td><button className={`${styles.link_btn} link_btn`} onClick={() => deleteEmployee(employee._id)}>Usuń konto</button></td>
+                            <td><button className={`${styles.edit_btn} link_btn`} onClick={() => {
+                              setSelectedEmployee(employee._id)
+                              setDataEmployee(employee)
+                            }}>Edytuj</button></td>
+                            <td><button className={`${styles.link_btn} link_btn`} onClick={() => deleteEmployee(employee._id, employee.email, true)}>Usuń konto</button></td>
                           </tr>
                         ))}
                       </tbody>
@@ -281,14 +327,13 @@ const UserPermissions = ({ handleLogout }) => {
           />
       </label>*/}
         <label>
-          Roles - select
-          <input
-            type="text"
-            name="Roles"
-            value={dataPerson.roles}
-            onChange={handleChange}
-            required
-          />
+          Roles: <br></br>
+          <select name="roles" value={dataPerson.roles} onChange={handleChange} required>
+            <option value="">Wybierz uprawnienia</option>
+            <option value="User">Użytkownik</option>
+            <option value="Employee">Pracownik</option>
+            <option value="Admin">Admin</option>
+          </select>
         </label>
         <button className={styles.btn_close} onClick={() => {
           setSelectedPerson(null)
@@ -340,9 +385,9 @@ const UserPermissions = ({ handleLogout }) => {
           />
         </label>
         <label>
-          Data urodzenia:
+          Data urodzenia: <br></br>
           <input
-            type="text"
+            type="date"
             name="birthDate"
             value={dataEmployee.birthDate}
             onChange={handleChange}
@@ -373,6 +418,7 @@ const UserPermissions = ({ handleLogout }) => {
           setSelectedEmployee(null)
         }}>Zamknij</button>
         <button className={styles.btn_send} onClick={() => {
+          modifyEmployee(dataEmployee._id, dataEmployee)
           setSelectedEmployee(null)
         }}>Prześlij</button>
       </Modal>

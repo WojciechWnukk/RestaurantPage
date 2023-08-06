@@ -1,6 +1,10 @@
 == Nawczoraj ==
-[ ] Panel zarządzania pracownikami
-[ ] To wyżej modalem
+[ ] Panel zarządzania pracownikami:
+[ ] W panelu użytkowników trzeba zintegrować działania na linii employee - user
+[3/4](Poprawic toasty) Czyli: usuwanie user i employee - usera powoduje usunięcie też pracownika, employee zmienia role w kolekcji user z empl->user
+[ ]  : zmiana roli w kolekcji user chyba powinna być niemożliwa na empl bo będzie brakowało danych chyba że przekierowanie na strone add empl 
+[ ] : Zmiana z roli employee->user powinna usuwać typka w kolekcji employee
+[ ] : Do tego wszystkiego trzeba zrobić komunikaty czy aby na pewno
 
 == Dozrobienia ==
 [ ] Połączyć z calendar app jako panel rezerwacji
@@ -11,6 +15,7 @@
 [ ] Po ocenie zamówienia przyznawanie pkt o x% wartości zamówienia
 [ ] Strona raporty z wykresami i pobieralnym plikiem
 [ ] Dodanie w .env danych serwera i clienta hosting/nie aby szybko zmieniać między dev a prod
+[ ] Przerobić dodawanie empl i product na Modala
 
 == Zrobione ==
 [x] Przy każdym/dostarczonym zamówieniu dodać możliwość oceny klikaną gwiazdką

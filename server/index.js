@@ -20,9 +20,11 @@ const connection = require('./db')
 connection()
 
 // routes
-app.use("/api/employees", employeeRoutes)
 app.get("/api/employees", employeeRoutes)
+app.put("/api/employees/:employeeId", employeeRoutes)
 app.delete("/api/employees/:employeeId?", employeeRoutes)
+app.use("/api/employees", employeeRoutes)
+
 
 app.put("/api/users/:userId", userRoutes)
 app.put("/api/users/password", tokenVerification)
