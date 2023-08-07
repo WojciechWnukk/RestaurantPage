@@ -1,9 +1,9 @@
 == Nawczoraj ==
 [ ] Panel zarządzania pracownikami:
 [ ] W panelu użytkowników trzeba zintegrować działania na linii employee - user
-[3/4](Poprawic toasty) Czyli: usuwanie user i employee - usera powoduje usunięcie też pracownika, employee zmienia role w kolekcji user z empl->user
-[ ]  : zmiana roli w kolekcji user chyba powinna być niemożliwa na empl bo będzie brakowało danych chyba że przekierowanie na strone add empl 
-[ ] : Zmiana z roli employee->user powinna usuwać typka w kolekcji employee
+[3/4] (Poprawic toasty) Czyli: usuwanie user i employee - usera powoduje usunięcie też pracownika, employee zmienia role w kolekcji user z empl->user
+[x] : zmiana roli w kolekcji user na empl przekierowanie na strone add empl 
+[x] : Zmiana z roli employee->user powinna usuwać typka w kolekcji employee
 [ ] : Do tego wszystkiego trzeba zrobić komunikaty czy aby na pewno
 
 == Dozrobienia ==

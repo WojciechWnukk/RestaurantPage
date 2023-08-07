@@ -99,9 +99,9 @@ const UserPermissions = ({ handleLogout }) => {
           }
           await axios(config)
           console.log("Usunieto konto usera")
-          if(userRole === "Employee") {
+          if(userRole === "Employee") { //delete user with role empl -> delete user & empl
             const findEmployee = employees.find((employee) => employee.email === userEmail)
-            deleteEmployee(findEmployee._id)
+            await deleteEmployee(findEmployee._id)
             console.log("Usunieto empl")
           }
           handleGetUsers()
@@ -120,7 +120,7 @@ const UserPermissions = ({ handleLogout }) => {
       if (employeeId) {
         try {
           const response = await axios.delete(`http://localhost:8080/api/employees/${employeeId}`)
-          if (control === true) {
+          if (control === true) { //delete empl -> change roles empl->user
             const findUser = users.find((user) => user.email === employeeEmail)
             const newRoles = { ...findUser, roles: "User" }
             modifyUser(findUser._id, newRoles)
@@ -131,6 +131,8 @@ const UserPermissions = ({ handleLogout }) => {
 
         }
       }
+    } else {
+      throw new Error("dsada")
     }
   }
 
@@ -150,6 +152,25 @@ const UserPermissions = ({ handleLogout }) => {
   const modifyUser = async (userId, modifyUser) => {
     console.log(userId)
     try {
+
+      if(modifyUser.roles==="User") { //if roles empl->user = delete from empl
+        const orginalUser = users.find((user) => user._id === userId)
+        if(orginalUser && orginalUser.roles === "Employee") {
+          const findEmployee = employees.find((employee) => employee.email === orginalUser.email)
+          deleteEmployee(findEmployee._id)
+        }
+      } else if (modifyUser.roles==="Employee") { //from user role to empl
+        const orginalUser = users.find((user) => user._id === userId)
+        if(orginalUser && orginalUser.roles === "User") {
+          const confirmed = window.confirm("Nastąpi przekierowanie do panelu dodawania pracownika")
+          if(confirmed) {
+            handleNavigation("/add-employee")
+            return
+          }
+        }
+      }
+      
+
       await axios.put(
         `http://localhost:8080/api/users/${userId}`,
         {
