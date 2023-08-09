@@ -15,6 +15,7 @@ const UserPermissions = ({ handleLogout }) => {
   const [selectedEmployee, setSelectedEmployee] = useState(null)
   const [dataPerson, setDataPerson] = useState({})
   const [dataEmployee, setDataEmployee] = useState({})
+  const [isEmployee, setIsEmployee] = useState(null)
   const navigate = useNavigate()
 
   const handleNavigation = (path) => {
@@ -81,10 +82,14 @@ const UserPermissions = ({ handleLogout }) => {
   };
 
   const deleteUser = async (userId, userEmail, userRole) => {
-    const confirmed = window.confirm("Czy na pewno chcesz usunąć konto?")
-
+    let confirmed = false
+    if (userRole === "Employee") {
+      setIsEmployee(true)
+      confirmed = window.confirm("Czy na pewno chcesz usunąć konto? Uwaga usuwasz też pracownika")
+    } else {
+      confirmed = window.confirm("Czy na pewno chcesz usunąć konto?")
+    }
     if (confirmed) {
-
       if (userId) {
         try {
           const token = localStorage.getItem("token");
@@ -99,7 +104,8 @@ const UserPermissions = ({ handleLogout }) => {
           }
           await axios(config)
           console.log("Usunieto konto usera")
-          if(userRole === "Employee") { //delete user with role empl -> delete user & empl
+          if (userRole === "Employee") { //delete user with role empl -> delete user & empl
+            setIsEmployee(true)
             const findEmployee = employees.find((employee) => employee.email === userEmail)
             await deleteEmployee(findEmployee._id)
             console.log("Usunieto empl")
@@ -115,7 +121,12 @@ const UserPermissions = ({ handleLogout }) => {
   }
 
   const deleteEmployee = async (employeeId, employeeEmail, control) => {
-    const confirmed = window.confirm("Czy na pewno chcesz zwolnić pracownika?")
+    let confirmed = false
+    if (!isEmployee || control) {
+      confirmed = window.confirm("Czy na pewno chcesz zwolnić pracownika?")
+    } else {
+      confirmed = true
+    }
     if (confirmed) {
       if (employeeId) {
         try {
@@ -129,10 +140,10 @@ const UserPermissions = ({ handleLogout }) => {
           handleGetUsers()
         } catch (error) {
 
+        } finally {
+          setIsEmployee(false)
         }
       }
-    } else {
-      throw new Error("dsada")
     }
   }
 
@@ -153,23 +164,22 @@ const UserPermissions = ({ handleLogout }) => {
     console.log(userId)
     try {
 
-      if(modifyUser.roles==="User") { //if roles empl->user = delete from empl
+      if (modifyUser.roles === "User") { //if roles empl->user = delete from empl
         const orginalUser = users.find((user) => user._id === userId)
-        if(orginalUser && orginalUser.roles === "Employee") {
+        if (orginalUser && orginalUser.roles === "Employee") {
           const findEmployee = employees.find((employee) => employee.email === orginalUser.email)
           deleteEmployee(findEmployee._id)
         }
-      } else if (modifyUser.roles==="Employee") { //from user role to empl
+      } else if (modifyUser.roles === "Employee") { //from user role to empl
         const orginalUser = users.find((user) => user._id === userId)
-        if(orginalUser && orginalUser.roles === "User") {
-          const confirmed = window.confirm("Nastąpi przekierowanie do panelu dodawania pracownika")
-          if(confirmed) {
-            handleNavigation("/add-employee")
-            return
+        if (orginalUser && orginalUser.roles === "User") {
+          const confirmed = window.confirm("Czy na pewno chcesz dodać pracownika?")
+          if (confirmed) {
+            addEmployee(dataPerson)
           }
         }
       }
-      
+
 
       await axios.put(
         `http://localhost:8080/api/users/${userId}`,
@@ -182,6 +192,7 @@ const UserPermissions = ({ handleLogout }) => {
         }
       )
       handleGetUsers()
+      handleGetEmployees()
     } catch (error) {
       console.error("Error updating user")
     }
@@ -206,6 +217,30 @@ const UserPermissions = ({ handleLogout }) => {
       console.error("Error updating employee")
     }
   }
+
+  const addEmployee = async (dataPerson) => {
+    try {
+      const { password, roles, _id, __v, ...dataWithoutPassword } = dataPerson; //usuwanie danych używanych dla kolekcji user które nie mają zastosowania w empl
+
+      const newDataPerson = {
+        ...dataWithoutPassword,
+        hireDate: new Date().toISOString()
+      };
+      console.log(newDataPerson)
+      const url = "http://localhost:8080/api/employees"
+      const { newDataPerson: res } = await axios.post(url, newDataPerson)
+      console.log(res.message)
+
+    } catch (error) {
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status <= 500
+      ) {
+
+      }
+    }
+  };
 
   useEffect(() => {
     handleGetEmployees()
@@ -356,6 +391,49 @@ const UserPermissions = ({ handleLogout }) => {
             <option value="Admin">Admin</option>
           </select>
         </label>
+        {dataPerson.roles === "Employee" && (
+          <>
+            <label>
+              Data urodzenia:<br></br>
+              <input
+                type="date"
+                name="birthDate"
+                value={dataPerson.birthDate || ''}
+                onChange={handleChange}
+                required
+              />
+            </label>
+            <label>
+              PESEL:
+              <input
+                type="text"
+                name="pesel"
+                value={dataPerson.pesel || ''}
+                onChange={handleChange}
+                required
+              />
+            </label>
+            <label>
+              Płeć:<br></br>
+              <select name="gender" value={dataPerson.gender} onChange={handleChange} required>
+                <option value="">Wybierz płeć</option>
+                <option value="Mężczyzna">Mężczyzna</option>
+                <option value="Kobieta">Kobieta</option>
+              </select>
+            </label>
+            <label>
+              Pensja:<br></br>
+              <input
+                type="number"
+                name="salary"
+                value={dataPerson.salary || ''}
+                onChange={handleChange}
+                required
+              />
+            </label>
+
+          </>
+        )}
         <button className={styles.btn_close} onClick={() => {
           setSelectedPerson(null)
         }}>Zamknij</button>

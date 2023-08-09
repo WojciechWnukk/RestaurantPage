@@ -1,21 +1,15 @@
 == Nawczoraj ==
-[ ] Panel zarządzania pracownikami:
-[ ] W panelu użytkowników trzeba zintegrować działania na linii employee - user
-[3/4] (Poprawic toasty) Czyli: usuwanie user i employee - usera powoduje usunięcie też pracownika, employee zmienia role w kolekcji user z empl->user
-[x] : zmiana roli w kolekcji user na empl przekierowanie na strone add empl 
-[x] : Zmiana z roli employee->user powinna usuwać typka w kolekcji employee
-[ ] : Do tego wszystkiego trzeba zrobić komunikaty czy aby na pewno
+[ ] Przerobić dodawanie empl i product na Modala
+[ ] Panel promocji typu zbieranie punktów za zakupy (może api do kodów rabatowych?)
+[ ] Panel w którym kelner składa zamówienie, typu dostaje telefon od klienta
+[ ] Ogarnąć działanie GridFS
 
 == Dozrobienia ==
 [ ] Połączyć z calendar app jako panel rezerwacji
 [ ] Dodać panel z zestawieniem finansow od miesiaca
-[ ] Panel promocji typu zbieranie punktów za zakupy
-[ ] Panel w którym kelner składa zamówienie, typu dostaje telefon od klienta
 [?] upload zdjęć, profilówki dla pracowników - można to załatwić w ten sam sposób jak jedzenie z tym że prywatny hosting trzeba
-[ ] Po ocenie zamówienia przyznawanie pkt o x% wartości zamówienia
 [ ] Strona raporty z wykresami i pobieralnym plikiem
 [ ] Dodanie w .env danych serwera i clienta hosting/nie aby szybko zmieniać między dev a prod
-[ ] Przerobić dodawanie empl i product na Modala
 
 == Zrobione ==
 [x] Przy każdym/dostarczonym zamówieniu dodać możliwość oceny klikaną gwiazdką
@@ -34,3 +28,10 @@
 [x] Dodać strone na hosting, zrobić QR przekierowujący, chip nfc
 [x] Możliwość modyfikacji zamówienia: Użytkownicy powinni mieć możliwość modyfikacji swojego zamówienia przed jego akceptacją przez restaurację. 
 [x] Panel dla admina w którym będzie mógł edytować dane o produktach zamiast w bazie, dodawać nowe itp CRUD
+[x] Panel zarządzania pracownikami:
+[x] W panelu użytkowników trzeba zintegrować działania na linii employee - user
+[x] Czyli: usuwanie user i employee - usera powoduje usunięcie też pracownika, employee zmienia role w kolekcji user z empl->user
+[x] : zmiana roli w kolekcji user na empl przekierowanie na strone add empl 
+[x] : Zmiana z roli employee->user powinna usuwać typka w kolekcji employee
+[x] : Do tego wszystkiego trzeba zrobić komunikaty czy aby na pewno
+[x] : Robienie z usera pracownika (zmiana roli w k user i dodanie do empl)

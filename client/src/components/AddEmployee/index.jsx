@@ -56,6 +56,7 @@ const AddEmployee = ({ handleLogout }) => {
       const url = "http://localhost:8080/api/employees"
       const { data: res } = await axios.post(url, data)
       console.log(res.message)
+      console.log(data)
       setSuccessMessage("Pracownik " + data.firstName + " został dodany")
       await addUser()
 
