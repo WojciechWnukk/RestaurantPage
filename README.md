@@ -14,5 +14,7 @@ Some examples of functionality:
 - displaying of navigation depending on account permissions
 
 New (after 14.07):
-- Adding products by admin (now they are in DB)
+- Adding and updating products by admin (now they are in DB)
 - paying online with stripe
+- updating an order that hasn't been approved
+- updating users and employees ( 1 action = changes in 2 collections)
