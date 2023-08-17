@@ -181,7 +181,7 @@ const OrderRealize = ({ handleLogout }) => {
           />
         )}
       </CheckRoles>
-      <h3>Order Summary</h3>
+      <h3>Podsumowanie zamówienia</h3>
       {cartItems.length === 0 ? (
         <p>Najpierw dodaj coś do koszyka! :D</p>
       ) : (

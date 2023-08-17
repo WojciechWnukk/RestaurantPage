@@ -54,7 +54,7 @@ const OrderSuccess = ({ handleLogout }) => {
           <h2>Dziękujemy za złożenie zamówienia!</h2>
           {orderData.slice().reverse().map((order) => (
             <div key={order._id}>
-              <p className={styles.order_number}>Numer stolika: {order.orderId}</p>
+              <p className={styles.order_number}>Numer zamówienia: {order.orderId}</p>
               <p
                 className={`${styles.status} ${order.status === "Zamówiono"
                   ? styles.status_ordered

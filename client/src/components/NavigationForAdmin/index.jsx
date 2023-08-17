@@ -26,6 +26,12 @@ const NavigationForAdmin = ({ cartItemCount }) => {
         </button>
         <button
           className={`${styles.nav_button} ${styles.white_btn}`}
+          onClick={() => handleNavigation("/cart")}
+        >
+          Złóż zamówienie
+        </button>
+        <button
+          className={`${styles.nav_button} ${styles.white_btn}`}
           onClick={() => handleNavigation("/waiter-panel")}
         >
           Panel kelnera

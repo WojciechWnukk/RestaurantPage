@@ -3,39 +3,43 @@
 
 .menu_container {
 	display: flex;
-	flex: 1 3;
-	align-items: flex-start;
+	flex-direction: column;
+	align-items: stretch;
 	gap: 20px;
 	height: 70vh;
-
 }
 
 .categories {
+	order: -1;
+}
+
+.categories_buttons {
+	display: flex;
+	justify-content: space-around;
+	width: 100%;
+}
+
+.category_button {
 	flex: 1;
-	background-color: #f1f1f1;
-	padding: 20px;
-	height: 89vh;
+	font-size: 16px;
+	padding: 15px;
+	background-color: #ccc;
+	border: none;
+	cursor: pointer;
+	outline: none;
+}
+
+.category_button:hover {
+	background-color: #857c7c3e;
+  }
+
+.category_button.active_category {
+	background-color: #ddd;
 }
 
 .categories h2 {
 	margin-bottom: 10px;
-}
-
-.categories_table {
-	width: 100%;
-	border-collapse: collapse;
-}
-
-.categories_table th {
-	padding: 10px;
-	background-color: #ccc;
-	text-align: left;
-}
-
-.categories_table td {
-	padding: 10px;
-	border-bottom: 1px solid #ccc;
-	cursor: pointer;
+	text-align: center;
 }
 
 .active_category {
@@ -79,4 +83,11 @@
 	cursor: pointer;
 }
 
-/* ... */
+.add_to_cart_btn:hover {
+	background-color: gold;
+	color: black;
+  }
+
+.content h2 {
+	text-align: center;
+}

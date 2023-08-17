@@ -17,7 +17,8 @@ const MyOrders = ({ handleLogout }) => {
   const [selectedOrderId, setSelectedOrderId] = useState(null)
   const [modify, setModify] = useState("");
 
- 
+
+
   useEffect(() => {
     loadCartItemsFromLocalStorage(setCartItems);
   }, []);
@@ -174,11 +175,11 @@ const MyOrders = ({ handleLogout }) => {
       >
         <h2>Chcesz coś zmienić w zamówieniu {selectedOrderId}? <br></br>Pisz!</h2>
         <label htmlFor="comments">Dodatkowe komentarze:</label>
-          <textarea
-            id="comments"
-            value={modify}
-            onChange={handleModifyChange}
-          ></textarea>
+        <textarea
+          id="comments"
+          value={modify}
+          onChange={handleModifyChange}
+        ></textarea>
         <button className={styles.btn_close} onClick={() => {
           setSelectedOrderId(null)
           setModify("")

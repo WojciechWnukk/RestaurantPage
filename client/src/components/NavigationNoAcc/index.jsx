@@ -31,13 +31,14 @@ const Navigation = ({ cartItemCount }) => {
           Rezerwacje
         </button>
 
-        <button
+
+      </div>
+      <button
           className={`${styles.nav_button} ${styles.white_btn}`}
           onClick={() => handleNavigation("/login")}
         >
           Zaloguj
         </button>
-      </div>
     </nav>
   );
 };

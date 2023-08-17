@@ -8,6 +8,7 @@
 .waiter_panel_title {
   font-size: 24px;
   font-weight: bold;
+  text-align: center;
   margin-bottom: 20px;
 }
 
@@ -53,4 +54,34 @@
   border-radius: 5px;
   border: 1px solid #ccc;
   outline: none;
+}
+
+.order_filter_btn_on {
+  padding: 10px 20px;
+  width: 100%;
+  background-color: #ff0000;
+  font-size: large;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.order_filter_btn_off {
+  padding: 10px 20px;
+  width: 100%;
+  background-color: #33ff00;
+  font-size: large;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.order_filter_btn_on:hover {
+  background-color: #33ff00;
+}
+
+.order_filter_btn_off:hover {
+  background-color: #ff0000;
 }

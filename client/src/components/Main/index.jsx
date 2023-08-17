@@ -4,6 +4,8 @@ import categoriesData from "../categoriesData";
 import axios from "axios";
 import { loadCartItemsFromLocalStorage, saveCartItemsToLocalStorage } from "../Scripts/localStorage";
 import CheckRoles from "../CheckRoles";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUtensils, faBurger, faIceCream, faWhiskeyGlass } from "@fortawesome/free-solid-svg-icons";
 import NavigationSelector from "../Scripts/NavigationSelector";
 
 const Main = ({ handleLogout }) => {
@@ -45,33 +47,30 @@ const Main = ({ handleLogout }) => {
 
   const fetchProducts = async () => {
     try {
-        const url = "http://localhost:8080/api/products"
-        const response = await axios.get(url)
-        const availableProducts = response.data.data.filter(
-            (product) =>
-                product.productStatus === "Dostępny"
-        )
-        setProducts(availableProducts)
+      const url = "http://localhost:8080/api/products"
+      const response = await axios.get(url)
+      const availableProducts = response.data.data.filter(
+        (product) =>
+          product.productStatus === "Dostępny"
+      )
+      setProducts(availableProducts)
 
     } catch (error) {
-        console.error("Error fetching products: ", error)
+      console.error("Error fetching products: ", error)
     }
-}
+  }
 
-useEffect(() => {
-  fetchProducts()
-  const filteredData = products.filter(
+  useEffect(() => {
+    fetchProducts()
+    const filteredData = products.filter(
       (product) => product.productCategory === selectedCategory.name
-  )
-  setFilteredFoodData(filteredData);
-}, [products, selectedCategory]);
+    )
+    setFilteredFoodData(filteredData);
+  }, [products, selectedCategory]);
 
   return (
     <div className={styles.main_container}>
-      {
-      }
-
-<div>
+      <div>
         <CheckRoles>
           {(details) => (
             <NavigationSelector
@@ -86,30 +85,27 @@ useEffect(() => {
 
       <div className={styles.menu_container}>
         <div className={styles.categories}>
-          <h2>Kategorie posiłków</h2>
-          <table className={styles.categories_table}>
-            <thead>
-              <tr>
-                <th>Rodzaj</th>
-              </tr>
-            </thead>
-            <tbody>
-              {categoriesData.map((category) => (
-                <tr
-                  key={category.id}
-                  className={
-                    category === selectedCategory ? styles.active_category : ""
-                  }
-                  onClick={() => handleCategoryClick(category)}
-                >
-                  <td>{category.name}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div className={styles.categories_buttons}>
+            {categoriesData.map((category) => (
+              <button
+                key={category.id}
+                className={`${styles.category_button} ${category === selectedCategory ? styles.active_category : ""
+                  }`}
+                onClick={() => handleCategoryClick(category)}
+              >
+                {category.name}
+                <br /><br />
+                {
+                  category.name === "Przystawki" ? <FontAwesomeIcon icon={faUtensils} size="xl" /> :
+                    category.name === "Dania główne" ? <FontAwesomeIcon icon={faBurger} size="xl" /> :
+                      category.name === "Desery" ? <FontAwesomeIcon icon={faIceCream} size="xl" /> :
+                        category.name === "Napoje" ? <FontAwesomeIcon icon={faWhiskeyGlass} size="xl" /> : null
+                }
+              </button>
+            ))}
+          </div>
         </div>
         <div className={styles.content}>
-          <h2>{selectedCategory.name}</h2>
           <div className={styles.food_items}>
             {filteredFoodData.map((food) => (
               <div className={styles.food_item} key={food._id}>

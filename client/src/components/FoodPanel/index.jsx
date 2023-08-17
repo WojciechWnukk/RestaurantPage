@@ -6,6 +6,8 @@ import CheckRoles from "../CheckRoles";
 import NavigationSelector from "../Scripts/NavigationSelector";
 import { useNavigate } from "react-router-dom";
 import Modal from "react-modal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUtensils, faBurger, faIceCream, faWhiskeyGlass } from "@fortawesome/free-solid-svg-icons";
 
 
 const FoodPanel = ({ handleLogout }) => {
@@ -96,7 +98,7 @@ const FoodPanel = ({ handleLogout }) => {
         try {
             await axios.put(
                 `http://localhost:8080/api/products/${productId}`,
-                { 
+                {
                     productName: newProduct.productName,
                     productPrice: newProduct.productPrice,
                     productCategory: newProduct.productCategory,
@@ -108,7 +110,7 @@ const FoodPanel = ({ handleLogout }) => {
             console.error("Error updating product")
         }
     }
-    
+
 
 
     useEffect(() => {
@@ -143,34 +145,32 @@ const FoodPanel = ({ handleLogout }) => {
 
             <div className={styles.menu_container}>
                 <div className={styles.categories}>
+                    <div className={styles.categories_buttons}>
+                        {categoriesData.map((category) => (
+                            <button
+                                key={category.id}
+                                className={`${styles.category_button} ${category === selectedCategory ? styles.active_category : ""
+                                    }`}
+                                onClick={() => handleCategoryClick(category)}
+                            >
+                                {category.name}
+                                <br /><br />
+                                {
+                                    category.name === "Przystawki" ? <FontAwesomeIcon icon={faUtensils} size="xl" /> :
+                                        category.name === "Dania główne" ? <FontAwesomeIcon icon={faBurger} size="xl" /> :
+                                            category.name === "Desery" ? <FontAwesomeIcon icon={faIceCream} size="xl" /> :
+                                                category.name === "Napoje" ? <FontAwesomeIcon icon={faWhiskeyGlass} size="xl" /> : null
+                                }
+                            </button>
+                        ))}
+                    </div>
                     <button className={styles.new_product_btn}
                         onClick={() => handleNavigation("/new-product")}>
                         Dodaj nowy produkt
                     </button>
-                    <h2>Kategorie posiłków</h2>
-                    <table className={styles.categories_table}>
-                        <thead>
-                            <tr>
-                                <th>Rodzaj</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {categoriesData.map((category) => (
-                                <tr
-                                    key={category.id}
-                                    className={
-                                        category === selectedCategory ? styles.active_category : ""
-                                    }
-                                    onClick={() => handleCategoryClick(category)}
-                                >
-                                    <td>{category.name}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+
                 </div>
                 <div className={styles.content}>
-                    <h2>{selectedCategory.name}</h2>
                     <div className={styles.food_items}>
                         {filteredFoodData.map((product) => (
                             <div className={styles.food_item} key={product._id}>
@@ -180,8 +180,8 @@ const FoodPanel = ({ handleLogout }) => {
                                     <p>{product.productPrice + " zł"}</p>
                                     <button className={styles.add_to_cart_btn}
                                         onClick={() => {
-                                        setSelectedProduct(product)
-                                        setData(product)
+                                            setSelectedProduct(product)
+                                            setData(product)
                                         }}>
                                         Edytuj
                                     </button>
@@ -202,46 +202,46 @@ const FoodPanel = ({ handleLogout }) => {
                 overlayClassName={styles.modal_overlay}
             >
                 <h2>Edytuj produkt {data.productName}</h2>
-                    <label>
-                        Nazwa produktu:
-                        <input
-                            type="text"
-                            name="productName"
-                            value={data.productName}
-                            onChange={handleChange}
-                            required
-                        />
-                    </label>
-                    <label>
-                        Cena:
-                        <input
-                            type="text"
-                            name="productPrice"
-                            value={data.productPrice}
-                            onChange={handleChange}
-                            required
-                        />
-                    </label>
-                    <label>
-                        Kategoria:
-                        <select name="productCategory" value={data.productCategory} onChange={handleChange} required>
-                            <option value="">Wybierz kategorie</option> {/* trzeba zrobic integracje z bazą potem */}
-                            <option value="Przystawki">Przystawki</option>
-                            <option value="Dania główne">Dania główne</option>
-                            <option value="Desery">Desery</option>
-                            <option value="Napoje">Napoje</option>
-                        </select>
-                    </label>
-                    <label>
-                        Link do obrazka:
-                        <input
-                            type="text"
-                            name="productImage"
-                            value={data.productImage}
-                            onChange={handleChange}
-                            required
-                        />
-                    </label>
+                <label>
+                    Nazwa produktu:
+                    <input
+                        type="text"
+                        name="productName"
+                        value={data.productName}
+                        onChange={handleChange}
+                        required
+                    />
+                </label>
+                <label>
+                    Cena:
+                    <input
+                        type="text"
+                        name="productPrice"
+                        value={data.productPrice}
+                        onChange={handleChange}
+                        required
+                    />
+                </label>
+                <label>
+                    Kategoria:
+                    <select name="productCategory" value={data.productCategory} onChange={handleChange} required>
+                        <option value="">Wybierz kategorie</option> {/* trzeba zrobic integracje z bazą potem */}
+                        <option value="Przystawki">Przystawki</option>
+                        <option value="Dania główne">Dania główne</option>
+                        <option value="Desery">Desery</option>
+                        <option value="Napoje">Napoje</option>
+                    </select>
+                </label>
+                <label>
+                    Link do obrazka:
+                    <input
+                        type="text"
+                        name="productImage"
+                        value={data.productImage}
+                        onChange={handleChange}
+                        required
+                    />
+                </label>
                 <button className={styles.btn_close} onClick={() => {
                     setSelectedProduct(null)
                 }}>Zamknij</button>

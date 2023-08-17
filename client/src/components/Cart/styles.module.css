@@ -51,6 +51,10 @@
   cursor: pointer;
 }
 
+.remove_btn:hover {
+  background-color: #ff0000;
+}
+
 .total_price {
   display: flex;
   justify-content: space-between;
@@ -68,8 +72,6 @@
   font-weight: bold;
   font-size: 18px;
 }
-
-/* styles.module.css */
 
 .link_btn {
   background-color: green;

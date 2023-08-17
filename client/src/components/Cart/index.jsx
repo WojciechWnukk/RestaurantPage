@@ -38,8 +38,6 @@ const Cart = ({ handleLogout }) => {
 
   return (
     <div className={styles.cart_container}>
-
-
       <CheckRoles>
         {(details) => (
           <NavigationSelector

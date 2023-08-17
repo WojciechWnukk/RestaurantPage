@@ -184,4 +184,21 @@ router.put("/:userId", async (req, res) => {
   }
 })
 
+router.put("/points/:userId", async (req, res) => {
+  try {
+    const { userId } = req.params
+    const { points } = req.body
+    if(points) {
+      const user = await User.findByIdAndUpdate(userId, {  points: points })
+    
+      if(!user){
+        return res.status(404).json({ message: "User not found" });
+      }
+      res.status(200).json({ data: user, message: "User points updated successfully" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+})
+
 module.exports = router

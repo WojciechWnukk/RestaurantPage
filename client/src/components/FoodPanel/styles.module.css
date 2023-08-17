@@ -3,39 +3,40 @@
 
 .menu_container {
 	display: flex;
-	flex: 1 3;
-	align-items: flex-start;
+	flex-direction: column;
+	align-items: stretch;
 	gap: 20px;
 	height: 70vh;
 
 }
 
 .categories {
-	flex: 1;
-	background-color: #f1f1f1;
-	padding: 20px;
-	height: 89vh;
+	order: -1;
 }
 
-.categories h2 {
-	margin-bottom: 10px;
-}
-
-.categories_table {
+.categories_buttons {
+	display: flex;
+	justify-content: space-around;
 	width: 100%;
-	border-collapse: collapse;
 }
 
-.categories_table th {
-	padding: 10px;
+.category_button {
+	flex: 1;
+	font-size: 16px;
+	padding: 15px;
 	background-color: #ccc;
-	text-align: left;
+	border: none;
+	cursor: pointer;
+	outline: none;
 }
 
-.categories_table td {
-	padding: 10px;
-	border-bottom: 1px solid #ccc;
-	cursor: pointer;
+
+.category_button:hover {
+	background-color: #857c7c3e;
+}
+
+.category_button.active_category {
+	background-color: #ddd;
 }
 
 .active_category {
@@ -79,36 +80,60 @@
 	cursor: pointer;
 }
 
-.new_product_btn{
-    padding: 10px;
-    background-color: #26c1b6;
-    color: white;
-    border: none;
-    cursor: pointer;
-    width: 300px;
+.add_to_cart_btn:hover {
+	background-color: #3e8e41;
 }
+
+.new_product_btn {
+	background-color: #cbc9c9;
+	color: rgb(0, 0, 0);
+	border: 2px solid #787878;
+	width: 100%;
+	height: 50px;
+	text-align: center;
+	font-size: 16px;
+	cursor: pointer;
+	font-weight: bold;
+
+}
+
+.new_product_btn:hover {
+	background-color: #787878;
+	color: rgb(255, 255, 255);
+	border: 2px solid #cbc9c9;
+}
+
 .btn_close {
 	padding: 10px;
-	  background-color: #ff0000;
-	  color: white;
-	  border: none;
-	  cursor: pointer;
+	background-color: #ff0000;
+	color: white;
+	border: none;
+	cursor: pointer;
 	width: 200px;
 	margin: 0 auto;
-  }
-  
-  .btn_send {
+}
+
+.btn_close:hover {
+	background-color: #e94e4e;
+	color: rgb(255, 255, 255);
+}
+
+.btn_send {
 	padding: 10px;
-	  background-color: #4caf50;
-	  color: white;
-	  border: none;
-	  cursor: pointer;
+	background-color: #4caf50;
+	color: white;
+	border: none;
+	cursor: pointer;
 	width: 200px;
 	margin: 0 auto;
-  }
-  
-  .modal_content {
-	/* Styles for the modal content */
+}
+
+.btn_send:hover {
+	background-color: #3e8e41;
+	color: rgb(255, 255, 255);
+}
+
+.modal_content {
 	background-color: #fff;
 	border: 1px solid #ccc;
 	border-radius: 4px;
@@ -120,19 +145,19 @@
 	transition: top 0.3s, transform 0.3s;
 	margin: 0 auto;
 	outline: none;
-  }
-  
-  .modal_content__after-open {
+}
+
+.modal_content__after-open {
 	top: 50%;
 	transform: translateY(-50%);
-  }
-  
-  .modal_content__before_close {
+}
+
+.modal_content__before_close {
 	top: 0;
 	transform: translateY(0);
-  }
-  
-  .modal_overlay {
+}
+
+.modal_overlay {
 	/* Styles for the modal overlay */
 	background-color: rgba(0, 0, 0, 0.7);
 	display: flex;
@@ -143,5 +168,4 @@
 	left: 0;
 	right: 0;
 	bottom: 0;
-  }
-  
+}
