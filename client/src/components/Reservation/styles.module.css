@@ -1,0 +1,54 @@
+.reservation {
+    text-align: center;
+}
+
+.date_boxes {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    gap: 20px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.date_box {
+    width: calc(16.666% - 10px);
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #f5f5f5;
+}
+
+.date_box p {
+    margin: 0;
+    padding: 5px 0;
+    font-size: 20px;
+}
+
+
+.time_ranges {
+    display: flex;
+    flex-direction: column; /* Wyświetlanie w kolumnie */
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.time_ranges button {
+    margin-bottom: 5px; /* Odstęp między przyciskami */
+    padding: 5px;
+    background-color: #4caf50;
+    border: 1px solid #ccc;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.time_ranges button:hover {
+    background-color: #46a049;
+}

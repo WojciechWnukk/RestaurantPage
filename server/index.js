@@ -8,6 +8,7 @@ const orderRoutes = require("./routes/orders")
 const employeeRoutes = require("./routes/employees")
 const paymentRoutes = require("./routes/payment")
 const productRoutes = require("./routes/products")
+const reservationRoutes = require("./routes/reservations")
 //middleware
 app.use(express.json())
 app.use(cors())
