@@ -40,7 +40,7 @@ const AddEmployee = ({ handleLogout }) => {
 
   const addUser = async () => {
     try {
-      const userUrl = "http://localhost:8080/api/users";
+      const userUrl = `${process.env.REACT_APP_DEV_SERVER}/api/users`;
       console.log(dataUser)
       await axios.post(userUrl, dataUser);
       console.log("Użytkownik został dodany");
@@ -53,7 +53,7 @@ const AddEmployee = ({ handleLogout }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = "http://localhost:8080/api/employees"
+      const url = `${process.env.REACT_APP_DEV_SERVER}/api/employees`
       const { data: res } = await axios.post(url, data)
       console.log(res.message)
       console.log(data)

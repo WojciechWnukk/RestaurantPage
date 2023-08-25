@@ -48,5 +48,9 @@ app.put("/api/products/:productId", productRoutes)
 app.use("/api/products", productRoutes)
 app.get("/api/products", productRoutes)
 
+app.post("/api/reservations", reservationRoutes)
+app.use("/api/reservations", reservationRoutes)
+
+
 const port = process.env.PORT || 8080
 app.listen(port, () => console.log(`Nasłuchiwanie na porcie ${port}`))

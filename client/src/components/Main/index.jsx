@@ -47,7 +47,7 @@ const Main = ({ handleLogout }) => {
 
   const fetchProducts = async () => {
     try {
-      const url = "http://localhost:8080/api/products"
+      const url = `${process.env.REACT_APP_DEV_SERVER}/api/products`
       const response = await axios.get(url)
       const availableProducts = response.data.data.filter(
         (product) =>

@@ -10,7 +10,7 @@ const CheckRoles = ({ children }) => {
       try {
         const config = {
           method: "get",
-          url: "http://localhost:8080/api/users/user",
+          url: `${process.env.REACT_APP_DEV_SERVER}/api/users/user`,
           headers: {
             "Content-Type": "application/json",
             "x-access-token": token,

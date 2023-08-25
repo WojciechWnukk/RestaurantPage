@@ -86,7 +86,7 @@ const OrderRealize = ({ handleLogout }) => {
 
     //const apiUrl = "http://164.92.133.224/api/orders"
     try {
-      const url = "http://localhost:8080/api/orders";
+      const url = `${process.env.REACT_APP_DEV_SERVER}/api/orders`;
       const data = {
         //orderNumber,
         tableNumber,
@@ -100,7 +100,6 @@ const OrderRealize = ({ handleLogout }) => {
         paymentStatus: "Platne przy odbiorze"
       };
 
-      //const response = await axios.post(url, data);
       const response = await axios.post(url, data);
 
       console.log("Order created successfully");
@@ -133,7 +132,7 @@ const OrderRealize = ({ handleLogout }) => {
         quantity: item.quantity,
         price: item.productPrice,
       }));
-      const response = await axios.post("http://localhost:8080/api/payment", { tableNumber, comments, meals: mealsData, totalPrice, userToken: checkedToken, userEmail: emailAddress });
+      const response = await axios.post(`${process.env.REACT_APP_DEV_SERVER}/api/payment`, { tableNumber, comments, meals: mealsData, totalPrice, userToken: checkedToken, userEmail: emailAddress });
       const { url } = response.data;
       const session = await stripe.redirectToCheckout({
         sessionId: url,
@@ -155,7 +154,7 @@ const OrderRealize = ({ handleLogout }) => {
           status: "Zamówiono",
           paymentStatus: "Oplacone"
         }
-        const url = "http://localhost:8080/api/orders";
+        const url = `${process.env.REACT_APP_DEV_SERVER}/api/orders`;
         const response = await axios.post(url, orderData);
         console.log("Order created successfully");
 

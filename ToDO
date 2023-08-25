@@ -1,15 +1,16 @@
 == Nawczoraj ==
-[ ] Panel promocji typu zbieranie punktów za zakupy (może api do kodów rabatowych? albo  biblioteka discount-codes )
-[x] Panel w którym kelner składa zamówienie, typu dostaje telefon od klienta
-[ ] Ogarnąć działanie GridFS
-[ ] panel rezerwacji - rezerwować można tylko po zweryfikowaniu numeru tel
+
 
 == Dozrobienia ==
-[ ] Dodać panel z zestawieniem finansow od miesiaca
 [?] upload zdjęć, profilówki dla pracowników - można to załatwić w ten sam sposób jak jedzenie z tym że prywatny hosting trzeba
 [ ] Strona raporty z wykresami i pobieralnym plikiem
 [ ] Dodanie w .env danych serwera i clienta hosting/nie aby szybko zmieniać między dev a prod
 [ ] Przerobić dodawanie empl i product na Modala
+[ ] Panel promocji typu zbieranie punktów za zakupy (może api do kodów rabatowych? albo  biblioteka discount-codes )
+[x] Panel w którym kelner składa zamówienie, typu dostaje telefon od klienta
+[ ] Ogarnąć działanie GridFS
+[ ] panel rezerwacji - rezerwować można tylko po zweryfikowaniu numeru tel
+[ ] Logowanie i rejestracja - zmiana w modala 
 
 == Zrobione ==
 [x] Przy każdym/dostarczonym zamówieniu dodać możliwość oceny klikaną gwiazdką

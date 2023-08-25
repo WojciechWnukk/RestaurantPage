@@ -48,7 +48,7 @@ const FoodPanel = ({ handleLogout }) => {
             try {
                 const config = {
                     method: "get",
-                    url: "http://localhost:8080/api/users/user",
+                    url: `${process.env.REACT_APP_DEV_SERVER}/api/users/user`,
                     headers: {
                         "Content-Type": "application/json",
                         "x-access-token": token,
@@ -80,7 +80,7 @@ const FoodPanel = ({ handleLogout }) => {
 
     const fetchProducts = async () => {
         try {
-            const url = "http://localhost:8080/api/products"
+            const url = `${process.env.REACT_APP_DEV_SERVER}/api/products`
             const response = await axios.get(url)
             const availableProducts = response.data.data.filter(
                 (product) =>
@@ -97,7 +97,8 @@ const FoodPanel = ({ handleLogout }) => {
         console.log(productId)
         try {
             await axios.put(
-                `http://localhost:8080/api/products/${productId}`,
+                `${process.env.REACT_APP_DEV_SERVER}/api/products/${productId}`,
+                //`http://localhost:8080/api/products/${productId}`,
                 {
                     productName: newProduct.productName,
                     productPrice: newProduct.productPrice,

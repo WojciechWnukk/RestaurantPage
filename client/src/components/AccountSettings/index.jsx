@@ -39,7 +39,7 @@ const AccountSettings = ({ handleLogout }) => {
       if (token) {
         const config = {
           method: "put",
-          url: "http://localhost:8080/api/users/password",
+          url: `${process.env.REACT_APP_DEV_SERVER}/api/users/password`,
           headers: {
             "Content-Type": "application/json",
             "x-access-token": token,
@@ -84,7 +84,7 @@ const AccountSettings = ({ handleLogout }) => {
         try {
           const config = {
             method: 'delete',
-            url: 'http://localhost:8080/api/users',
+            url: `${process.env.REACT_APP_DEV_SERVER}/api/users`,
             headers: {
               'Content-Type': 'application/json',
               'x-access-token': token

@@ -13,7 +13,7 @@ const OrderSuccess = ({ handleLogout }) => {
     localStorage.removeItem("cartItems");
     const fetchOrderData = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/orders");
+        const response = await axios.get(`${process.env.REACT_APP_DEV_SERVER}/api/orders`);
         const orders = response.data.data.filter(
           (order) => order.userToken === token
         );

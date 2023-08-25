@@ -52,3 +52,80 @@
 .time_ranges button:hover {
     background-color: #46a049;
 }
+
+.modal {
+    /* Styles for the modal content */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    max-width: 400px;
+    padding: 20px;
+    position: relative;
+    top: 0;
+    transform: translateY(0);
+    transition: top 0.3s, transform 0.3s;
+    margin: 0 auto;
+    outline: none;
+  }
+  
+  .modal__after-open {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  .modal__before_close {
+    top: 0;
+    transform: translateY(0);
+  }
+  
+  .overlay {
+    /* Styles for the modal overlay */
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  
+  .btn_close {
+    padding: 10px;
+      background-color: #ff0000;
+      color: white;
+      border: none;
+      cursor: pointer;
+    width: 200px;
+    margin: 0 auto;
+  }
+  
+  .btn_send {
+    padding: 10px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    width: 200px;
+    margin: 0 auto;
+  }
+
+  input[type="number"],
+textarea {
+  width: 100%;
+  padding: 8px;
+  margin-top: 4px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Additional Styling */
+h2 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+p {
+  margin: 5px 0;
+}

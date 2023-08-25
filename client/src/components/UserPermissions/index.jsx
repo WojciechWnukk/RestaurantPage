@@ -27,7 +27,7 @@ const UserPermissions = ({ handleLogout }) => {
       try {
         const config = {
           method: "get",
-          url: "http://localhost:8080/api/users/",
+          url: `${process.env.REACT_APP_DEV_SERVER}/api/users/`,
           headers: {
             "Content-Type": "application/json",
             "x-access-token": token,
@@ -54,7 +54,7 @@ const UserPermissions = ({ handleLogout }) => {
       try {
         const config = {
           method: "get",
-          url: "http://localhost:8080/api/employees/",
+          url: `${process.env.REACT_APP_DEV_SERVER}/api/employees/`,
           headers: {
             "Content-Type": "application/json",
             "x-access-token": token,
@@ -96,7 +96,7 @@ const UserPermissions = ({ handleLogout }) => {
 
           const config = {
             method: 'delete',
-            url: `http://localhost:8080/api/users/${userId}`,
+            url: `${process.env.REACT_APP_DEV_SERVER}/api/users/${userId}`,
             headers: {
               'Content-Type': 'application/json',
               'x-access-token': token
@@ -130,7 +130,7 @@ const UserPermissions = ({ handleLogout }) => {
     if (confirmed) {
       if (employeeId) {
         try {
-          const response = await axios.delete(`http://localhost:8080/api/employees/${employeeId}`)
+          const response = await axios.delete(`${process.env.REACT_APP_DEV_SERVER}/api/employees/${employeeId}`/*`http://localhost:8080/api/employees/${employeeId}`*/)
           if (control === true) { //delete empl -> change roles empl->user
             const findUser = users.find((user) => user.email === employeeEmail)
             const newRoles = { ...findUser, roles: "User" }
@@ -182,7 +182,7 @@ const UserPermissions = ({ handleLogout }) => {
 
 
       await axios.put(
-        `http://localhost:8080/api/users/${userId}`,
+        `${process.env.REACT_APP_DEV_SERVER}/api/users/${userId}`,
         {
           firstName: modifyUser.firstName,
           lastName: modifyUser.lastName,
@@ -202,7 +202,7 @@ const UserPermissions = ({ handleLogout }) => {
     console.log(employeeId)
     try {
       await axios.put(
-        `http://localhost:8080/api/employees/${employeeId}`,
+        `${process.env.REACT_APP_DEV_SERVER}/api/employees/${employeeId}`,
         {
           firstName: modifyEmployee.firstName,
           lastName: modifyEmployee.lastName,
@@ -227,7 +227,7 @@ const UserPermissions = ({ handleLogout }) => {
         hireDate: new Date().toISOString()
       };
       console.log(newDataPerson)
-      const url = "http://localhost:8080/api/employees"
+      const url = `${process.env.REACT_APP_DEV_SERVER}/api/employees`
       const { newDataPerson: res } = await axios.post(url, newDataPerson)
       console.log(res.message)
 

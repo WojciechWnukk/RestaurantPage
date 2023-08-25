@@ -23,7 +23,7 @@ const UpdateProduct = ({ handleLogout }) => {
             try {
                 const config = {
                     method: "get",
-                    url: "http://localhost:8080/api/users/user",
+                    url: `${process.env.REACT_APP_DEV_SERVER}/api/users/user`,
                     headers: {
                         "Content-Type": "application/json",
                         "x-access-token": token,
@@ -60,7 +60,7 @@ const UpdateProduct = ({ handleLogout }) => {
         e.preventDefault()
         try {
             //const url=`${process.env.DEV_SERVER}/api/addproduct`
-            const url = "http://localhost:8080/api/products"
+            const url = `${process.env.REACT_APP_DEV_SERVER}/api/products`
             console.log(data)
             await axios.post(url, data)
 
