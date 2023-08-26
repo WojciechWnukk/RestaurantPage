@@ -220,13 +220,13 @@ const UserPermissions = ({ handleLogout }) => {
 
   const addEmployee = async (dataPerson) => {
     try {
-      const { password, roles, _id, __v, ...dataWithoutPassword } = dataPerson; //usuwanie danych używanych dla kolekcji user które nie mają zastosowania w empl
+      const { password, roles, _id, __v, points, ...dataWithoutPassword } = dataPerson; //usuwanie danych używanych dla kolekcji user które nie mają zastosowania w empl
 
       const newDataPerson = {
         ...dataWithoutPassword,
         hireDate: new Date().toISOString()
       };
-      console.log(newDataPerson)
+      console.log("new ", newDataPerson)
       const url = `${process.env.REACT_APP_DEV_SERVER}/api/employees`
       const { newDataPerson: res } = await axios.post(url, newDataPerson)
       console.log(res.message)

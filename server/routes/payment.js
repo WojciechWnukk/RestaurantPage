@@ -17,8 +17,8 @@ router.post("/", async (req, res) => {
         quantity: meal.quantity,
       })),
       mode: "payment",
-      success_url: `http://localhost:3000/order-success`,
-      cancel_url: `http://localhost:3000/`,
+      success_url: `${process.env.HOSTING_CLIENT}/order-success`,
+      cancel_url: `${process.env.HOSTING_CLIENT}/`,
       automatic_tax: { enabled: true },
     });
     const orderData = {
