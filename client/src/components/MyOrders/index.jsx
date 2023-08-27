@@ -6,6 +6,7 @@ import NavigationForAdmin from "../NavigationForAdmin";
 import CheckRoles from "../CheckRoles";
 import { loadCartItemsFromLocalStorage, saveCartItemsToLocalStorage } from "../Scripts/localStorage";
 import Modal from "react-modal";
+import ServerAvailability from "../Scripts/ServerAvailability";
 
 Modal.setAppElement("#root");
 
@@ -97,6 +98,10 @@ const MyOrders = ({ handleLogout }) => {
 
   return (
     <div className={styles.order_realize_container}>
+      <div>
+        <ServerAvailability>
+        </ServerAvailability>
+      </div>
       <CheckRoles>
         {(details) => {
           if (details && details.roles === "Admin") {

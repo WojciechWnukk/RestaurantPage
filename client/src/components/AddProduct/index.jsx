@@ -4,6 +4,7 @@ import Navigation from "../Navigation";
 import axios from "axios";
 import NavigationForAdmin from "../NavigationForAdmin";
 import CheckRoles from "../CheckRoles";
+import ServerAvailability from "../Scripts/ServerAvailability";
 
 const AddProduct = ({ handleLogout }) => {
     const [details, setDetails] = useState(null)
@@ -95,6 +96,10 @@ const AddProduct = ({ handleLogout }) => {
 
     return (
         <div className={styles.order_realize_container}>
+            <div>
+                <ServerAvailability>
+                </ServerAvailability>
+            </div>
             <CheckRoles>
                 {(details) => {
                     if (details && details.roles === "Admin") {

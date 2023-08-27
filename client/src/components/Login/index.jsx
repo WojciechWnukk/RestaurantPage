@@ -2,6 +2,7 @@ import { useState } from "react"
 import axios from "axios"
 import { Link } from "react-router-dom"
 import styles from "./styles.module.css"
+import ServerAvailability from "../Scripts/ServerAvailability";
 
 
 const Login = () => {
@@ -13,7 +14,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const url =`${process.env.REACT_APP_DEV_SERVER}/api/auth`
+            const url = `${process.env.REACT_APP_DEV_SERVER}/api/auth`
             const { data: res } = await axios.post(url, data)
             localStorage.setItem("token", res.data)
             localStorage.setItem("email", data.email)
@@ -30,6 +31,10 @@ const Login = () => {
     }
     return (
         <div className={styles.login_container}>
+            <div>
+                <ServerAvailability>
+                </ServerAvailability>
+            </div>
             <div className={styles.login_form_container}>
                 <div className={styles.left}>
                     <form className={styles.form_container}

@@ -3,6 +3,7 @@ import styles from "./styles.module.css";
 import axios from "axios";
 import CheckRoles from "../CheckRoles";
 import NavigationSelector from "../Scripts/NavigationSelector";
+import ServerAvailability from "../Scripts/ServerAvailability";
 
 const OrderSuccess = ({ handleLogout }) => {
   const [orderData, setOrderData] = useState(null);
@@ -36,6 +37,10 @@ const OrderSuccess = ({ handleLogout }) => {
 
   return (
     <div className={styles.order_realize_container}>
+      <div>
+        <ServerAvailability>
+        </ServerAvailability>
+      </div>
       <CheckRoles>
         {(details) => (
           <NavigationSelector

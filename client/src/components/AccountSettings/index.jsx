@@ -5,6 +5,7 @@ import { loadCartItemsFromLocalStorage, saveCartItemsToLocalStorage } from "../S
 import axios from "axios";
 import NavigationForAdmin from "../NavigationForAdmin"
 import CheckRoles from "../CheckRoles";
+import ServerAvailability from "../Scripts/ServerAvailability";
 
 const AccountSettings = ({ handleLogout }) => {
   const [currentPassword, setCurrentPassword] = useState("");
@@ -106,7 +107,10 @@ const AccountSettings = ({ handleLogout }) => {
 
   return (
     <div className={styles.account_settings_container}>
-
+      <div>
+        <ServerAvailability>
+        </ServerAvailability>
+      </div>
       <CheckRoles>
         {(details) => {
           if (details && details.roles === "Admin") {

@@ -37,10 +37,10 @@ router.put("/:employeeId", async (req, res) => {
   try {
     const { employeeId } = req.params
     const { firstName, lastName, email, birthDate, pesel, salary } = req.body
-    if(firstName && lastName && email && birthDate && pesel && salary) {
+    if (firstName && lastName && email && birthDate && pesel && salary) {
       const employee = await Employee.findByIdAndUpdate(employeeId, { firstName: firstName, lastName: lastName, email: email, birthDate: birthDate, pesel: pesel, salary: salary })
-    
-      if(!employee){
+
+      if (!employee) {
         return res.status(404).json({ message: "Employee not found" });
       }
       res.status(200).json({ data: employee, message: "Employee updated successfully" });
@@ -54,12 +54,12 @@ router.delete("/:employeeId?", async (req, res) => {
   try {
     const { employeeId } = req.params
 
-    if (employeeId){
+    if (employeeId) {
       await Employee.findByIdAndRemove(employeeId)
       res.status(200).send({ message: "Employee deleted" })
     }
   } catch (error) {
-    res.status(500).send({ message: "Internal Server Error" })  
+    res.status(500).send({ message: "Internal Server Error" })
   }
 })
 

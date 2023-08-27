@@ -20,7 +20,7 @@ const orderSchema = new mongoose.Schema({
   totalPrice: { type: Number, required: true },
   status: { type: String, required: false },
   comments: { type: String, default: null },
-  modifyOrder: { type: String, default: null},
+  modifyOrder: { type: String, default: null },
   userToken: { type: String, required: true },
   userEmail: { type: String, required: true },
   orderDate: { type: Date, default: Date.now },

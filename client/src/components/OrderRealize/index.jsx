@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import CheckRoles from "../CheckRoles";
 import NavigationSelector from "../Scripts/NavigationSelector";
 import { loadStripe } from '@stripe/stripe-js';
+import ServerAvailability from "../Scripts/ServerAvailability";
 const stripePromise = loadStripe('pk_test_51NUCO4CTvIeCfZ48NcnZga4vVwWBjMV21jqsmPWuBgc9i6CSHUQIfC3hIgjBrdOiu5uMosaLlwmEhQzrWPEAdqYZ00NcG5v8jk');
 
 
@@ -82,7 +83,7 @@ const OrderRealize = ({ handleLogout }) => {
     console.log(" " + JSON.stringify(mealsData))
     console.log(token)
 
-    
+
 
     //const apiUrl = "http://164.92.133.224/api/orders"
     try {
@@ -168,8 +169,10 @@ const OrderRealize = ({ handleLogout }) => {
 
   return (
     <div className={styles.order_realize_container}>
-
-
+      <div>
+        <ServerAvailability>
+        </ServerAvailability>
+      </div>
       <CheckRoles>
         {(details) => (
           <NavigationSelector

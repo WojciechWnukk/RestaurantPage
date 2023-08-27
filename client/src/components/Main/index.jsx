@@ -7,6 +7,7 @@ import CheckRoles from "../CheckRoles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUtensils, faBurger, faIceCream, faWhiskeyGlass } from "@fortawesome/free-solid-svg-icons";
 import NavigationSelector from "../Scripts/NavigationSelector";
+import ServerAvailability from "../Scripts/ServerAvailability";
 
 const Main = ({ handleLogout }) => {
 
@@ -70,6 +71,10 @@ const Main = ({ handleLogout }) => {
 
   return (
     <div className={styles.main_container}>
+      <div>
+      <ServerAvailability>
+      </ServerAvailability>
+      </div>
       <div>
         <CheckRoles>
           {(details) => (

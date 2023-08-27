@@ -3,6 +3,7 @@ import styles from "./styles.module.css"
 import axios from "axios";
 import NavigationForAdmin from "../NavigationForAdmin";
 import CheckRoles from "../CheckRoles";
+import ServerAvailability from "../Scripts/ServerAvailability";
 
 const AddEmployee = ({ handleLogout }) => {
 
@@ -78,6 +79,10 @@ const AddEmployee = ({ handleLogout }) => {
 
   return (
     <div className={styles.AddEmployee_container}>
+      <div>
+        <ServerAvailability>
+        </ServerAvailability>
+      </div>
       <CheckRoles>
         {(details) => {
           if (details && details.roles === "Admin") {

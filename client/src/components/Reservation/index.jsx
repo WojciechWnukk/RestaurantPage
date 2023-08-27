@@ -1,10 +1,11 @@
- import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./styles.module.css";
 import CheckRoles from "../CheckRoles";
 import { loadCartItemsFromLocalStorage, saveCartItemsToLocalStorage } from "../Scripts/localStorage";
 import NavigationSelector from "../Scripts/NavigationSelector";
 import axios from "axios";
 import Modal from "react-modal";
+import ServerAvailability from "../Scripts/ServerAvailability";
 
 const Reservation = ({ handleLogout }) => {
   const [cartItems, setCartItems] = useState([]);
@@ -47,7 +48,7 @@ const Reservation = ({ handleLogout }) => {
     try {
       const url = `${process.env.REACT_APP_DEV_SERVER}/api/reservations`;
       const data = {
-        reservationDate:  date,
+        reservationDate: date,
         reservationTime: hours,
         reservationTable: persons,
         reservationPerson: email,
@@ -63,6 +64,10 @@ const Reservation = ({ handleLogout }) => {
 
   return (
     <div className={styles.reservation_container}>
+      <div>
+        <ServerAvailability>
+        </ServerAvailability>
+      </div>
       <CheckRoles>
         {(details) => (
           <NavigationSelector
@@ -81,12 +86,12 @@ const Reservation = ({ handleLogout }) => {
               <p>{day.day}</p>
               <p>{day.date}</p>
               <div className={styles.time_ranges}>
-                <button onClick={() => setSelectedTime({day: day.day, date: day.date, time: 10})}>10:00 - 12:00</button>
-                <button onClick={() => setSelectedTime({day: day.day, date: day.date, time: 12})}>12:00 - 14:00</button>
-                <button onClick={() => setSelectedTime({day: day.day, date: day.date, time: 14})}>14:00 - 16:00</button>
-                <button onClick={() => setSelectedTime({day: day.day, date: day.date, time: 16})}>16:00 - 18:00</button>
-                <button onClick={() => setSelectedTime({day: day.day, date: day.date, time: 18})}>18:00 - 20:00</button>
-                <button onClick={() => setSelectedTime({day: day.day, date: day.date, time: 20})}>20:00 - 22:00</button>
+                <button onClick={() => setSelectedTime({ day: day.day, date: day.date, time: 10 })}>10:00 - 12:00</button>
+                <button onClick={() => setSelectedTime({ day: day.day, date: day.date, time: 12 })}>12:00 - 14:00</button>
+                <button onClick={() => setSelectedTime({ day: day.day, date: day.date, time: 14 })}>14:00 - 16:00</button>
+                <button onClick={() => setSelectedTime({ day: day.day, date: day.date, time: 16 })}>16:00 - 18:00</button>
+                <button onClick={() => setSelectedTime({ day: day.day, date: day.date, time: 18 })}>18:00 - 20:00</button>
+                <button onClick={() => setSelectedTime({ day: day.day, date: day.date, time: 20 })}>20:00 - 22:00</button>
               </div>
             </div>
           ))}
@@ -97,43 +102,43 @@ const Reservation = ({ handleLogout }) => {
         onRequestClose={() => setSelectedTime(null)}
         className={styles.modal}
         overlayClassName={styles.overlay}
-        >
-  {selectedTime && (
-    <div>
-      <h2>Potwierdź rezerwację</h2>
-      <p>Data: {selectedTime.date}</p>
-      <p>Dzień tygodnia: {selectedTime.day}</p>
-      <p>Godzina: {selectedTime.time}</p>
-      <label>Liczba osób:</label>
-      <input
-        type="number"
-        value={selectedPersons}
-        onChange={(e) => setSelectedPersons(e.target.value)}
-        min="1"
-      />
-      <label>Komentarz:</label>
-      <textarea
-        value={comment}
-        onChange={(e) => setComment(e.target.value)}
-      />
-      <p>Adres email: {storedEmail ? storedEmail : 
-      <input
-        type="email"
-        value={tempEmail}
-        placeholder="Podaj adres email"
-        onChange={(e) => setTempEmail(e.target.value)}
-      />
-      }</p>
-      <button className={styles.btn_close} onClick={() => setSelectedTime(null)}>Anuluj</button>
-      <button className={styles.btn_send} onClick={() => {
-        reserveTable(selectedTime.date, selectedTime.time, selectedPersons, comment, storedEmail ? storedEmail : tempEmail)
-        setSelectedTime(null)
-        setSelectedPersons(1)
-        setComment("")
-        }}>Zarezerwuj</button>
-    </div>
-    )}
-        </Modal>
+      >
+        {selectedTime && (
+          <div>
+            <h2>Potwierdź rezerwację</h2>
+            <p>Data: {selectedTime.date}</p>
+            <p>Dzień tygodnia: {selectedTime.day}</p>
+            <p>Godzina: {selectedTime.time}</p>
+            <label>Liczba osób:</label>
+            <input
+              type="number"
+              value={selectedPersons}
+              onChange={(e) => setSelectedPersons(e.target.value)}
+              min="1"
+            />
+            <label>Komentarz:</label>
+            <textarea
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+            />
+            <p>Adres email: {storedEmail ? storedEmail :
+              <input
+                type="email"
+                value={tempEmail}
+                placeholder="Podaj adres email"
+                onChange={(e) => setTempEmail(e.target.value)}
+              />
+            }</p>
+            <button className={styles.btn_close} onClick={() => setSelectedTime(null)}>Anuluj</button>
+            <button className={styles.btn_send} onClick={() => {
+              reserveTable(selectedTime.date, selectedTime.time, selectedPersons, comment, storedEmail ? storedEmail : tempEmail)
+              setSelectedTime(null)
+              setSelectedPersons(1)
+              setComment("")
+            }}>Zarezerwuj</button>
+          </div>
+        )}
+      </Modal>
     </div>
   );
 };

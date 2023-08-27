@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import Modal from "react-modal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUtensils, faBurger, faIceCream, faWhiskeyGlass } from "@fortawesome/free-solid-svg-icons";
+import ServerAvailability from "../Scripts/ServerAvailability";
 
 
 const FoodPanel = ({ handleLogout }) => {
@@ -133,6 +134,10 @@ const FoodPanel = ({ handleLogout }) => {
 
     return (
         <div className={styles.main_container}>
+            <div>
+                <ServerAvailability>
+                </ServerAvailability>
+            </div>
             <CheckRoles>
                 {(details) => (
                     <NavigationSelector

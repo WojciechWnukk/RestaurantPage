@@ -113,7 +113,7 @@ router.put("/:orderId", async (req, res) => {
         return res.status(404).json({ message: "Order not found" });
       }
       res.status(200).json({ data: order, message: "Order Rate updated successfully" });
-    } else if (modifyOrder){
+    } else if (modifyOrder) {
       const order = await Order.findByIdAndUpdate(orderId, { modifyOrder }, { new: true })
       if (!order) {
         return res.status(404).json({ message: "Order not found" });

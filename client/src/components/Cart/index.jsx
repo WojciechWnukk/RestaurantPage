@@ -4,6 +4,7 @@ import { calculateTotalPrice } from "../Scripts/calculateTotalPrice";
 import CheckRoles from "../CheckRoles";
 import { useNavigate } from "react-router-dom";
 import NavigationSelector from "../Scripts/NavigationSelector";
+import ServerAvailability from "../Scripts/ServerAvailability";
 
 const Cart = ({ handleLogout }) => {
   const [cartItems, setCartItems] = useState([]);
@@ -38,6 +39,10 @@ const Cart = ({ handleLogout }) => {
 
   return (
     <div className={styles.cart_container}>
+      <div>
+        <ServerAvailability>
+        </ServerAvailability>
+      </div>
       <CheckRoles>
         {(details) => (
           <NavigationSelector
