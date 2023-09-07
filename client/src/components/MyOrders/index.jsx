@@ -17,7 +17,9 @@ const MyOrders = ({ handleLogout }) => {
   const [ratings, setRatings] = useState({});
   const [selectedOrderId, setSelectedOrderId] = useState(null)
   const [modify, setModify] = useState("");
-
+  const [showPointsModal, setShowPointsModal] = useState(false);
+  const [earnedPoints, setEarnedPoints] = useState(0);
+  
 
 
   useEffect(() => {
@@ -60,6 +62,11 @@ const MyOrders = ({ handleLogout }) => {
         `${process.env.REACT_APP_DEV_SERVER}/api/orders/${orderId}`,
         { orderRate: rating }
       )
+
+    //pobieranie danych o zalogowanym użytkowniku oraz dodawanie mu punktów o wartości 10% wartości zamówienia
+    putPoints(orderId)
+    
+
       fetchOrderData()
     } catch (error) {
       console.error("Error updating order status:", error);
@@ -94,8 +101,34 @@ const MyOrders = ({ handleLogout }) => {
     } catch (error) {
       console.error("Error updating order comments:", error);
     }
+  }
+
+  const putPoints = async (orderId) => {
+    try {
+      const response = await axios.get(`${process.env.REACT_APP_DEV_SERVER}/api/orders/${orderId}`);
+      const order = response.data.data;
+      const user = await axios.get(`${process.env.REACT_APP_DEV_SERVER}/api/users/${email}`);
+      console.log(user.data.data)
+      const points = Math.floor(order.totalPrice * 10);
+      const newPoints = user.data.data.points + points;
+      console.log("Po ocenie ", newPoints)
+      console.log("Za zamowienie ", points)
+      await axios.put(
+        `${process.env.REACT_APP_DEV_SERVER}/api/users/points/${email}`,
+        { points: newPoints }
+      )
+      showPointsCongratulations(points);
+    } catch (error) {
+      console.error("Error updating user points:", error);
+    }
+  }
+
+  const showPointsCongratulations = (points) => {
+    setEarnedPoints(points);
+    setShowPointsModal(true);
   };
 
+  
   return (
     <div className={styles.order_realize_container}>
       <div>
@@ -111,7 +144,7 @@ const MyOrders = ({ handleLogout }) => {
           }
         }}
       </CheckRoles>
-      <h2>Wszystkie Twoje zamówienia</h2>
+      <h2>Wszystkie Twoje zamówienia {email}</h2>
       <div className={styles.order_container}>
         <table className={styles.order_summary_table}>
           <thead>
@@ -120,7 +153,7 @@ const MyOrders = ({ handleLogout }) => {
               <th>Czas</th>
               <th>Status</th>
               <th>Cena</th>
-              <th>Oceń!</th>
+              <th>Oceń i otrzymaj punkty!</th>
               <th>Zmień coś!</th>
             </tr>
           </thead>
@@ -194,6 +227,21 @@ const MyOrders = ({ handleLogout }) => {
           modifyOrder(selectedOrderId, modify)
         }}>Prześlij</button>
       </Modal>
+
+
+      {/*Modal z gratulacjami za ocenę zamówienia*/}
+      <Modal
+        isOpen={showPointsModal}
+        onRequestClose={() => setShowPointsModal(false)}
+        contentLabel="Gratulacje!"
+        className={styles.modal_content}
+        overlayClassName={styles.modal_overlay}
+      >
+        <h2>Gratulacje! Otrzymujesz {earnedPoints} punktów!</h2>
+        <button className={styles.btn_close_points} onClick={() => setShowPointsModal(false)}>Zamknij</button>
+      </Modal>
+
+
     </div>
   );
 };

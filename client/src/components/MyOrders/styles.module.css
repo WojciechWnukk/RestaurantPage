@@ -41,9 +41,9 @@
 }
 
 .order_summary_table {
-  width: 100%;
-  max-width: 1200px;
+  width: 90%;
   table-layout: fixed;
+  margin: 0 auto;
 }
 
 .order_summary_table th,
@@ -194,4 +194,14 @@ button[type="submit"] {
   left: 0;
   right: 0;
   bottom: 0;
+}
+
+.btn_close_points {
+  padding: 10px;
+	background-color: #ff0000;
+	color: white;
+	border: none;
+	cursor: pointer;
+  width: 100%;
+  margin: 0 auto;
 }

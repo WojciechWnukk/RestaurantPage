@@ -8,7 +8,7 @@ import ServerAvailability from "../Scripts/ServerAvailability";
 
 const AddProduct = ({ handleLogout }) => {
     const [details, setDetails] = useState(null)
-    const [cartItems, setCartItems] = useState([]);
+    const [cartItems] = useState([]);
     const [data, setData] = useState({
         productName: "",
         productPrice: "",

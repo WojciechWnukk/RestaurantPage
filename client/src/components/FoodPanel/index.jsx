@@ -13,7 +13,7 @@ import ServerAvailability from "../Scripts/ServerAvailability";
 
 const FoodPanel = ({ handleLogout }) => {
     const [selectedCategory, setSelectedCategory] = useState(categoriesData[0]);
-    const [cartItems, setCartItems] = useState([]);
+    const [cartItems] = useState([]);
     const [details, setDetails] = useState(null);
     const [products, setProducts] = useState([]);
     const [filteredFoodData, setFilteredFoodData] = useState([])

@@ -15,19 +15,20 @@ const OrderRealize = ({ handleLogout }) => {
   const [tableNumber, setTableNumber] = useState(0);
   const [comments, setComments] = useState("");
   const [emailAddress, setEmailAddress] = useState("")
-  const [orderTime, setOrderTime] = useState("40min");
+  const [orderTime] = useState("40min");
   const [cartItems, setCartItems] = useState([]);
   const totalPrice = calculateTotalPrice(cartItems);
   const token = localStorage.getItem("token")
   const [isTableNumberValid, setTableNumberValid] = useState(true);
   const [tableNumberErrorMessage, setTableNumberErrorMessage] = useState("");
-  const [error, setError] = useState("")
+  const [ , setError] = useState("")
   const [checkedToken, setCheckedToken] = useState("")
+  const storedEmail = localStorage.getItem("email");
 
   const navigate = useNavigate()
   useEffect(() => {
     loadCartItemsFromLocalStorage(setCartItems);
-    const storedEmail = localStorage.getItem("email");
+    
     if (token && storedEmail) {
       setEmailAddress(storedEmail);
     }
@@ -75,7 +76,6 @@ const OrderRealize = ({ handleLogout }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const orderNumber = 123
     if (tableNumber <= 0) {
       setTableNumberErrorMessage("Please enter a valid table number.");
       return;
@@ -83,13 +83,9 @@ const OrderRealize = ({ handleLogout }) => {
     console.log(" " + JSON.stringify(mealsData))
     console.log(token)
 
-
-
-    //const apiUrl = "http://164.92.133.224/api/orders"
     try {
       const url = `${process.env.REACT_APP_DEV_SERVER}/api/orders`;
       const data = {
-        //orderNumber,
         tableNumber,
         comments,
         meals: mealsData,
@@ -101,7 +97,7 @@ const OrderRealize = ({ handleLogout }) => {
         paymentStatus: "Platne przy odbiorze"
       };
 
-      const response = await axios.post(url, data);
+      await axios.post(url, data);
 
       console.log("Order created successfully");
 
@@ -141,7 +137,6 @@ const OrderRealize = ({ handleLogout }) => {
 
       if (session.error) {
         console.error("Błąd podczas przekierowania do płatności:", session.error.message);
-        // komunikat o błędzie
       } else {
         const email = token ? email : emailAddress
         const orderData = {
@@ -156,7 +151,7 @@ const OrderRealize = ({ handleLogout }) => {
           paymentStatus: "Oplacone"
         }
         const url = `${process.env.REACT_APP_DEV_SERVER}/api/orders`;
-        const response = await axios.post(url, orderData);
+        await axios.post(url, orderData);
         console.log("Order created successfully");
 
         navigate("/order-success");
@@ -227,8 +222,9 @@ const OrderRealize = ({ handleLogout }) => {
           />
         </div>
 
-        {!token && (
-          <div className={styles.guestData}>
+        {(
+          <div className={styles.guestData}
+          hidden={storedEmail}>
             <label htmlFor="email">Podaj maila:</label>
             <input
               type="text"
@@ -260,7 +256,9 @@ const OrderRealize = ({ handleLogout }) => {
           <button type="submit">Płacę przy odbiorze!</button>
         </div>
         <div className={styles.form_group}>
-          <button type="button" onClick={handlePayment}>
+          <button type="button"
+          onClick={handlePayment}
+          hidden={totalPrice==="0.00"}>
             Płacę online!
           </button>
         </div>

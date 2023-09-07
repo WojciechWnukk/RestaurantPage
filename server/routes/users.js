@@ -96,18 +96,7 @@ router.get("/", async (req, res) => {
       res.status(500).send({ message: error.message });
     });
 })
-/*
-router.delete("/", async (req, res) => {
-    try {
-        const id = req.user._id
-        console.log(id)
-        await User.findByIdAndRemove(id)
-        res.status(200).send({ message: "User deleted successfully" })
-        
-      } catch (error) {
-        res.status(500).send({ message: "Internal Server Error" })
-      }
-    })*/
+
 router.delete("/:userId?", async (req, res) => {
   try {
     const { userId } = req.params;
@@ -140,6 +129,20 @@ router.get("/user", async (req, res) => {
     res.status(500).send({ message: "Internal Server Error" });
   }
 });
+
+router.get("/:userEmail", async (req, res) => {
+  try {
+    const userEmail = req.params.userEmail
+    const user = await User.findOne({ email: userEmail });
+    if (!user) {
+      return res.status(404).send({ message: "User not found" });
+    }
+    res.status(200).send({ data: user, message: "User details retrieved successfully" });
+  } catch (error) {
+    res.status(500).send({ message: "Internal Server Error" });
+  }
+});
+
 router.put("/password", async (req, res) => {
   try {
     const userId = req.user._id;
@@ -184,12 +187,14 @@ router.put("/:userId", async (req, res) => {
   }
 })
 
-router.put("/points/:userId", async (req, res) => {
+router.put("/points/:userEmail", async (req, res) => {
   try {
-    const { userId } = req.params
+    const { userEmail } = req.params
+    console.log(userEmail)
     const { points } = req.body
+    console.log(points)
     if (points) {
-      const user = await User.findByIdAndUpdate(userId, { points: points })
+      const user = await User.findOneAndUpdate({email: userEmail}, { points: points })
 
       if (!user) {
         return res.status(404).json({ message: "User not found" });

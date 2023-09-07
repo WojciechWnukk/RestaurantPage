@@ -15,26 +15,28 @@ import Reservation from "./components/Reservation"
 import FoodPanel from "./components/FoodPanel"
 import AddProduct from "./components/AddProduct"
 import UpdateProduct from "./components/UpdateProduct"
+import Promotions from "./components/Promotions"
 function App() {
     const user = localStorage.getItem("token")
-    
+
     return (
         <Routes>
             <Route path="/" exact element={<Main />} />
             <Route path="/signup" exact element={<Signup />} />
             <Route path="/login" exact element={<Login />} />
             <Route path="/cart" exact element={<Cart />} />
-             {user && <Route path="/account-settings" exact element={<AccountSettings />} />}
-             <Route path="/reservation" exact element={<Reservation />} />
-             <Route path="/order-realize" exact element={<OrderRealize />} />
-             <Route path="/order-success" exact element={<OrderSuccess />} />
-             {user && <Route path="/my-orders" exact element={<MyOrders />} />}
-             {user && <Route path="/waiter-panel" element={<WaiterPanel />} />}
-             {user && <Route path="/user-permissions" element={<UserPermissions />} />}
-             {user && <Route path="/add-employee" element={<AddEmployee />} />}
-             {user && <Route path="/food-panel" element={<FoodPanel />} />}
-             {user && <Route path="/new-product" element={<AddProduct />} />}
-             {user && <Route path="/update-product" element={<UpdateProduct />} />}
+            {user && <Route path="/account-settings" exact element={<AccountSettings />} />}
+            <Route path="/reservation" exact element={<Reservation />} />
+            <Route path="/order-realize" exact element={<OrderRealize />} />
+            <Route path="/order-success" exact element={<OrderSuccess />} />
+            {user && <Route path="/my-orders" exact element={<MyOrders />} />}
+            {user && <Route path="/waiter-panel" element={<WaiterPanel />} />}
+            {user && <Route path="/user-permissions" element={<UserPermissions />} />}
+            {user && <Route path="/add-employee" element={<AddEmployee />} />}
+            {user && <Route path="/food-panel" element={<FoodPanel />} />}
+            {user && <Route path="/new-product" element={<AddProduct />} />}
+            {user && <Route path="/update-product" element={<UpdateProduct />} />}
+            {user && <Route path="/promotions" element={<Promotions />} />}
 
             <Route path="/account-settings" element={<Navigate replace to="/login" />} />
             <Route path="/reservation" element={<Navigate replace to="/login" />} />
@@ -45,8 +47,9 @@ function App() {
             <Route path="/food-panel" element={<Navigate replace to="/login" />} />
             <Route path="/new-product" element={<Navigate replace to="/login" />} />
             <Route path="/update-product" element={<Navigate replace to="/login" />} />
+            <Route path="/promotions" element={<Navigate replace to="/login" />} />
 
-            
+
         </Routes>
     )
 }

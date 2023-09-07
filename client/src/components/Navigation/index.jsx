@@ -49,6 +49,13 @@ const Navigation = ({ cartItemCount }) => {
         >
           Zamówienia
         </button>
+
+        <button
+          className={`${styles.nav_button} ${styles.white_btn}`}
+          onClick={() => handleNavigation("/promotions")}
+        >
+          Punkty
+        </button>
       </div>
       <button
         className={`${styles.nav_button} ${styles.white_btn}`}

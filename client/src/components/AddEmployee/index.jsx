@@ -7,7 +7,7 @@ import ServerAvailability from "../Scripts/ServerAvailability";
 
 const AddEmployee = ({ handleLogout }) => {
 
-  const [error, setError] = useState("")
+  const [ , setError] = useState("")
   const [successMessage, setSuccessMessage] = useState("")
   const [data, setData] = useState({
     firstName: "",

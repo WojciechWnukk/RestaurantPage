@@ -1,3 +1,4 @@
+/*
 import React, { useState, useEffect } from "react";
 import styles from "./styles.module.css";
 import Navigation from "../Navigation";
@@ -17,3 +18,4 @@ const X = ({ handleLogout }) => {
 };
 
 export default X;
+*/

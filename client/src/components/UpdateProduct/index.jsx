@@ -8,7 +8,7 @@ import CheckRoles from "../CheckRoles";
 
 const UpdateProduct = ({ handleLogout }) => {
     const [details, setDetails] = useState(null)
-    const [cartItems, setCartItems] = useState([]);
+    const [cartItems] = useState([]);
 
     const [data, setData] = useState({
         productName: "",

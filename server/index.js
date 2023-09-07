@@ -29,16 +29,18 @@ app.use("/api/employees", employeeRoutes)
 
 app.put("/api/users/:userId", userRoutes)
 app.put("/api/users/password", tokenVerification)
-app.put("/api/users/points/:userId", userRoutes)
+app.put("/api/users/points/:userEmail", userRoutes)
 app.get("/api/users/", tokenVerification)
 //app.delete("/api/users", tokenVerification)
 app.delete("/api/users/:userId?", tokenVerification)
 app.get("/api/users/user", tokenVerification)
+app.get("/api/users/:userEmail", userRoutes)
 app.use("/api/users", userRoutes)
 
 app.put("/api/orders/:orderId", orderRoutes)
 app.use("/api/orders", orderRoutes)
 app.get("/api/orders", orderRoutes)
+app.get("/api/orders/:orderId", orderRoutes)
 
 app.use("/api/auth", authRoutes)
 
