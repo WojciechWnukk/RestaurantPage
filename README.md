@@ -16,3 +16,6 @@ Some examples of functionality:
 - paying online with stripe
 - updating an order that hasn't been approved
 - updating users and employees ( 1 action = changes in 2 collections)
+
+After hosting update:
+- Promotions system
