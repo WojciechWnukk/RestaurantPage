@@ -16,6 +16,7 @@ import FoodPanel from "./components/FoodPanel"
 import AddProduct from "./components/AddProduct"
 import UpdateProduct from "./components/UpdateProduct"
 import Promotions from "./components/Promotions"
+import Reports from "./components/Reports"
 function App() {
     const user = localStorage.getItem("token")
 
@@ -37,6 +38,7 @@ function App() {
             {user && <Route path="/new-product" element={<AddProduct />} />}
             {user && <Route path="/update-product" element={<UpdateProduct />} />}
             {user && <Route path="/promotions" element={<Promotions />} />}
+            {user && <Route path="/reports" element={<Reports />} />}
 
             <Route path="/account-settings" element={<Navigate replace to="/login" />} />
             <Route path="/reservation" element={<Navigate replace to="/login" />} />
@@ -48,6 +50,7 @@ function App() {
             <Route path="/new-product" element={<Navigate replace to="/login" />} />
             <Route path="/update-product" element={<Navigate replace to="/login" />} />
             <Route path="/promotions" element={<Navigate replace to="/login" />} />
+            <Route path="/reports" element={<Navigate replace to="/login" />} />
 
 
         </Routes>

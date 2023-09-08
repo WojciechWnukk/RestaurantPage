@@ -60,6 +60,12 @@ const NavigationForAdmin = ({ cartItemCount }) => {
         >
           Panel produktów
         </button>
+        <button
+          className={`${styles.nav_button} ${styles.white_btn}`}
+          onClick={() => handleNavigation("/reports")}
+        >
+          Statystyki
+        </button>
       </div>
       <button
         className={`${styles.nav_button} ${styles.white_btn}`}
