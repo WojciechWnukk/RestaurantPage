@@ -66,6 +66,12 @@ const NavigationForAdmin = ({ cartItemCount }) => {
         >
           Statystyki
         </button>
+        <button
+          className={`${styles.nav_button} ${styles.white_btn}`}
+          onClick={() => handleNavigation("/table-map")}
+        >
+          Mapa stolików
+        </button>
       </div>
       <button
         className={`${styles.nav_button} ${styles.white_btn}`}

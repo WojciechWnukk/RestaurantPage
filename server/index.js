@@ -9,6 +9,8 @@ const employeeRoutes = require("./routes/employees")
 const paymentRoutes = require("./routes/payment")
 const productRoutes = require("./routes/products")
 const reservationRoutes = require("./routes/reservations")
+const tableRoutes = require("./routes/tables")
+
 //middleware
 app.use(express.json())
 app.use(cors())
@@ -52,6 +54,11 @@ app.get("/api/products", productRoutes)
 
 app.post("/api/reservations", reservationRoutes)
 app.use("/api/reservations", reservationRoutes)
+
+app.get("/api/tables", tableRoutes)
+app.put("/api/tables/:tableId", tableRoutes)
+app.use("/api/tables", tableRoutes)
+
 
 
 const port = process.env.PORT || 8080

@@ -19,7 +19,7 @@ const Reports = ({ handleLogout }) => {
             const transformedDataa = orders.map(order => ({
                 totalPrice: order.totalPrice,
                 orderDate: order.orderDate
-              }));
+            }));
             setTransformedData(transformedDataa)
         } catch (error) {
             console.error("Error fetching orders: ", error)
@@ -30,7 +30,7 @@ const Reports = ({ handleLogout }) => {
 
     useEffect(() => {
         fetchOrders()
-        
+
     }, [])
 
     return (
@@ -52,9 +52,12 @@ const Reports = ({ handleLogout }) => {
                 </CheckRoles>
             </div>
             <div className={styles.graph_container}>
+                <div className={styles.graph_title}>
+                    <h2>Zarobki w danym miesiącu</h2>
+                </div>
                 <Graph data={transformedData} />
-{              console.log("transformed ", transformedData)
-}
+                {console.log("transformed ", transformedData)
+                }
 
             </div>
         </div>
