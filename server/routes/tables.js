@@ -46,9 +46,9 @@ router.get("/:tableId", async (req, res) => {
 router.put("/:tableId", async (req, res) => {
     try {
         const { tableId } = req.params
-        const { tableStatus } = req.body
-        if (tableStatus) {
-            const table = await Table.findByIdAndUpdate(tableId, { tableStatus }, { new: true })
+        const { x, y } = req.body
+        if (tableId && x && y) {
+            const table = await Table.findByIdAndUpdate(tableId, { x, y }, { new: x, new: y })
 
             if (!table) {
                 return res.status(404).json({ message: "Table not found" });
