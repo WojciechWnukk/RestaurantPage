@@ -10,21 +10,23 @@
     background-color: #f2f2f2;
     margin-top: 20px;
     border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 /* Styl stolików */
 .table {
     position: absolute;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     background-color: #4caf50; /* Zielony kolor kwadracika */
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
-    border: 10px;
-    border-color: black;
+    border: 2px solid #000;
+    border-radius: 50%;
 }
 
 /* Styl stolików po najechaniu myszką */
@@ -33,8 +35,18 @@
 }
 
 /* Styl stolików zajętych */
-.table.occupied {
+.table_occupied {
     background-color: #e74c3c;
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+    border: 2px solid #000;
+    border-radius: 50%;
 }
 
 /* Nagłówek mapy */

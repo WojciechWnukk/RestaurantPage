@@ -16,6 +16,7 @@ const TableMap = ({ handleLogout }) => {
         tableNumber: null,
         tableCapacity: null
     });
+    const [orders, setOrders] = useState([]);
 
     const fetchTables = async () => {
         try {
@@ -31,16 +32,32 @@ const TableMap = ({ handleLogout }) => {
     const handleTableDragEnd = async (tableId, newX, newY) => {
         try {
             newX = newX - 456;
-            newY = newY - 150;
+            newY = newY - 185;
+
+            const mapElement = document.querySelector(`.${styles.map}`);
+            const mapRect = mapElement.getBoundingClientRect();
+
+            const tableWidth = 30;
+            const tableHeight = 30;
+
+            const minX = 0;
+            const maxX = mapRect.width - tableWidth;
+            const minY = 0;
+            const maxY = mapRect.height - tableHeight;
+            console.log(minX, maxX, minY, maxY)
+
+            const clampedX = Math.min(Math.max(newX, minX), maxX);
+            const clampedY = Math.min(Math.max(newY, minY), maxY);
+
             const tableIndex = tables.findIndex((table) => table._id === tableId);
-            console.log(newX, newY)
+            console.log(clampedX, clampedY)
             const updatedTables = [...tables];
-            updatedTables[tableIndex] = { ...updatedTables[tableIndex], x: newX, y: newY };
+            updatedTables[tableIndex] = { ...updatedTables[tableIndex], x: clampedX, y: clampedY };
 
             setTables(updatedTables);
 
             const updateUrl = `${process.env.REACT_APP_DEV_SERVER}/api/tables/${tableId}`;
-            await axios.put(updateUrl, { x: newX, y: newY });
+            await axios.put(updateUrl, { x: clampedX, y: clampedY });
         } catch (error) {
             console.error('Error updating table position: ', error);
         }
@@ -68,9 +85,21 @@ const TableMap = ({ handleLogout }) => {
         setNewTableData({ ...newTableData, [e.target.name]: e.target.value });
     };
 
+    const fetchOrders = async () => {
+        try {
+            const url = `${process.env.REACT_APP_DEV_SERVER}/api/orders`;
+            const response = await axios.get(url);
+            const orders = response.data.data;
+            setOrders(orders);
+        } catch (error) {
+            console.error('Error fetching orders: ', error);
+        }
+    }
+
 
     useEffect(() => {
         fetchTables()
+        fetchOrders()
     }, []);
 
 
@@ -99,7 +128,7 @@ const TableMap = ({ handleLogout }) => {
                     {tables ? tables.map((table) => (
                         <div
                             key={table._id}
-                            className={styles.table}
+                            className={table.tableStatus === "Wolny" ? styles.table : styles.table_occupied}
                             style={{ left: table.x, top: table.y }}
                             draggable="true"
                             onDragEnd={(e) => {
@@ -112,7 +141,7 @@ const TableMap = ({ handleLogout }) => {
                                 setSelectedTable(table)
                                 setTableDetails(table)
                             }}
-                        ></div>
+                        >{table.tableNumber}</div>
                     )) : null}
                 </div>
                 <Modal
@@ -125,6 +154,25 @@ const TableMap = ({ handleLogout }) => {
                     <p>Status: {tableDetails.tableStatus}</p>
                     <p>Koordynaty: {tableDetails ? `${tableDetails.x}x${tableDetails.y}` : 'Brak danych'}</p>
                     <p>Liczba miejsc: {tableDetails.tableCapacity}</p>
+                    {/*Jeśli zajęty pokaż zamówienia na ten stolik które są z innym statusem niż dostarczone*/}
+                    {tableDetails.tableStatus === "Zajęty" ? <div>
+                        <h3>Zamówienia</h3>
+                        {orders ? orders.map((order) => (
+                            <div key={order._id}>
+                                {order.tableNumber === tableDetails.tableNumber && order.status !== "Zamowienie dostarczone" ? <div>
+                                    <p>{order.status}</p>
+                                    <p>{order.meals.map((item) => (
+                                        <div key={item._id}>
+                                            <span>{item.name} x</span>
+                                            <span>{item.quantity}</span>
+                                        </div>
+                                    ))}</p>
+                                    <p>Do zapłaty: {order.totalPrice}zł</p>
+                                </div> : null}
+                            </div>
+                        )) : null}
+                    </div> : null}
+
                     <button className={styles.btn_close} onClick={() => setSelectedTable(null)}>Zamknij</button>
                 </Modal>
                 <Modal
