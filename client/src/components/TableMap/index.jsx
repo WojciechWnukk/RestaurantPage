@@ -17,6 +17,9 @@ const TableMap = ({ handleLogout }) => {
         tableCapacity: null
     });
     const [orders, setOrders] = useState([]);
+    const [reservations, setReservations] = useState([]);
+    const [crossedItems, setCrossedItems] = useState([]);
+
 
     const fetchTables = async () => {
         try {
@@ -96,10 +99,46 @@ const TableMap = ({ handleLogout }) => {
         }
     }
 
+    const fetchReservations = async () => {
+        try {
+            const url = `${process.env.REACT_APP_DEV_SERVER}/api/reservations`;
+            const response = await axios.get(url);
+            const reservations = response.data.data;
+            setReservations(reservations);
+        } catch (error) {
+            console.error('Error fetching reservations: ', error);
+        }
+    }
+
+    const changeTableStatus = async () => {
+        try {
+            const url = `${process.env.REACT_APP_DEV_SERVER}/api/tables/${tableDetails._id}`;
+            const data = {
+                tableStatus: tableDetails.tableStatus === "Wolny" ? "Zajęty" : "Wolny"
+            }
+            const response = await axios.put(url, data);
+
+            fetchTables()
+        } catch (error) {
+            console.error('Error changing table status: ', error);
+        }
+    }
+
+    const handleItemCross = (itemId) => {
+        if (crossedItems.includes(itemId)) {
+            setCrossedItems(crossedItems.filter((id) => id !== itemId));
+        } else {
+            setCrossedItems([...crossedItems, itemId]);
+        }
+    };
+
 
     useEffect(() => {
         fetchTables()
         fetchOrders()
+        fetchReservations()
+        const today = new Date().toISOString().split('T')[0];
+        console.log(today)
     }, []);
 
 
@@ -154,26 +193,38 @@ const TableMap = ({ handleLogout }) => {
                     <p>Status: {tableDetails.tableStatus}</p>
                     <p>Koordynaty: {tableDetails ? `${tableDetails.x}x${tableDetails.y}` : 'Brak danych'}</p>
                     <p>Liczba miejsc: {tableDetails.tableCapacity}</p>
-                    {/*Jeśli zajęty pokaż zamówienia na ten stolik które są z innym statusem niż dostarczone*/}
                     {tableDetails.tableStatus === "Zajęty" ? <div>
-                        <h3>Zamówienia</h3>
+                        <h3>Zamówienia:</h3>
                         {orders ? orders.map((order) => (
-                            <div key={order._id}>
-                                {order.tableNumber === tableDetails.tableNumber && order.status !== "Zamowienie dostarczone" ? <div>
-                                    <p>{order.status}</p>
-                                    <p>{order.meals.map((item) => (
-                                        <div key={item._id}>
-                                            <span>{item.name} x</span>
-                                            <span>{item.quantity}</span>
+                            <div key={order._id}
+                            >
+                                {order.tableNumber === tableDetails.tableNumber && order.status !== "Zamowienie dostarczone" && order.orderDate.split('T')[0].toString() === new Date().toISOString().split('T')[0].toString() ? <div>
+                                    <p>Status zamówienia: {order.status}</p>
+                                    {order.meals.map((item) => (
+                                        <div
+                                            key={item._id}
+                                            className={crossedItems.includes(item._id) ? styles.crossedItem : styles.normalItem}
+                                            onClick={() => handleItemCross(item._id)}>
+                                            <p>{item.name} x{item.quantity}</p>
                                         </div>
-                                    ))}</p>
+                                    ))}
                                     <p>Do zapłaty: {order.totalPrice}zł</p>
+                                    <p>------------------------------</p>
                                 </div> : null}
                             </div>
                         )) : null}
                     </div> : null}
-
+                    <p>Rezerwacje w dniu dzisiejszym:</p>
+                    {reservations ? reservations.map((reservation) => (
+                        <div key={reservation._id}>
+                            {reservation.reservationTable === tableDetails.tableNumber && reservation.reservationDate === new Date().toISOString().split('T')[0].toString()/*"2023-09-14"*/ ? <div>
+                                <p>Na godzine: {reservation.reservationTime}:00</p>
+                                <p>Zarezerwowano przez: {reservation.reservationPerson}</p>
+                            </div> : null}
+                        </div>
+                    )) : null}
                     <button className={styles.btn_close} onClick={() => setSelectedTable(null)}>Zamknij</button>
+                    <button className={tableDetails.tableStatus === "Wolny" ? styles.btn_free : styles.btn_occupied} onClick={() => { changeTableStatus() && setSelectedTable(null) }}>Zmień na {tableDetails.tableStatus === "Wolny" ? "zajęty" : "wolny"}</button>
                 </Modal>
                 <Modal
                     isOpen={newTable !== null}
@@ -205,7 +256,7 @@ const TableMap = ({ handleLogout }) => {
                     <button className={styles.btn_add} onClick={() => {
                         addTable(newTableData.tableNumber, newTableData.tableCapacity)
                         setNewTable(null)
-                        }}>Dodaj</button>
+                    }}>Dodaj</button>
                 </Modal>
             </div>
         </div>

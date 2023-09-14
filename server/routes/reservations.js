@@ -47,6 +47,18 @@ router.post("/", async (req, res) => {
   sendEmail(req.body.reservationPerson, 'Rezerwacja', `Dziękujemy za rezerwację w naszej restauracji. Poniżej znajdują się szczegóły rezerwacji: \n Data: ${req.body.reservationDate} \n Godzina: ${req.body.reservationTime} \n Stolik dla ${req.body.reservationTable} osób. W razie jakikolwiek pytań zapraszamy do kontaktu z nami pod numerem 123 456 789. \n Pozdrawiamy, \n Zespół restauracji`)
 })
 
+router.get("/", async (req, res) => {
+  Reservation.find().exec()
+    .then(async () => {
+      const reservations = await Reservation.find()
+      res.status(200).send({ data: reservations, message: "Lista rezerwacji" })
+    })
+    .catch(error => {
+      res.status(500).send({ message: error.message })
+    })
+})
+
+
 
 
 module.exports = router

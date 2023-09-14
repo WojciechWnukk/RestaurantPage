@@ -9,8 +9,6 @@ import ServerAvailability from "../Scripts/ServerAvailability";
 
 const Reservation = ({ handleLogout }) => {
   const [cartItems, setCartItems] = useState([]);
-  const [currentDate, setCurrentDate] = useState("");
-  const [currentDay, setCurrentDay] = useState("");
   const [week, setWeek] = useState([]);
   const storedEmail = localStorage.getItem("email");
   const [selectedTime, setSelectedTime] = useState(null)
@@ -40,7 +38,15 @@ const Reservation = ({ handleLogout }) => {
   }, [cartItems]);
 
   const reserveTable = (date, hours, persons, comment, email) => {
-    console.log(date)
+    const dateParts = date.split('.');
+  const day = dateParts[0];
+  const month = dateParts[1];
+  const year = dateParts[2];
+
+  // Utwórz nową sformatowaną datę w formacie "RRRR-MM-DD"
+  const formattedDate = `${year}-${month}-${day}`
+
+    console.log(formattedDate)
     console.log(hours)
     console.log(persons)
     console.log(email)
@@ -48,7 +54,7 @@ const Reservation = ({ handleLogout }) => {
     try {
       const url = `${process.env.REACT_APP_DEV_SERVER}/api/reservations`;
       const data = {
-        reservationDate: date,
+        reservationDate: formattedDate,
         reservationTime: hours,
         reservationTable: persons,
         reservationPerson: email,

@@ -19,7 +19,8 @@
     position: absolute;
     width: 30px;
     height: 30px;
-    background-color: #4caf50; /* Zielony kolor kwadracika */
+    background-color: #4caf50;
+    /* Zielony kolor kwadracika */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -31,7 +32,8 @@
 
 /* Styl stolików po najechaniu myszką */
 .table:hover {
-    background-color: #2980b9; /* Zmiana koloru po najechaniu */
+    background-color: #2980b9;
+    /* Zmiana koloru po najechaniu */
 }
 
 /* Styl stolików zajętych */
@@ -63,55 +65,55 @@ h2 {
 }
 
 .modal_content {
-	background-color: #fff;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	max-width: 400px;
-	padding: 20px;
-	position: relative;
-	top: 0;
-	transform: translateY(0);
-	transition: top 0.3s, transform 0.3s;
-	margin: 0 auto;
-	outline: none;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    max-width: 400px;
+    padding: 20px;
+    position: relative;
+    top: 0;
+    transform: translateY(0);
+    transition: top 0.3s, transform 0.3s;
+    margin: 0 auto;
+    outline: none;
 }
 
 .modal_content__after-open {
-	top: 50%;
-	transform: translateY(-50%);
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .modal_content__before_close {
-	top: 0;
-	transform: translateY(0);
+    top: 0;
+    transform: translateY(0);
 }
 
 .modal_overlay {
-	/* Styles for the modal overlay */
-	background-color: rgba(0, 0, 0, 0.7);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
+    /* Styles for the modal overlay */
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
 .btn_close {
-	padding: 10px;
-	background-color: #ff0000;
-	color: white;
-	border: none;
-	cursor: pointer;
-	width: 200px;
-	margin: 0 auto;
+    padding: 10px;
+    background-color: #ff0000;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 200px;
+    margin: 0 auto;
 }
 
 .btn_close:hover {
-	background-color: #e94e4e;
-	color: rgb(255, 255, 255);
+    background-color: #e94e4e;
+    color: rgb(255, 255, 255);
 }
 
 .btn_add_table {
@@ -142,4 +144,76 @@ h2 {
 .btn_add:hover {
     background-color: #3e8e41;
     color: rgb(255, 255, 255);
+}
+
+.btn_free {
+    padding: 10px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 200px;
+    margin: 0 auto;
+}
+
+.btn_free:hover {
+    background-color: #3e8e41;
+    color: rgb(255, 255, 255);
+}
+
+.btn_occupied {
+    padding: 10px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 200px;
+    margin: 0 auto;
+}
+
+.btn_occupied:hover {
+    background-color: #c0392b;
+    color: rgb(255, 255, 255);
+}
+
+.modal_content h2 {
+    font-size: 24px;
+    /* Rozmiar czcionki dla nagłówka */
+    color: #333;
+    /* Kolor tekstu */
+    margin-bottom: 10px;
+}
+
+.modal_content p {
+    font-size: 16px;
+    /* Rozmiar czcionki dla tekstu */
+    color: #555;
+    /* Kolor tekstu */
+    margin-bottom: 8px;
+}
+
+.modal_content h3 {
+    font-size: 20px;
+    /* Rozmiar czcionki dla nagłówka h3 */
+    color: #333;
+    /* Kolor tekstu */
+    margin-top: 16px;
+    /* Mniejszy margines od góry */
+    margin-bottom: 12px;
+    /* Mniejszy margines na dole */
+}
+
+/* Styl dla elementów przekreślonych */
+.crossedItem {
+    text-decoration: line-through;
+    /* Przekreślenie tekstu */
+    color: #888;
+    /* Kolor przekreślonego tekstu */
+    cursor: pointer;
+}
+
+/* Styl dla elementów nieprzekreślonych */
+.normalItem {
+    /* Dodaj dowolne style dla nieprzekreślonych elementów */
+    cursor: pointer;
 }

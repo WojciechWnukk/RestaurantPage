@@ -46,14 +46,19 @@ router.get("/:tableId", async (req, res) => {
 router.put("/:tableId", async (req, res) => {
     try {
         const { tableId } = req.params
-        const { x, y } = req.body
+        const { x, y, tableStatus } = req.body
+
+        if (tableId && tableStatus) {
+            const table = await Table.findByIdAndUpdate(tableId, { tableStatus }, { new: tableStatus })
+            res.status(200).json({ data: table, message: "Table status updated successfully" });
+        }
         if (tableId && x && y) {
             const table = await Table.findByIdAndUpdate(tableId, { x, y }, { new: x, new: y })
 
             if (!table) {
                 return res.status(404).json({ message: "Table not found" });
             }
-            res.status(200).json({ data: table, message: "Table status updated successfully" });
+            res.status(200).json({ data: table, message: "Table position updated successfully" });
         }
     } catch (error) {
         res.status(500).json({ message: "Internal Server Error" });
