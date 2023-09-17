@@ -12,6 +12,7 @@ const AddEmployee = ({ handleLogout }) => {
   const [data, setData] = useState({
     firstName: "",
     lastName: "",
+    phoneNumber: "",
     email: "",
     birthDate: "",
     pesel: "",
@@ -22,6 +23,7 @@ const AddEmployee = ({ handleLogout }) => {
   const [dataUser, setDataUser] = useState({
     firstName: "",
     lastName: "",
+    phoneNumber: "",
     email: "",
     roles: "Employee",
   })
@@ -108,6 +110,16 @@ const AddEmployee = ({ handleLogout }) => {
                         type="text"
                         name="lastName"
                         value={data.lastName}
+                        onChange={handleChange}
+                        required
+                      />
+                    </label>
+                    <label>
+                      Numer telefonu:
+                      <input
+                        type="text"
+                        name="phoneNumber"
+                        value={data.phoneNumber}
                         onChange={handleChange}
                         required
                       />

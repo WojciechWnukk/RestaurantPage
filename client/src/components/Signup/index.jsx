@@ -6,6 +6,7 @@ const Signup = () => {
     const [data, setData] = useState({
         firstName: "",
         lastName: "",
+        phoneNumber: "",
         email: "",
         roles: "User",
         password: "",
@@ -63,6 +64,15 @@ const Signup = () => {
                             name="lastName"
                             onChange={handleChange}
                             value={data.lastName}
+                            required
+                            className={styles.input}
+                        />
+                        <input
+                            type="text"
+                            placeholder="Numer telefonu"
+                            name="phoneNumber"
+                            onChange={handleChange}
+                            value={data.phoneNumber}
                             required
                             className={styles.input}
                         />

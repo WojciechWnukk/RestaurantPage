@@ -170,12 +170,36 @@ router.put("/password", async (req, res) => {
   }
 });
 
+router.put("/phoneNumber", async (req, res) => {
+  try {
+    const userId = req.user._id;
+    const { currentNumber, newNumber } = req.body
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).send({ message: "User not found" });
+    }
+    if(user.phoneNumber != currentNumber) {
+      console.log(user.phoneNumber + "!=" + currentNumber) 
+      console.log("Stary numer się nie zgadza z baza")
+      return res.status(401).send({ message: "Invalid current Number" });
+    }
+    if (currentNumber && newNumber) {
+      user.phoneNumber = newNumber
+      await user.save()
+      res.status(200).send({ message: "Phone number updated successfully" });
+    }
+  } catch (error) {
+    res.status(500).send({ message: "Internal Server Error" });
+  }
+}
+)
+
 router.put("/:userId", async (req, res) => {
   try {
     const { userId } = req.params
-    const { firstName, lastName, email, password, roles } = req.body
-    if (firstName && lastName && email && password && roles) {
-      const user = await User.findByIdAndUpdate(userId, { firstName: firstName, lastName: lastName, email: email, password: password, roles: roles })
+    const { firstName, lastName, phoneNumber, email, password, roles } = req.body
+    if (firstName && lastName && phoneNumber && email && password && roles) {
+      const user = await User.findByIdAndUpdate(userId, { firstName: firstName, lastName: lastName, phoneNumber: phoneNumber, email: email, password: password, roles: roles })
 
       if (!user) {
         return res.status(404).json({ message: "User not found" });
@@ -194,7 +218,7 @@ router.put("/points/:userEmail", async (req, res) => {
     const { points } = req.body
     console.log(points)
     if (points) {
-      const user = await User.findOneAndUpdate({email: userEmail}, { points: points })
+      const user = await User.findOneAndUpdate({ email: userEmail }, { points: points })
 
       if (!user) {
         return res.status(404).json({ message: "User not found" });

@@ -1,16 +1,28 @@
 == Nawczoraj ==
-[ ] Pobieralny excel z danymi o zamówieniach
-[ ] Możliwe do zrobienia wykresy: liczba założonych kont w czasie, liczba zamówień w czasie
+[ ] Pobieralny excele do wykresów = Czaro
+[ ] Możliwe do zrobienia wykresy: liczba założonych kont w czasie, liczba zamówień w czasie itd = Czaro
 [ ] Poprawić stoliki bo zmiana rozmiaru okna psuje przesuwanie
+[ ] Strona raporty z wykresami i pobieralnym plikiem
 
 == Dozrobienia ==
 [?] upload zdjęć, profilówki dla pracowników - można to załatwić w ten sam sposób jak jedzenie z tym że prywatny hosting trzeba
-[ ] Strona raporty z wykresami i pobieralnym plikiem
 [1/2] Panel w którym kelner składa zamówienie, typu dostaje telefon od klienta dodanie nr tel albo email
 [ ] Ogarnąć działanie GridFS
 [ ] panel rezerwacji - rezerwować można tylko po zweryfikowaniu numeru tel
 [ ] Logowanie i rejestracja - zmiana w modala 
 [ ] Przerobić dodawanie empl i product na Modala
+[ ] Logowanie przez OAuth?
+
+== WymaganiaInżynierki ==
+[x] 1. W rejestracji dodanie nr tel
+[x] 2. Zmiana numeru tel
+[ ] 3. Opisy posiłków, ustawianie dostępności, wyszukiwanie po nazwie
+[ ] 4. Email po zmianie statusu na w przygotowaniu
+[ ] 5. Dodanie zamówionych produktów w my orders
+[ ] 6. Zabawa QR i NFC - linki przekazujące nr stolików
+[ ] 7. Bardziej szczegółowe opinie?
+[ ] 8. Możliwość dawania napiwków?
+
 
 
 == Zrobione ==

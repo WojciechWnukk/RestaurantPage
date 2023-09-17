@@ -13,6 +13,8 @@ const AccountSettings = ({ handleLogout }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [cartItems, setCartItems] = useState([]);
+  const [currentNumber, setCurrentNumber] = useState("")
+  const [newNumber, setNewNumber] = useState("")
 
   useEffect(() => {
     loadCartItemsFromLocalStorage(setCartItems);
@@ -105,6 +107,39 @@ const AccountSettings = ({ handleLogout }) => {
 
   }
 
+  const changeNumber = async (e) => {
+    e.preventDefault()
+    const token = localStorage.getItem("token")
+    console.log("token" + token)
+    const confirmed = window.confirm("Czy na pewno chcesz zmienić numer telefonu?")
+    if (confirmed) {
+      const token = localStorage.getItem("token")
+      if (token) {
+        try {
+          const config = {
+            method: 'put',
+            url: `${process.env.REACT_APP_DEV_SERVER}/api/users/phoneNumber`,
+            headers: {
+              'Content-Type': 'application/json',
+              'x-access-token': token
+            },
+            data: {
+              currentNumber: currentNumber,
+              newNumber: newNumber
+            }
+          }
+
+          await axios(config)
+          console.log("Zmieniono numer")
+        } catch (error) {
+
+        }
+      }
+      setCurrentNumber("")
+      setNewNumber("")
+    }
+  }
+
   return (
     <div className={styles.account_settings_container}>
       <div>
@@ -157,6 +192,33 @@ const AccountSettings = ({ handleLogout }) => {
           </button>
         </div>
       </form>
+
+      <h2>Zmień numer telefonu</h2>
+      <form onSubmit={changeNumber}>
+        <div className={styles.form_group}>
+          <label htmlFor="currentNumber">Aktualny numer:</label>
+          <input
+            type="text"
+            id="currentNumber"
+            value={currentNumber}
+            onChange={(e) => setCurrentNumber(e.target.value)}
+          />
+        </div>
+        <div className={styles.form_group}>
+          <label htmlFor="newNumber">Nowy numer:</label>
+          <input
+            type="text"
+            id="newNumber"
+            value={newNumber}
+            onChange={(e) => setNewNumber(e.target.value)}
+          />
+        </div>
+        <div className={styles.button_container}>
+          <button type="submit">Zmień numer</button>
+        </div>
+      </form>
+
+
     </div>
   );
 };

@@ -7,7 +7,9 @@
     position: relative;
     width: 600px;
     height: 400px;
-    background-color: #f2f2f2;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px; /* Rozmiar kratki */
     margin-top: 20px;
     border: 1px solid #ccc;
     border-radius: 10px;
@@ -17,8 +19,8 @@
 /* Styl stolików */
 .table {
     position: absolute;
-    width: 30px;
-    height: 30px;
+    width: 36px;
+    height: 36px;
     background-color: #4caf50;
     /* Zielony kolor kwadracika */
     display: flex;

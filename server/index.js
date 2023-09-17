@@ -31,6 +31,7 @@ app.use("/api/employees", employeeRoutes)
 
 app.put("/api/users/:userId", userRoutes)
 app.put("/api/users/password", tokenVerification)
+app.put("/api/users/phoneNumber", tokenVerification)
 app.put("/api/users/points/:userEmail", userRoutes)
 app.get("/api/users/", tokenVerification)
 //app.delete("/api/users", tokenVerification)

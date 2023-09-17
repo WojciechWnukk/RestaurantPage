@@ -32,39 +32,31 @@ const TableMap = ({ handleLogout }) => {
         }
     }
 
-    const handleTableDragEnd = async (tableId, newX, newY) => {
+    const handleTableDragEnd = async (tableId, clientX, clientY) => {
         try {
-            newX = newX - 456;
-            newY = newY - 185;
-
             const mapElement = document.querySelector(`.${styles.map}`);
             const mapRect = mapElement.getBoundingClientRect();
-
-            const tableWidth = 30;
-            const tableHeight = 30;
-
-            const minX = 0;
-            const maxX = mapRect.width - tableWidth;
-            const minY = 0;
-            const maxY = mapRect.height - tableHeight;
-            console.log(minX, maxX, minY, maxY)
-
-            const clampedX = Math.min(Math.max(newX, minX), maxX);
-            const clampedY = Math.min(Math.max(newY, minY), maxY);
-
+    
+            // Szerokość i wysokość kratki
+            const gridSize = 40;
+    
+            // Skalowanie pozycji myszki względem szerokości i wysokości mapy
+            const scaledX = Math.round((clientX - mapRect.left) / gridSize) * gridSize;
+            const scaledY = Math.round((clientY - mapRect.top) / gridSize) * gridSize;
+    
             const tableIndex = tables.findIndex((table) => table._id === tableId);
-            console.log(clampedX, clampedY)
             const updatedTables = [...tables];
-            updatedTables[tableIndex] = { ...updatedTables[tableIndex], x: clampedX, y: clampedY };
-
+            updatedTables[tableIndex] = { ...updatedTables[tableIndex], x: scaledX, y: scaledY };
+    
             setTables(updatedTables);
-
+    
             const updateUrl = `${process.env.REACT_APP_DEV_SERVER}/api/tables/${tableId}`;
-            await axios.put(updateUrl, { x: clampedX, y: clampedY });
+            await axios.put(updateUrl, { x: scaledX, y: scaledY });
         } catch (error) {
             console.error('Error updating table position: ', error);
         }
     }
+    
 
     const addTable = async (tableNumber, tableCapacity) => {
         try {
@@ -168,7 +160,10 @@ const TableMap = ({ handleLogout }) => {
                         <div
                             key={table._id}
                             className={table.tableStatus === "Wolny" ? styles.table : styles.table_occupied}
-                            style={{ left: table.x, top: table.y }}
+                            style={{
+                                left: `${table.x}px`,
+                                top: `${table.y}px`,
+                                 }}
                             draggable="true"
                             onDragEnd={(e) => {
                                 const newX = e.clientX;
@@ -214,10 +209,11 @@ const TableMap = ({ handleLogout }) => {
                             </div>
                         )) : null}
                     </div> : null}
-                    <p>Rezerwacje w dniu dzisiejszym:</p>
+
                     {reservations ? reservations.map((reservation) => (
                         <div key={reservation._id}>
                             {reservation.reservationTable === tableDetails.tableNumber && reservation.reservationDate === new Date().toISOString().split('T')[0].toString()/*"2023-09-14"*/ ? <div>
+                                <p>Rezerwacje w dniu dzisiejszym:</p>
                                 <p>Na godzine: {reservation.reservationTime}:00</p>
                                 <p>Zarezerwowano przez: {reservation.reservationPerson}</p>
                             </div> : null}

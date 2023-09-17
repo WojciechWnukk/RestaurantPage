@@ -36,9 +36,9 @@ router.get("/", async (req, res) => {
 router.put("/:employeeId", async (req, res) => {
   try {
     const { employeeId } = req.params
-    const { firstName, lastName, email, birthDate, pesel, salary } = req.body
-    if (firstName && lastName && email && birthDate && pesel && salary) {
-      const employee = await Employee.findByIdAndUpdate(employeeId, { firstName: firstName, lastName: lastName, email: email, birthDate: birthDate, pesel: pesel, salary: salary })
+    const { firstName, lastName, phoneNumber, email, birthDate, pesel, salary } = req.body
+    if (firstName && lastName && phoneNumber && email && birthDate && pesel && salary) {
+      const employee = await Employee.findByIdAndUpdate(employeeId, { firstName: firstName, lastName: lastName, phoneNumber: phoneNumber, email: email, birthDate: birthDate, pesel: pesel, salary: salary })
 
       if (!employee) {
         return res.status(404).json({ message: "Employee not found" });

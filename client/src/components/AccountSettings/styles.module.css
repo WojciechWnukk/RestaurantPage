@@ -23,10 +23,31 @@ label {
 input[type="password"] {
   padding: 10px;
   width: 100%;
-  /* Zmiana szerokości na 100% */
   max-width: 300px;
-  /* Ograniczenie maksymalnej szerokości do 300px */
   font-size: 16px;
+}
+
+input[type="password"]:focus {
+  outline: 3px solid #4caf50;
+}
+
+input[type="password"]:focus ~ .error_message {
+  display: block;
+}
+
+input[type="text"] {
+  padding: 10px;
+  width: 100%;
+  max-width: 300px;
+  font-size: 16px;
+}
+
+input[type="text"]:focus {
+  outline: 3px solid #4caf50;
+}
+
+input[type="text"]:focus ~ .error_message {
+  display: block;
 }
 
 .error_message {

@@ -5,6 +5,9 @@ import NavigationSelector from "../Scripts/NavigationSelector";
 import ServerAvailability from "../Scripts/ServerAvailability";
 import Graph from "../Scripts/Graph";
 import axios from "axios";
+import * as XLSX from 'xlsx';
+
+
 
 const Reports = ({ handleLogout }) => {
 
@@ -27,6 +30,14 @@ const Reports = ({ handleLogout }) => {
     }
 
 
+    const exportToExcel = () => {
+        const ws = XLSX.utils.json_to_sheet(transformedData);
+        const wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "Dane");
+        const fileName = "orders_raport.xlsx";
+        XLSX.writeFile(wb, fileName);
+      };
+        
 
     useEffect(() => {
         fetchOrders()
@@ -58,8 +69,8 @@ const Reports = ({ handleLogout }) => {
                 <Graph data={transformedData} />
                 {console.log("transformed ", transformedData)
                 }
-
             </div>
+            <button className={styles.btn_download} onClick={exportToExcel}>Export to Excel</button>
         </div>
     );
 };

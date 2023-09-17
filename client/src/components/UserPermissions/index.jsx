@@ -186,6 +186,7 @@ const UserPermissions = ({ handleLogout }) => {
         {
           firstName: modifyUser.firstName,
           lastName: modifyUser.lastName,
+          phoneNumber: modifyUser.phoneNumber,
           email: modifyUser.email,
           password: modifyUser.password,
           roles: modifyUser.roles
@@ -206,6 +207,7 @@ const UserPermissions = ({ handleLogout }) => {
         {
           firstName: modifyEmployee.firstName,
           lastName: modifyEmployee.lastName,
+          phoneNumber: modifyEmployee.phoneNumber,
           email: modifyEmployee.email,
           birthDate: modifyEmployee.birthDate,
           pesel: modifyEmployee.pesel,
@@ -362,6 +364,16 @@ const UserPermissions = ({ handleLogout }) => {
           />
         </label>
         <label>
+          Numer telefonu:
+          <input
+            type="text"
+            name="phoneNumber"
+            value={dataPerson.phoneNumber}
+            onChange={handleChange}
+            required
+          />
+        </label>
+        <label>
           Email:
           <input
             type="text"
@@ -371,17 +383,6 @@ const UserPermissions = ({ handleLogout }) => {
             required
           />
         </label>
-        {/*
-        <label>
-          Hasło:
-          <input
-            type="text"
-            name="password"
-            value={dataPerson.password}
-            onChange={handleChange}
-            required
-          />
-      </label>*/}
         <label>
           Roles: <br></br>
           <select name="roles" value={dataPerson.roles} onChange={handleChange} required>
@@ -469,6 +470,16 @@ const UserPermissions = ({ handleLogout }) => {
             type="text"
             name="lastName"
             value={dataEmployee.lastName}
+            onChange={handleChange}
+            required
+          />
+        </label>
+        <label>
+          Numer telefonu:
+          <input
+            type="text"
+            name="phoneNumber"
+            value={dataEmployee.phoneNumber}
             onChange={handleChange}
             required
           />
