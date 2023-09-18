@@ -21,14 +21,14 @@ const OrderRealize = ({ handleLogout }) => {
   const token = localStorage.getItem("token")
   const [isTableNumberValid, setTableNumberValid] = useState(true);
   const [tableNumberErrorMessage, setTableNumberErrorMessage] = useState("");
-  const [ , setError] = useState("")
+  const [, setError] = useState("")
   const [checkedToken, setCheckedToken] = useState("")
   const storedEmail = localStorage.getItem("email");
 
   const navigate = useNavigate()
   useEffect(() => {
     loadCartItemsFromLocalStorage(setCartItems);
-    
+
     if (token && storedEmail) {
       setEmailAddress(storedEmail);
     }
@@ -224,7 +224,7 @@ const OrderRealize = ({ handleLogout }) => {
 
         {(
           <div className={styles.guestData}
-          hidden={storedEmail}>
+            hidden={storedEmail}>
             <label htmlFor="email">Podaj maila:</label>
             <input
               type="text"
@@ -257,8 +257,8 @@ const OrderRealize = ({ handleLogout }) => {
         </div>
         <div className={styles.form_group}>
           <button type="button"
-          onClick={handlePayment}
-          hidden={totalPrice==="0.00"}>
+            onClick={handlePayment}
+            hidden={totalPrice === "0.00"}>
             Płacę online!
           </button>
         </div>

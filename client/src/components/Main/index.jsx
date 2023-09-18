@@ -65,9 +65,9 @@ const Main = ({ handleLogout }) => {
   useEffect(() => {
     fetchProducts()
     const filteredData = products.filter(
-      (product) => 
-      product.productCategory === selectedCategory.name &&
-      product.productName.toLowerCase().includes(searchQuery.toLowerCase())
+      (product) =>
+        product.productCategory === selectedCategory.name &&
+        product.productName.toLowerCase().includes(searchQuery.toLowerCase())
     )
     setFilteredFoodData(filteredData);
   }, [products, selectedCategory, searchQuery]);
@@ -75,8 +75,8 @@ const Main = ({ handleLogout }) => {
   return (
     <div className={styles.main_container}>
       <div>
-      <ServerAvailability>
-      </ServerAvailability>
+        <ServerAvailability>
+        </ServerAvailability>
       </div>
       <div>
         <CheckRoles>
@@ -125,18 +125,18 @@ const Main = ({ handleLogout }) => {
           <div className={styles.food_items}>
             {filteredFoodData.map((food) => (
               <div className={styles.food_item} key={food._id}>
-                {food.productStatus === "Dostępny" ? 
-                <div className={styles.food_item_inner}>
-                  <img src={food.productImage} alt={food.productName} className={styles.food_item_image} />
-                  <h3>{food.productName}</h3>
-                  {food.productDescription ? <p>{food.productDescription}</p> : ""}
-                  <p>{food.productPrice + " zł"}</p>
-                  <button className={styles.add_to_cart_btn}
-                    onClick={() => addToCart(food)}>
-                    Biorę!
-                  </button>
-                </div>
-                : ""}
+                {food.productStatus === "Dostępny" ?
+                  <div className={styles.food_item_inner}>
+                    <img src={food.productImage} alt={food.productName} className={styles.food_item_image} />
+                    <h3>{food.productName}</h3>
+                    {food.productDescription ? <p>{food.productDescription}</p> : ""}
+                    <p>{food.productPrice + " zł"}</p>
+                    <button className={styles.add_to_cart_btn}
+                      onClick={() => addToCart(food)}>
+                      Biorę!
+                    </button>
+                  </div>
+                  : ""}
               </div>
             ))}
           </div>

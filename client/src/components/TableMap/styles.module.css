@@ -1,28 +1,22 @@
-/* styles.module.css */
-
-/* Kontener mapy */
-
-/* Kontener stolików */
 .map {
     position: relative;
     width: 600px;
     height: 400px;
     background-image: linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px),
-                      linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
-    background-size: 40px 40px; /* Rozmiar kratki */
+        linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+    background-size: 40px 40px;
+    /* Rozmiar kratki */
     margin-top: 20px;
     border: 1px solid #ccc;
     border-radius: 10px;
     overflow: hidden;
 }
 
-/* Styl stolików */
 .table {
     position: absolute;
     width: 36px;
     height: 36px;
     background-color: #4caf50;
-    /* Zielony kolor kwadracika */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -32,13 +26,10 @@
     border-radius: 50%;
 }
 
-/* Styl stolików po najechaniu myszką */
 .table:hover {
     background-color: #2980b9;
-    /* Zmiana koloru po najechaniu */
 }
 
-/* Styl stolików zajętych */
 .table_occupied {
     background-color: #e74c3c;
     position: absolute;
@@ -53,7 +44,6 @@
     border-radius: 50%;
 }
 
-/* Nagłówek mapy */
 h2 {
     font-size: 24px;
     margin-bottom: 10px;
@@ -91,7 +81,6 @@ h2 {
 }
 
 .modal_overlay {
-    /* Styles for the modal overlay */
     background-color: rgba(0, 0, 0, 0.7);
     display: flex;
     justify-content: center;
@@ -180,42 +169,29 @@ h2 {
 
 .modal_content h2 {
     font-size: 24px;
-    /* Rozmiar czcionki dla nagłówka */
     color: #333;
-    /* Kolor tekstu */
     margin-bottom: 10px;
 }
 
 .modal_content p {
     font-size: 16px;
-    /* Rozmiar czcionki dla tekstu */
     color: #555;
-    /* Kolor tekstu */
     margin-bottom: 8px;
 }
 
 .modal_content h3 {
     font-size: 20px;
-    /* Rozmiar czcionki dla nagłówka h3 */
     color: #333;
-    /* Kolor tekstu */
     margin-top: 16px;
-    /* Mniejszy margines od góry */
     margin-bottom: 12px;
-    /* Mniejszy margines na dole */
 }
 
-/* Styl dla elementów przekreślonych */
 .crossedItem {
     text-decoration: line-through;
-    /* Przekreślenie tekstu */
     color: #888;
-    /* Kolor przekreślonego tekstu */
     cursor: pointer;
 }
 
-/* Styl dla elementów nieprzekreślonych */
 .normalItem {
-    /* Dodaj dowolne style dla nieprzekreślonych elementów */
     cursor: pointer;
 }

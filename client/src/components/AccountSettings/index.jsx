@@ -155,7 +155,7 @@ const AccountSettings = ({ handleLogout }) => {
           }
         }}
       </CheckRoles>
-      <h2>Ustawienia konta</h2>
+      <h2>Zmień hasło</h2>
       <form onSubmit={changePassword}>
         <div className={styles.form_group}>
           <label htmlFor="currentPassword">Aktualne hasło:</label>

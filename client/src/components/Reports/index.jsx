@@ -36,8 +36,8 @@ const Reports = ({ handleLogout }) => {
         XLSX.utils.book_append_sheet(wb, ws, "Dane");
         const fileName = "orders_raport.xlsx";
         XLSX.writeFile(wb, fileName);
-      };
-        
+    };
+
 
     useEffect(() => {
         fetchOrders()

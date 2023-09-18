@@ -39,12 +39,12 @@ const Reservation = ({ handleLogout }) => {
 
   const reserveTable = (date, hours, persons, comment, email) => {
     const dateParts = date.split('.');
-  const day = dateParts[0];
-  const month = dateParts[1];
-  const year = dateParts[2];
+    const day = dateParts[0];
+    const month = dateParts[1];
+    const year = dateParts[2];
 
-  // Utwórz nową sformatowaną datę w formacie "RRRR-MM-DD"
-  const formattedDate = `${year}-${month}-${day}`
+    // Utwórz nową sformatowaną datę w formacie "RRRR-MM-DD"
+    const formattedDate = `${year}-${month}-${day}`
 
     console.log(formattedDate)
     console.log(hours)

@@ -20,7 +20,7 @@ const MyOrders = ({ handleLogout }) => {
   const [showPointsModal, setShowPointsModal] = useState(false);
   const [earnedPoints, setEarnedPoints] = useState(0);
   const [selectedOrderDetails, setSelectedOrderDetails] = useState(null)
-  
+
 
 
   useEffect(() => {
@@ -64,9 +64,9 @@ const MyOrders = ({ handleLogout }) => {
         { orderRate: rating }
       )
 
-    //pobieranie danych o zalogowanym użytkowniku oraz dodawanie mu punktów o wartości 10% wartości zamówienia
-    putPoints(orderId)
-    
+      //pobieranie danych o zalogowanym użytkowniku oraz dodawanie mu punktów o wartości 10% wartości zamówienia
+      putPoints(orderId)
+
 
       fetchOrderData()
     } catch (error) {
@@ -129,7 +129,7 @@ const MyOrders = ({ handleLogout }) => {
     setShowPointsModal(true);
   };
 
-  
+
   return (
     <div className={styles.order_realize_container}>
       <div>
@@ -277,7 +277,7 @@ const MyOrders = ({ handleLogout }) => {
                     <td>{meal.price}</td>
                   </tr>
                 )
-                
+
                 ) : null
             ))}
           </tbody>

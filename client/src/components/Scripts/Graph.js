@@ -12,8 +12,8 @@ Chart.register(
   PointElement,
   Tooltip,
   BarController,
-  TimeScale, // Dodaj TimeScale
-  TimeSeriesScale // Dodaj TimeSeriesScale
+  TimeScale,
+  TimeSeriesScale
 );
 const summarizeTransactionsByMonth = (data) => {
   // Grupowanie transakcji po miesiącach i obliczanie sumy wartości
@@ -55,19 +55,19 @@ const Graph = ({ data }) => {
       x: {
         type: 'time',
         time: {
-            unit: 'month',
-            tooltipFormat: 'yyyy',
-            stepSize: 1,
+          unit: 'month',
+          tooltipFormat: 'yyyy',
+          stepSize: 1,
         },
         title: {
-            display: true,
-            text: 'Data transakcji'
+          display: true,
+          text: 'Data transakcji'
         }
       },
       y: {
         title: {
-            display: true,
-            text: 'Zarobki'
+          display: true,
+          text: 'Zarobki'
         }
       },
     },

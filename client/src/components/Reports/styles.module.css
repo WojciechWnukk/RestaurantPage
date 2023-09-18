@@ -14,7 +14,7 @@
     align-items: center;
     margin-bottom: 20px;
     margin-top: 80px;
-    
+
 }
 
 .graph_title {
@@ -37,12 +37,12 @@
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     display: inline-block;
-    align-items: center; /* Wyśrodkowanie w pionie */
+    align-items: center;
     justify-content: center;
     color: white;
 }
 
 .reports_container {
-    text-align: center; /* Wyśrodkowanie tekstu w poziomie */
+    text-align: center;
     position: relative;
 }

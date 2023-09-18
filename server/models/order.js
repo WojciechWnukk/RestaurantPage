@@ -5,7 +5,6 @@ const { ObjectId } = mongoose.Schema.Types;
 
 
 const orderSchema = new mongoose.Schema({
-  //orderId: {type: ObjectId, default: () => new mongoose.Types.ObjectId()},
   orderId: {
     type: String
   },

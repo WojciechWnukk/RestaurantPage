@@ -120,46 +120,45 @@ button[type="submit"] {
 
 .btn_edit {
   padding: 10px;
-	background-color: #4caf50;
-	color: white;
-	border: none;
-	cursor: pointer;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
   width: 180px;
   margin: 0 auto;
 }
 
 .btn_disabled {
   padding: 10px;
-	background-color: #837a7c;
-	color: white;
-	border: none;
-	cursor: pointer;
+  background-color: #837a7c;
+  color: white;
+  border: none;
+  cursor: pointer;
   width: 180px;
   margin: 0 auto;
 }
 
 .btn_close {
   padding: 10px;
-	background-color: #ff0000;
-	color: white;
-	border: none;
-	cursor: pointer;
+  background-color: #ff0000;
+  color: white;
+  border: none;
+  cursor: pointer;
   width: 100%;
   margin: 0 auto;
 }
 
 .btn_send {
   padding: 10px;
-	background-color: #4caf50;
-	color: white;
-	border: none;
-	cursor: pointer;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
   width: 100%;
   margin: 0 auto;
 }
 
 .modal_content {
-  /* Styles for the modal content */
   background-color: #fff;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -184,7 +183,6 @@ button[type="submit"] {
 }
 
 .modal_overlay {
-  /* Styles for the modal overlay */
   background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
@@ -198,10 +196,10 @@ button[type="submit"] {
 
 .btn_close_points {
   padding: 10px;
-	background-color: #ff0000;
-	color: white;
-	border: none;
-	cursor: pointer;
+  background-color: #ff0000;
+  color: white;
+  border: none;
+  cursor: pointer;
   width: 100%;
   margin: 0 auto;
 }
@@ -212,7 +210,6 @@ button[type="submit"] {
   margin-top: 20px;
 }
 
-/* Nagłówki kolumn */
 .order_details_table th {
   background-color: #f2f2f2;
   font-weight: bold;
@@ -221,7 +218,6 @@ button[type="submit"] {
   border: 1px solid #ccc;
 }
 
-/* Komórki tabeli */
 .order_details_table td {
   padding: 10px;
   border: 1px solid #ccc;

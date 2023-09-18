@@ -1,117 +1,115 @@
 .reservation {
-    text-align: center;
+  text-align: center;
 }
 
 .date_boxes {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: nowrap;
-    margin-top: 20px;
-    margin-left: 20px;
-    margin-right: 20px;
-    gap: 20px;
-    font-size: 30px;
-    font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  gap: 20px;
+  font-size: 30px;
+  font-weight: bold;
 }
 
 .date_box {
-    width: calc(16.666% - 10px);
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    text-align: center;
-    background-color: #f5f5f5;
+  width: calc(16.666% - 10px);
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center;
+  background-color: #f5f5f5;
 }
 
 .date_box p {
-    margin: 0;
-    padding: 5px 0;
-    font-size: 20px;
+  margin: 0;
+  padding: 5px 0;
+  font-size: 20px;
 }
 
 
 .time_ranges {
-    display: flex;
-    flex-direction: column; /* Wyświetlanie w kolumnie */
-    margin-top: 10px;
-    font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  font-size: 12px;
 }
 
 .time_ranges button {
-    margin-bottom: 5px; /* Odstęp między przyciskami */
-    padding: 5px;
-    background-color: #4caf50;
-    border: 1px solid #ccc;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 20px;
+  margin-bottom: 5px;
+  padding: 5px;
+  background-color: #4caf50;
+  border: 1px solid #ccc;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
 }
 
 .time_ranges button:hover {
-    background-color: #46a049;
+  background-color: #46a049;
 }
 
 .modal {
-    /* Styles for the modal content */
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    max-width: 400px;
-    padding: 20px;
-    position: relative;
-    top: 0;
-    transform: translateY(0);
-    transition: top 0.3s, transform 0.3s;
-    margin: 0 auto;
-    outline: none;
-  }
-  
-  .modal__after-open {
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  
-  .modal__before_close {
-    top: 0;
-    transform: translateY(0);
-  }
-  
-  .overlay {
-    /* Styles for the modal overlay */
-    background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-  }
-  
-  .btn_close {
-    padding: 10px;
-      background-color: #ff0000;
-      color: white;
-      border: none;
-      cursor: pointer;
-    width: 200px;
-    margin: 0 auto;
-  }
-  
-  .btn_send {
-    padding: 10px;
-      background-color: #4caf50;
-      color: white;
-      border: none;
-      cursor: pointer;
-    width: 200px;
-    margin: 0 auto;
-  }
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  max-width: 400px;
+  padding: 20px;
+  position: relative;
+  top: 0;
+  transform: translateY(0);
+  transition: top 0.3s, transform 0.3s;
+  margin: 0 auto;
+  outline: none;
+}
 
-  input[type="number"],
+.modal__after-open {
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.modal__before_close {
+  top: 0;
+  transform: translateY(0);
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.btn_close {
+  padding: 10px;
+  background-color: #ff0000;
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 200px;
+  margin: 0 auto;
+}
+
+.btn_send {
+  padding: 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  width: 200px;
+  margin: 0 auto;
+}
+
+input[type="number"],
 textarea {
   width: 100%;
   padding: 8px;
@@ -120,7 +118,6 @@ textarea {
   border-radius: 4px;
 }
 
-/* Additional Styling */
 h2 {
   font-size: 1.2em;
   margin-bottom: 10px;

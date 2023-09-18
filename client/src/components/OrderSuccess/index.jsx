@@ -8,7 +8,7 @@ import ServerAvailability from "../Scripts/ServerAvailability";
 const OrderSuccess = ({ handleLogout }) => {
   const [orderData, setOrderData] = useState(null);
   const token = localStorage.getItem("token");
-  const [ , setLoading] = useState(true)
+  const [, setLoading] = useState(true)
 
   useEffect(() => {
     localStorage.removeItem("cartItems");

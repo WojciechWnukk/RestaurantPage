@@ -178,8 +178,8 @@ router.put("/phoneNumber", async (req, res) => {
     if (!user) {
       return res.status(404).send({ message: "User not found" });
     }
-    if(user.phoneNumber != currentNumber) {
-      console.log(user.phoneNumber + "!=" + currentNumber) 
+    if (user.phoneNumber != currentNumber) {
+      console.log(user.phoneNumber + "!=" + currentNumber)
       console.log("Stary numer się nie zgadza z baza")
       return res.status(401).send({ message: "Invalid current Number" });
     }

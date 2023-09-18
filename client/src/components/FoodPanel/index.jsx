@@ -101,7 +101,6 @@ const FoodPanel = ({ handleLogout }) => {
         try {
             await axios.put(
                 `${process.env.REACT_APP_DEV_SERVER}/api/products/${productId}`,
-                //`http://localhost:8080/api/products/${productId}`,
                 {
                     productName: newProduct.productName,
                     productDescription: newProduct.productDescription,

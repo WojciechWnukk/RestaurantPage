@@ -1,4 +1,3 @@
-/* styles.module.css */
 
 .order_realize_container {
   display: flex;
@@ -56,4 +55,3 @@
 .addproduct_container button:hover {
   background-color: #0056b3;
 }
-

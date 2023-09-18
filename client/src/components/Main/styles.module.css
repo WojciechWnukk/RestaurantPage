@@ -1,5 +1,3 @@
-/* Main Component */
-
 
 .menu_container {
 	display: flex;
@@ -31,7 +29,7 @@
 
 .category_button:hover {
 	background-color: #857c7c3e;
-  }
+}
 
 .category_button.active_category {
 	background-color: #ddd;
@@ -88,7 +86,7 @@
 .add_to_cart_btn:hover {
 	background-color: gold;
 	color: black;
-  }
+}
 
 .content h2 {
 	text-align: center;
@@ -96,14 +94,14 @@
 
 .search_bar {
 	display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .search_bar input {
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.search_bar input {
 	width: 100%;
 	border: 1px solid #ddd;
 	border-radius: 5px;
 	font-size: 16px;
-  }
+}

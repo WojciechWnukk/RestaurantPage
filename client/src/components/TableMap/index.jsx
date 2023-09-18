@@ -36,27 +36,27 @@ const TableMap = ({ handleLogout }) => {
         try {
             const mapElement = document.querySelector(`.${styles.map}`);
             const mapRect = mapElement.getBoundingClientRect();
-    
+
             // Szerokość i wysokość kratki
             const gridSize = 40;
-    
+
             // Skalowanie pozycji myszki względem szerokości i wysokości mapy
             const scaledX = Math.round((clientX - mapRect.left) / gridSize) * gridSize;
             const scaledY = Math.round((clientY - mapRect.top) / gridSize) * gridSize;
-    
+
             const tableIndex = tables.findIndex((table) => table._id === tableId);
             const updatedTables = [...tables];
             updatedTables[tableIndex] = { ...updatedTables[tableIndex], x: scaledX, y: scaledY };
-    
+
             setTables(updatedTables);
-    
+
             const updateUrl = `${process.env.REACT_APP_DEV_SERVER}/api/tables/${tableId}`;
             await axios.put(updateUrl, { x: scaledX, y: scaledY });
         } catch (error) {
             console.error('Error updating table position: ', error);
         }
     }
-    
+
 
     const addTable = async (tableNumber, tableCapacity) => {
         try {
@@ -163,7 +163,7 @@ const TableMap = ({ handleLogout }) => {
                             style={{
                                 left: `${table.x}px`,
                                 top: `${table.y}px`,
-                                 }}
+                            }}
                             draggable="true"
                             onDragEnd={(e) => {
                                 const newX = e.clientX;

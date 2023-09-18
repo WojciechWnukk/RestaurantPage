@@ -34,11 +34,11 @@ const Navigation = ({ cartItemCount }) => {
 
       </div>
       <button
-          className={`${styles.nav_button} ${styles.white_btn}`}
-          onClick={() => handleNavigation("/login")}
-        >
-          Zaloguj
-        </button>
+        className={`${styles.nav_button} ${styles.white_btn}`}
+        onClick={() => handleNavigation("/login")}
+      >
+        Zaloguj
+      </button>
     </nav>
   );
 };

@@ -130,7 +130,7 @@ const UserPermissions = ({ handleLogout }) => {
     if (confirmed) {
       if (employeeId) {
         try {
-          const response = await axios.delete(`${process.env.REACT_APP_DEV_SERVER}/api/employees/${employeeId}`/*`http://localhost:8080/api/employees/${employeeId}`*/)
+          const response = await axios.delete(`${process.env.REACT_APP_DEV_SERVER}/api/employees/${employeeId}`)
           if (control === true) { //delete empl -> change roles empl->user
             const findUser = users.find((user) => user.email === employeeEmail)
             const newRoles = { ...findUser, roles: "User" }

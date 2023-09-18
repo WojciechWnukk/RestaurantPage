@@ -51,15 +51,14 @@ const UpdateProduct = ({ handleLogout }) => {
         handleGetUserDetails()
     }, []);
 
-    
+
     if (!details || details.roles !== "Admin") {
         return <p>Brak uprawnień</p>;
     }
-    
+
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            //const url=`${process.env.DEV_SERVER}/api/addproduct`
             const url = `${process.env.REACT_APP_DEV_SERVER}/api/products`
             console.log(data)
             await axios.post(url, data)
