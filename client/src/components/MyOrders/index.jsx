@@ -19,6 +19,7 @@ const MyOrders = ({ handleLogout }) => {
   const [modify, setModify] = useState("");
   const [showPointsModal, setShowPointsModal] = useState(false);
   const [earnedPoints, setEarnedPoints] = useState(0);
+  const [selectedOrderDetails, setSelectedOrderDetails] = useState(null)
   
 
 
@@ -155,6 +156,7 @@ const MyOrders = ({ handleLogout }) => {
               <th>Cena</th>
               <th>Oceń i otrzymaj punkty!</th>
               <th>Zmień coś!</th>
+              <th>Szczegóły zamówienia</th>
             </tr>
           </thead>
           <tbody>
@@ -196,6 +198,11 @@ const MyOrders = ({ handleLogout }) => {
                   )}
 
                 </td>
+                <td>
+                  <button className={styles.btn_edit} onClick={() => setSelectedOrderDetails(order.orderId)}>
+                    Szczegóły
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -211,7 +218,7 @@ const MyOrders = ({ handleLogout }) => {
         className={styles.modal_content}
         overlayClassName={styles.modal_overlay}
       >
-        <h2>Chcesz coś zmienić w zamówieniu {selectedOrderId}? <br></br>Pisz!</h2>
+        <h2>Chcesz coś zmienić w zamówieniu? <br></br>Pisz!</h2>
         <label htmlFor="comments">Dodatkowe komentarze:</label>
         <textarea
           id="comments"
@@ -239,6 +246,45 @@ const MyOrders = ({ handleLogout }) => {
       >
         <h2>Gratulacje! Otrzymujesz {earnedPoints} punktów!</h2>
         <button className={styles.btn_close_points} onClick={() => setShowPointsModal(false)}>Zamknij</button>
+      </Modal>
+
+      {/*Modal z szczegółami zamówienia*/}
+      <Modal
+        isOpen={selectedOrderDetails !== null}
+        onRequestClose={() => {
+          setSelectedOrderDetails(null)
+        }}
+        contentLabel="Szczegóły zamówienia"
+        className={styles.modal_content}
+        overlayClassName={styles.modal_overlay}
+      >
+        <h2>Szczegóły zamówienia {selectedOrderDetails}</h2>
+        <table className={styles.order_details_table}>
+          <thead>
+            <tr>
+              <th>Nazwa</th>
+              <th>Ilość</th>
+              <th>Cena</th>
+            </tr>
+          </thead>
+          <tbody>
+            {reversedOrderData.map((order) => (
+              order.orderId === selectedOrderDetails ?
+                order.meals.map((meal) => (
+                  <tr key={meal._id}>
+                    <td>{meal.name}</td>
+                    <td>{meal.quantity}</td>
+                    <td>{meal.price}</td>
+                  </tr>
+                )
+                
+                ) : null
+            ))}
+          </tbody>
+        </table>
+        <button className={styles.btn_close} onClick={() => {
+          setSelectedOrderDetails(null)
+        }}>Zamknij</button>
       </Modal>
 
 

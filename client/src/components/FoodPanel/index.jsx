@@ -19,6 +19,8 @@ const FoodPanel = ({ handleLogout }) => {
     const [filteredFoodData, setFilteredFoodData] = useState([])
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [data, setData] = useState({})
+    const [searchQuery, setSearchQuery] = useState("");
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -85,7 +87,7 @@ const FoodPanel = ({ handleLogout }) => {
             const response = await axios.get(url)
             const availableProducts = response.data.data.filter(
                 (product) =>
-                    product.productStatus === "Dostępny"
+                    product.productStatus === "Dostępny" || product.productStatus === "Niedostępny"
             )
             setProducts(availableProducts)
 
@@ -102,9 +104,11 @@ const FoodPanel = ({ handleLogout }) => {
                 //`http://localhost:8080/api/products/${productId}`,
                 {
                     productName: newProduct.productName,
+                    productDescription: newProduct.productDescription,
                     productPrice: newProduct.productPrice,
                     productCategory: newProduct.productCategory,
-                    productImage: newProduct.productImage
+                    productImage: newProduct.productImage,
+                    productStatus: newProduct.productStatus
                 }
             )
             fetchProducts()
@@ -122,10 +126,12 @@ const FoodPanel = ({ handleLogout }) => {
 
     useEffect(() => {
         const filteredData = products.filter(
-            (product) => product.productCategory === selectedCategory.name
+            (product) =>
+                product.productCategory === selectedCategory.name &&
+                product.productName.toLowerCase().includes(searchQuery.toLowerCase())
         )
         setFilteredFoodData(filteredData);
-    }, [products, selectedCategory]);
+    }, [products, selectedCategory, searchQuery]);
 
 
     if (!details || details.roles !== "Admin") {
@@ -176,6 +182,14 @@ const FoodPanel = ({ handleLogout }) => {
                     </button>
 
                 </div>
+                <div className={styles.search_bar}>
+                    <input
+                        type="text"
+                        placeholder="Szukaj produktów..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                    />
+                </div>
                 <div className={styles.content}>
                     <div className={styles.food_items}>
                         {filteredFoodData.map((product) => (
@@ -183,6 +197,8 @@ const FoodPanel = ({ handleLogout }) => {
                                 <div className={styles.food_item_inner}>
                                     <img src={product.productImage} alt={product.productName} className={styles.food_item_image} />
                                     <h3>{product.productName}</h3>
+                                    <p>Dostępny? {product.productStatus === "Dostępny" ? "Tak" : "Nie"}</p>
+                                    {product.productDescription ? <p>{product.productDescription}</p> : ""}
                                     <p>{product.productPrice + " zł"}</p>
                                     <button className={styles.add_to_cart_btn}
                                         onClick={() => {
@@ -219,6 +235,15 @@ const FoodPanel = ({ handleLogout }) => {
                     />
                 </label>
                 <label>
+                    Opis produktu:
+                    <input
+                        type="text"
+                        name="productDescription"
+                        value={data.productDescription}
+                        onChange={handleChange}
+                    />
+                </label>
+                <label>
                     Cena:
                     <input
                         type="text"
@@ -247,6 +272,14 @@ const FoodPanel = ({ handleLogout }) => {
                         onChange={handleChange}
                         required
                     />
+                </label>
+                <label>
+                    Status:
+                    <select name="productStatus" value={data.productStatus} onChange={handleChange} required>
+                        <option value="">Wybierz status</option>
+                        <option value="Dostępny">Dostępny</option>
+                        <option value="Niedostępny">Niedostępny</option>
+                    </select>
                 </label>
                 <button className={styles.btn_close} onClick={() => {
                     setSelectedProduct(null)

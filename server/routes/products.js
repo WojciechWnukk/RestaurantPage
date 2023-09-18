@@ -32,9 +32,9 @@ router.get("/", async (req, res) => {
 router.put("/:productId", async (req, res) => {
     try {
         const { productId } = req.params
-        const { productName, productPrice, productCategory, productImage } = req.body
-        if (productName && productPrice && productCategory && productImage) {
-            const product = await Product.findByIdAndUpdate(productId, { productName: productName, productPrice: productPrice, productCategory: productCategory, productImage: productImage }, { new: true })
+        const { productName, productDescription, productPrice, productCategory, productImage, productStatus } = req.body
+        if (productName && productDescription && productPrice && productCategory && productImage && productStatus) {
+            const product = await Product.findByIdAndUpdate(productId, { productName: productName, productDescription: productDescription, productPrice: productPrice, productCategory: productCategory, productImage: productImage, productStatus: productStatus }, { new: true })
 
             if (!product) {
                 return res.status(404).json({ message: "Product not found" });

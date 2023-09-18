@@ -1,6 +1,6 @@
 == Nawczoraj ==
 [ ] Pobieralny excele do wykresów = Czaro
-[ ] Możliwe do zrobienia wykresy: liczba założonych kont w czasie, liczba zamówień w czasie itd = Czaro
+[ ] Możliwe do zrobienia wykresy: liczba założonych kont w czasie, liczba zamówień w czasie, średnia ocen na produkt itd = Czaro
 [ ] Poprawić stoliki bo zmiana rozmiaru okna psuje przesuwanie
 [ ] Strona raporty z wykresami i pobieralnym plikiem
 
@@ -12,18 +12,7 @@
 [ ] Logowanie i rejestracja - zmiana w modala 
 [ ] Przerobić dodawanie empl i product na Modala
 [ ] Logowanie przez OAuth?
-
-== WymaganiaInżynierki ==
-[x] 1. W rejestracji dodanie nr tel
-[x] 2. Zmiana numeru tel
-[ ] 3. Opisy posiłków, ustawianie dostępności, wyszukiwanie po nazwie
-[ ] 4. Email po zmianie statusu na w przygotowaniu
-[ ] 5. Dodanie zamówionych produktów w my orders
-[ ] 6. Zabawa QR i NFC - linki przekazujące nr stolików
-[ ] 7. Bardziej szczegółowe opinie?
-[ ] 8. Możliwość dawania napiwków?
-
-
+[ ] Zabawa QR i NFC - linki przekazujące nr stolików
 
 == Zrobione ==
 [x] Przy każdym/dostarczonym zamówieniu dodać możliwość oceny klikaną gwiazdką

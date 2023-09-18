@@ -76,48 +76,7 @@ const WaiterPanel = () => {
   if (!details || details.roles !== "Admin") {
     return <p>Brak uprawnień</p>;
   }
-/*
-  const handlePoints = async (orderId) => {
-    try {
-      const response = await axios.get(`http://localhost:8080/api/orders/${orderId}`)
-      const order = response.data.data;
-      const userId = order.userId;
-      const points = order.totalPrice;
-      const config = {
-        method: "post",
-        url: `http://localhost:8080/api/users/${userId}/points`,
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: {
-          points: points,
-        },
-      };
-      await axios(config);
-    } catch (error) {
-      console.error("Error updating user points:", error);
-    }
-  }
 
-  //zrób funkcje w której sprawdzasz czy order.status === "Zamowienie dostarczone" i jeśli tak to wywołaj funkcje handlePoints(order._id), nie zapomnij o zabezpieczeniu aby nie wywoływać jej kilka razy dla tego samego zamówienia
-  const handlePointsForOrder = async () => {
-    try {
-      const response = await axios.get("http://localhost:8080/api/orders")
-      const filteredOrders = response.data.data.filter(
-        (order) =>
-          showAllOrders || order.status !== "Zamowienie dostarczone"
-      );
-      filteredOrders.forEach(order => {
-        if (order.status === "Zamowienie dostarczone") {
-          handlePoints(order._id)
-        }
-      })
-    } catch (error) {
-      console.error("Error fetching orders:", error);
-    }
-  }
-
-*/
 
   return (
     <div className={styles.waiter_panel_container}>

@@ -144,7 +144,7 @@ button[type="submit"] {
 	color: white;
 	border: none;
 	cursor: pointer;
-  width: 200px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -154,7 +154,7 @@ button[type="submit"] {
 	color: white;
 	border: none;
 	cursor: pointer;
-  width: 200px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -204,4 +204,30 @@ button[type="submit"] {
 	cursor: pointer;
   width: 100%;
   margin: 0 auto;
+}
+
+.order_details_table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+/* Nagłówki kolumn */
+.order_details_table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+  text-align: left;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+/* Komórki tabeli */
+.order_details_table td {
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+/* Dla wierszy o nieparzystym indeksie zmień tło na szare */
+.order_details_table tbody tr:nth-child(odd) {
+  background-color: #f9f9f9;
 }

@@ -93,3 +93,17 @@
 .content h2 {
 	text-align: center;
 }
+
+.search_bar {
+	display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .search_bar input {
+	width: 100%;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	font-size: 16px;
+  }

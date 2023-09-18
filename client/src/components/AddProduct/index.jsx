@@ -11,6 +11,7 @@ const AddProduct = ({ handleLogout }) => {
     const [cartItems] = useState([]);
     const [data, setData] = useState({
         productName: "",
+        productDescription: "",
         productPrice: "",
         productStatus: "Dostępny",
         productCategory: "",
@@ -118,6 +119,16 @@ const AddProduct = ({ handleLogout }) => {
                             type="text"
                             name="productName"
                             value={data.productName}
+                            onChange={handleChange}
+                            required
+                        />
+                    </label>
+                    <label>
+                        Opis produktu:
+                        <input
+                            type="text"
+                            name="productDescription"
+                            value={data.productDescription}
                             onChange={handleChange}
                             required
                         />
