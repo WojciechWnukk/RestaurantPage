@@ -188,7 +188,7 @@ const TableMap = ({ handleLogout }) => {
                     <p>Status: {tableDetails.tableStatus}</p>
                     <p>Koordynaty: {tableDetails ? `${tableDetails.x}x${tableDetails.y}` : 'Brak danych'}</p>
                     <p>Liczba miejsc: {tableDetails.tableCapacity}</p>
-                    {tableDetails.tableStatus === "Zajęty" ? <div>
+                    {tableDetails.tableStatus /*=== "Zajęty"*/ ? <div>
                         <h3>Zamówienia:</h3>
                         {orders ? orders.map((order) => (
                             <div key={order._id}

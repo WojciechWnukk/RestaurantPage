@@ -227,7 +227,7 @@ const Reservation = ({ handleLogout }) => {
 
             {!selectedTable ? (
               <div className={styles.table_choose_container}>
-                <p>Wybierz stolik:</p>
+                <label>Wybierz stolik:</label>
                 <button
                   className={styles.table_choose}
                   onClick={() => {
@@ -249,7 +249,7 @@ const Reservation = ({ handleLogout }) => {
               value={comment}
               onChange={(e) => setComment(e.target.value)}
             />
-            <p>
+            <label>
               Adres email:{" "}
               {storedEmail ? (
                 storedEmail
@@ -261,7 +261,7 @@ const Reservation = ({ handleLogout }) => {
                   onChange={(e) => setTempEmail(e.target.value)}
                 />
               )}
-            </p>
+            </label>
             <button
               className={styles.btn_close}
               onClick={() => {
@@ -278,13 +278,14 @@ const Reservation = ({ handleLogout }) => {
                 reserveTable(
                   selectedTime.date,
                   selectedTime.time,
-                  selectedPersons,
+                  selectedTable,
                   comment,
                   storedEmail ? storedEmail : tempEmail
                 );
                 setSelectedTime(null);
                 setSelectedPersons(1);
                 setComment("");
+                setSelectedTable(null);
               }}
             >
               Zarezerwuj
@@ -321,6 +322,7 @@ const Reservation = ({ handleLogout }) => {
                       } else {
                         setSelectedTable(table.tableNumber);
                         setChooseTableModal(false);
+                        
                       }
                       
                     }}
