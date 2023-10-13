@@ -20,6 +20,7 @@ const FoodPanel = ({ handleLogout }) => {
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [data, setData] = useState({})
     const [searchQuery, setSearchQuery] = useState("");
+    const [wantSearch, setWantSearch] = useState(false);
 
 
     const handleChange = (e) => {
@@ -124,13 +125,22 @@ const FoodPanel = ({ handleLogout }) => {
     }, []);
 
     useEffect(() => {
-        const filteredData = products.filter(
-            (product) =>
-                product.productCategory === selectedCategory.name &&
-                product.productName.toLowerCase().includes(searchQuery.toLowerCase())
+        fetchProducts()
+        let filteredData = products
+        if(!wantSearch) {
+        filteredData = products.filter(
+          (product) =>
+            product.productCategory === selectedCategory.name &&
+            product.productName.toLowerCase().includes(searchQuery.toLowerCase())
         )
+        } else {
+          filteredData = products.filter(
+          (product) =>
+          product.productName.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+        }
         setFilteredFoodData(filteredData);
-    }, [products, selectedCategory, searchQuery]);
+      }, [products, selectedCategory, searchQuery, wantSearch]);
 
 
     if (!details || details.roles !== "Admin") {
@@ -163,6 +173,7 @@ const FoodPanel = ({ handleLogout }) => {
                                 className={`${styles.category_button} ${category === selectedCategory ? styles.active_category : ""
                                     }`}
                                 onClick={() => handleCategoryClick(category)}
+                                disabled = {wantSearch}
                             >
                                 {category.name}
                                 <br /><br />
@@ -182,13 +193,20 @@ const FoodPanel = ({ handleLogout }) => {
 
                 </div>
                 <div className={styles.search_bar}>
-                    <input
-                        type="text"
-                        placeholder="Szukaj produktów..."
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                    />
-                </div>
+          {wantSearch ? <button className={styles.search_button} onClick={() => setWantSearch(!wantSearch)}>{"❌"}</button> : null}
+          {wantSearch ? null : <button className={styles.search_button} onClick={() => setWantSearch(!wantSearch)}>{"🔍"}</button>}
+          {wantSearch ? 
+                   <input
+                   type="text"
+                   placeholder="Szukaj produktów..."
+                   value={searchQuery}
+                   onChange={(e) => setSearchQuery(e.target.value)}
+                 />
+                 :
+                  null
+        }
+ 
+        </div>
                 <div className={styles.content}>
                     <div className={styles.food_items}>
                         {filteredFoodData.map((product) => (

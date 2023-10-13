@@ -9,6 +9,8 @@ import NavigationSelector from "../Scripts/NavigationSelector";
 import axios from "axios";
 import Modal from "react-modal";
 import ServerAvailability from "../Scripts/ServerAvailability";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowPointer } from "@fortawesome/free-solid-svg-icons";
 
 const Reservation = ({ handleLogout }) => {
   const [cartItems, setCartItems] = useState([]);
@@ -19,6 +21,10 @@ const Reservation = ({ handleLogout }) => {
   const [comment, setComment] = useState("");
   const [tempEmail, setTempEmail] = useState("");
   const [chooseTableModal, setChooseTableModal] = useState(false);
+  const [tables, setTables] = useState(null);
+  const [selectedTable, setSelectedTable] = useState(null);
+  const [alreadyReserved, setAlreadyReserved] = useState([])
+
 
   useEffect(() => {
     loadCartItemsFromLocalStorage(setCartItems);
@@ -73,14 +79,57 @@ const Reservation = ({ handleLogout }) => {
         reservationComment: comment,
       };
       axios.post(url, data);
-      console.log("Zarezerwowano stolik" + " " + date + " " + hours);
+      console.log("Zarezerwowano stolik " + date + " " + hours);
     } catch (error) {
       console.error("Błąd podczas rezerwacji stolika:", error.response.data);
       throw new Error("Błąd podczas rezerwacji stolika");
     }
   };
 
-  const showTables = () => {};
+  const fetchTables = async () => {
+    try {
+      const url = `${process.env.REACT_APP_DEV_SERVER}/api/tables`;
+      const response = await axios.get(url);
+      const tables = response.data.data;
+      setTables(tables);
+    } catch (error) {
+      console.error("Error fetching tables: ", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchTables();
+  }, []);
+
+  const checkReservedTables = async (data, hours) => {
+    const dateParts = data.split(".");
+    const day = dateParts[0];
+    const month = dateParts[1];
+    const year = dateParts[2];
+    const formattedDate = `${year}-${month}-${day}`;
+    try {
+      const url = `${process.env.REACT_APP_DEV_SERVER}/api/reservations`;
+      const response = await axios.get(url);
+      const reservations = response.data.data;
+      const reservedTables = reservations.filter(
+        (reservation) =>
+          reservation.reservationDate === formattedDate &&
+          reservation.reservationTime === hours
+      );
+      const reservedTableNumbers = reservedTables.map(
+        (table) => table.reservationTable
+      );
+      setAlreadyReserved(reservedTableNumbers);
+      console.log(alreadyReserved);
+      console.log(reservedTableNumbers)
+
+    } catch (error) {
+      console.error("Error fetching tables: ", error);
+    }
+  }
+
+
+
 
   return (
     <div className={styles.reservation_container}>
@@ -154,12 +203,16 @@ const Reservation = ({ handleLogout }) => {
       </div>
       <Modal
         isOpen={selectedTime !== null}
-        onRequestClose={() => setSelectedTime(null)}
+        onRequestClose={() => {
+          setSelectedTime(null)
+          setSelectedTable(null)
+        }
+        }
         className={styles.modal}
         overlayClassName={styles.overlay}
       >
         {selectedTime && (
-          <div>
+          <div className={styles.reservation_details}>
             <h2>Potwierdź rezerwację</h2>
             <p>Data: {selectedTime.date}</p>
             <p>Dzień tygodnia: {selectedTime.day}</p>
@@ -171,11 +224,26 @@ const Reservation = ({ handleLogout }) => {
               onChange={(e) => setSelectedPersons(e.target.value)}
               min="1"
             />
-            Wybierz stolik:
-            <button
-              className={styles.table_choose}
-              onClick={() => {chooseTableModal(true)}}
-            ></button>
+
+            {!selectedTable ? (
+              <div className={styles.table_choose_container}>
+                <p>Wybierz stolik:</p>
+                <button
+                  className={styles.table_choose}
+                  onClick={() => {
+                    setChooseTableModal(true);
+                    checkReservedTables(selectedTime.date, selectedTime.time)
+
+                  }}
+                >
+                  <FontAwesomeIcon icon={faArrowPointer} size="xl" style={{color: "#ffffff",}} />
+                </button>
+              </div>
+            ) : (
+              <div className={styles.table_choose_container}>
+                <p>Wybrano stolik: {selectedTable}</p>
+              </div>
+            )}
             <label>Komentarz:</label>
             <textarea
               value={comment}
@@ -196,7 +264,11 @@ const Reservation = ({ handleLogout }) => {
             </p>
             <button
               className={styles.btn_close}
-              onClick={() => setSelectedTime(null)}
+              onClick={() => {
+                setSelectedTime(null)
+                setSelectedTable(null)
+              }
+              }
             >
               Anuluj
             </button>
@@ -221,11 +293,45 @@ const Reservation = ({ handleLogout }) => {
         )}
         <Modal
           isOpen={chooseTableModal}
-          onRequestClose={() => setChooseTableModal(false)}
+          onRequestClose={() => 
+            setChooseTableModal(false)
+          }
           className={styles.modal_choose_table}
           overlayClassName={styles.overlay_choose_table}
         >
           <h2>Wybierz stolik</h2>
+          <div className={styles.map}>
+            {tables
+              ? tables.map((table) => (
+                  <div
+                    key={table._id}
+                    className={
+                      alreadyReserved.includes(table.tableNumber) || table.tableStatus === "Zajęty"
+                        ? styles.table_occupied
+                        : styles.table
+                    }
+                    style={{
+                      left: `${table.x}px`,
+                      top: `${table.y}px`,
+                    }}
+                    onClick={() => {
+                      if(alreadyReserved.includes(table.tableNumber)){
+                        alert("Ten stolik jest już zarezerwowany")
+                        return
+                      } else {
+                        setSelectedTable(table.tableNumber);
+                        setChooseTableModal(false);
+                      }
+                      
+                    }}
+                    title={"Liczba miejsc " + table.tableCapacity}
+                  >
+                    {table.tableNumber}
+                  </div>
+                ))
+              : null}
+          </div>
+
           <button
             className={styles.btn_close}
             onClick={() => setChooseTableModal(false)}

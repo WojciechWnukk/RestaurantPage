@@ -32,7 +32,6 @@ const Cart = ({ handleLogout }) => {
   const handleNavigation = (path) => {
     navigate1(path);
   };
-  const token = localStorage.getItem("token");
 
   const increaseQuantity = (itemId) => {
     const updatedCartItems = cartItems.map((item) => {
