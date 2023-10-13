@@ -90,3 +90,41 @@
 .total_price_label {
   text-align: left;
 }
+
+.increase_btn {
+  padding: 5px;
+  background-color: darkgreen;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+}
+
+.increase_btn:hover {
+  background-color: green;
+}
+
+.decrease_btn {
+  padding: 5px;
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+}
+
+.decrease_btn:hover {
+  background-color: #ff0000;
+}
+
+.item_quantity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

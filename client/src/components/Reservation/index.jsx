@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styles from "./styles.module.css";
 import CheckRoles from "../CheckRoles";
-import { loadCartItemsFromLocalStorage, saveCartItemsToLocalStorage } from "../Scripts/localStorage";
+import {
+  loadCartItemsFromLocalStorage,
+  saveCartItemsToLocalStorage,
+} from "../Scripts/localStorage";
 import NavigationSelector from "../Scripts/NavigationSelector";
 import axios from "axios";
 import Modal from "react-modal";
@@ -11,15 +14,24 @@ const Reservation = ({ handleLogout }) => {
   const [cartItems, setCartItems] = useState([]);
   const [week, setWeek] = useState([]);
   const storedEmail = localStorage.getItem("email");
-  const [selectedTime, setSelectedTime] = useState(null)
-  const [selectedPersons, setSelectedPersons] = useState(1)
-  const [comment, setComment] = useState("")
-  const [tempEmail, setTempEmail] = useState("")
+  const [selectedTime, setSelectedTime] = useState(null);
+  const [selectedPersons, setSelectedPersons] = useState(1);
+  const [comment, setComment] = useState("");
+  const [tempEmail, setTempEmail] = useState("");
+  const [chooseTableModal, setChooseTableModal] = useState(false);
 
   useEffect(() => {
     loadCartItemsFromLocalStorage(setCartItems);
     const today = new Date();
-    const daysOfWeek = ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"];
+    const daysOfWeek = [
+      "Niedziela",
+      "Poniedziałek",
+      "Wtorek",
+      "Środa",
+      "Czwartek",
+      "Piątek",
+      "Sobota",
+    ];
 
     const nextDays = [];
     for (let i = 0; i <= 6; i++) {
@@ -38,19 +50,19 @@ const Reservation = ({ handleLogout }) => {
   }, [cartItems]);
 
   const reserveTable = (date, hours, persons, comment, email) => {
-    const dateParts = date.split('.');
+    const dateParts = date.split(".");
     const day = dateParts[0];
     const month = dateParts[1];
     const year = dateParts[2];
 
     // Utwórz nową sformatowaną datę w formacie "RRRR-MM-DD"
-    const formattedDate = `${year}-${month}-${day}`
+    const formattedDate = `${year}-${month}-${day}`;
 
-    console.log(formattedDate)
-    console.log(hours)
-    console.log(persons)
-    console.log(email)
-    console.log(comment)
+    console.log(formattedDate);
+    console.log(hours);
+    console.log(persons);
+    console.log(email);
+    console.log(comment);
     try {
       const url = `${process.env.REACT_APP_DEV_SERVER}/api/reservations`;
       const data = {
@@ -68,11 +80,12 @@ const Reservation = ({ handleLogout }) => {
     }
   };
 
+  const showTables = () => {};
+
   return (
     <div className={styles.reservation_container}>
       <div>
-        <ServerAvailability>
-        </ServerAvailability>
+        <ServerAvailability></ServerAvailability>
       </div>
       <CheckRoles>
         {(details) => (
@@ -92,12 +105,48 @@ const Reservation = ({ handleLogout }) => {
               <p>{day.day}</p>
               <p>{day.date}</p>
               <div className={styles.time_ranges}>
-                <button onClick={() => setSelectedTime({ day: day.day, date: day.date, time: 10 })}>10:00 - 12:00</button>
-                <button onClick={() => setSelectedTime({ day: day.day, date: day.date, time: 12 })}>12:00 - 14:00</button>
-                <button onClick={() => setSelectedTime({ day: day.day, date: day.date, time: 14 })}>14:00 - 16:00</button>
-                <button onClick={() => setSelectedTime({ day: day.day, date: day.date, time: 16 })}>16:00 - 18:00</button>
-                <button onClick={() => setSelectedTime({ day: day.day, date: day.date, time: 18 })}>18:00 - 20:00</button>
-                <button onClick={() => setSelectedTime({ day: day.day, date: day.date, time: 20 })}>20:00 - 22:00</button>
+                <button
+                  onClick={() =>
+                    setSelectedTime({ day: day.day, date: day.date, time: 10 })
+                  }
+                >
+                  10:00 - 12:00
+                </button>
+                <button
+                  onClick={() =>
+                    setSelectedTime({ day: day.day, date: day.date, time: 12 })
+                  }
+                >
+                  12:00 - 14:00
+                </button>
+                <button
+                  onClick={() =>
+                    setSelectedTime({ day: day.day, date: day.date, time: 14 })
+                  }
+                >
+                  14:00 - 16:00
+                </button>
+                <button
+                  onClick={() =>
+                    setSelectedTime({ day: day.day, date: day.date, time: 16 })
+                  }
+                >
+                  16:00 - 18:00
+                </button>
+                <button
+                  onClick={() =>
+                    setSelectedTime({ day: day.day, date: day.date, time: 18 })
+                  }
+                >
+                  18:00 - 20:00
+                </button>
+                <button
+                  onClick={() =>
+                    setSelectedTime({ day: day.day, date: day.date, time: 20 })
+                  }
+                >
+                  20:00 - 22:00
+                </button>
               </div>
             </div>
           ))}
@@ -122,28 +171,68 @@ const Reservation = ({ handleLogout }) => {
               onChange={(e) => setSelectedPersons(e.target.value)}
               min="1"
             />
+            Wybierz stolik:
+            <button
+              className={styles.table_choose}
+              onClick={() => {chooseTableModal(true)}}
+            ></button>
             <label>Komentarz:</label>
             <textarea
               value={comment}
               onChange={(e) => setComment(e.target.value)}
             />
-            <p>Adres email: {storedEmail ? storedEmail :
-              <input
-                type="email"
-                value={tempEmail}
-                placeholder="Podaj adres email"
-                onChange={(e) => setTempEmail(e.target.value)}
-              />
-            }</p>
-            <button className={styles.btn_close} onClick={() => setSelectedTime(null)}>Anuluj</button>
-            <button className={styles.btn_send} onClick={() => {
-              reserveTable(selectedTime.date, selectedTime.time, selectedPersons, comment, storedEmail ? storedEmail : tempEmail)
-              setSelectedTime(null)
-              setSelectedPersons(1)
-              setComment("")
-            }}>Zarezerwuj</button>
+            <p>
+              Adres email:{" "}
+              {storedEmail ? (
+                storedEmail
+              ) : (
+                <input
+                  type="email"
+                  value={tempEmail}
+                  placeholder="Podaj adres email"
+                  onChange={(e) => setTempEmail(e.target.value)}
+                />
+              )}
+            </p>
+            <button
+              className={styles.btn_close}
+              onClick={() => setSelectedTime(null)}
+            >
+              Anuluj
+            </button>
+            <button
+              className={styles.btn_send}
+              onClick={() => {
+                reserveTable(
+                  selectedTime.date,
+                  selectedTime.time,
+                  selectedPersons,
+                  comment,
+                  storedEmail ? storedEmail : tempEmail
+                );
+                setSelectedTime(null);
+                setSelectedPersons(1);
+                setComment("");
+              }}
+            >
+              Zarezerwuj
+            </button>
           </div>
         )}
+        <Modal
+          isOpen={chooseTableModal}
+          onRequestClose={() => setChooseTableModal(false)}
+          className={styles.modal_choose_table}
+          overlayClassName={styles.overlay_choose_table}
+        >
+          <h2>Wybierz stolik</h2>
+          <button
+            className={styles.btn_close}
+            onClick={() => setChooseTableModal(false)}
+          >
+            Anuluj
+          </button>
+        </Modal>
       </Modal>
     </div>
   );

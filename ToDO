@@ -10,6 +10,8 @@
 [ ] Przerobić dodawanie empl i product na Modala
 [ ] Logowanie przez OAuth?
 [ ] Zabawa QR i NFC - linki przekazujące nr stolików
+[ ] Websocket albo cos podobnego do natychmiastowych aktualizacji zamówień, stolików bez odświeżania
+[ ] Zrobić oddzielne efekty po kliknięciu niektórych buttonów, tak żeby np po dodaniu do koszyka podświetlała się w nav koszyk
 
 == Zrobione ==
 [x] Przy każdym/dostarczonym zamówieniu dodać możliwość oceny klikaną gwiazdką

@@ -212,7 +212,7 @@ const OrderRealize = ({ handleLogout }) => {
           {!isTableNumberValid && (
             <p className={styles.error_message}>{tableNumberErrorMessage}</p>
           )}
-          <label htmlFor="tableNumber">Number stolika:</label>
+          <label htmlFor="tableNumber">Numer stolika:</label>
           <input
             type="text"
             id="tableNumber"
@@ -237,7 +237,7 @@ const OrderRealize = ({ handleLogout }) => {
           </div>
         )}
 
-        <div className={styles.form_group}>
+        <div className={styles.form_group_comment}>
           <label htmlFor="comments">Dodatkowe komentarze:</label>
           <textarea
             id="comments"

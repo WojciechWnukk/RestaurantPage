@@ -16,6 +16,7 @@ const Main = ({ handleLogout }) => {
   const [products, setProducts] = useState([]);
   const [filteredFoodData, setFilteredFoodData] = useState([])
   const [searchQuery, setSearchQuery] = useState("");
+  const [wantSearch, setWantSearch] = useState(false);
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category);
@@ -64,13 +65,21 @@ const Main = ({ handleLogout }) => {
 
   useEffect(() => {
     fetchProducts()
-    const filteredData = products.filter(
+    let filteredData = products
+    if(!wantSearch) {
+    filteredData = products.filter(
       (product) =>
         product.productCategory === selectedCategory.name &&
         product.productName.toLowerCase().includes(searchQuery.toLowerCase())
     )
+    } else {
+      filteredData = products.filter(
+      (product) =>
+      product.productName.toLowerCase().includes(searchQuery.toLowerCase())
+    )
+    }
     setFilteredFoodData(filteredData);
-  }, [products, selectedCategory, searchQuery]);
+  }, [products, selectedCategory, searchQuery, wantSearch]);
 
   return (
     <div className={styles.main_container}>
@@ -100,6 +109,7 @@ const Main = ({ handleLogout }) => {
                 className={`${styles.category_button} ${category === selectedCategory ? styles.active_category : ""
                   }`}
                 onClick={() => handleCategoryClick(category)}
+                disabled = {wantSearch}
               >
                 {category.name}
                 <br /><br />
@@ -114,12 +124,19 @@ const Main = ({ handleLogout }) => {
           </div>
         </div>
         <div className={styles.search_bar}>
-          <input
-            type="text"
-            placeholder="Szukaj produktów..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
+          {wantSearch ? <button className={styles.search_button} onClick={() => setWantSearch(!wantSearch)}>{"❌"}</button> : null}
+          {wantSearch ? null : <button className={styles.search_button} onClick={() => setWantSearch(!wantSearch)}>{"🔍"}</button>}
+          {wantSearch ? 
+                   <input
+                   type="text"
+                   placeholder="Szukaj produktów..."
+                   value={searchQuery}
+                   onChange={(e) => setSearchQuery(e.target.value)}
+                 />
+                 :
+                  null
+        }
+ 
         </div>
         <div className={styles.content}>
           <div className={styles.food_items}>
