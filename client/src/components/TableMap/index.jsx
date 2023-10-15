@@ -142,12 +142,6 @@ const TableMap = ({ handleLogout }) => {
     console.log(today);
   }, []);
 
-  useEffect(() => {
-    window.onload = () => {
-      const mapElement = document.querySelector(`.${styles.map}`);
-      console.log(mapElement);
-    };
-  }, []);
 
   return (
     <div className={styles.tableMap_container}>
