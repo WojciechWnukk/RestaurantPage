@@ -10,12 +10,14 @@ Some examples of functionality:
 - email notifications for certain activities
 - orders rating
 - displaying of order history
-- When creating an employee account in front of the administrator, the system randomly generates a password which it sends to the specified email
+- when creating an employee account in front of the administrator, the system randomly generates a password which it sends to the specified email
 - displaying of navigation depending on account permissions
-- Adding and updating products by admin (now they are in DB)
+- adding and updating products by admin
 - paying online with stripe
 - updating an order that hasn't been approved
 - updating users and employees ( 1 action = changes in 2 collections)
-
-After hosting update:
-- Promotions system
+- promotions system
+- map with tables position
+- graph with earning with download option
+- product searching
+- reservation system
