@@ -39,15 +39,14 @@ const TableMap = ({ handleLogout }) => {
   const handleTableDragEnd = async (tableId, clientX, clientY) => {
     try {
       const mapElement = document.querySelector(`.${styles.map}`);
-      if(mapElement === null) return;
+      if (mapElement === null) return;
       const mapRect = mapElement.getBoundingClientRect();
-
+      console.log("elooo")
       // Szerokość i wysokość kratki
       const gridSize = 40;
 
       // Skalowanie pozycji myszki względem szerokości i wysokości mapy
-      const scaledX =
-        Math.round((clientX - mapRect.left) / gridSize) * gridSize;
+      const scaledX = Math.round((clientX - mapRect.left) / gridSize) * gridSize;
       const scaledY = Math.round((clientY - mapRect.top) / gridSize) * gridSize;
       if (scaledX < 0 || scaledY < 0 || scaledX > 560 || scaledY > 360) {
         console.log("Nie można ustawić poza mapą");
