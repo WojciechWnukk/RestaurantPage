@@ -65,6 +65,7 @@ const Cart = ({ handleLogout }) => {
           <NavigationSelector
             details={details}
             cartItems={cartItems}
+            quantity={cartItems.reduce((acc, item) => acc + item.quantity, 0)}
             handleLogout={handleLogout}
             token={localStorage.getItem("token")}
           />
@@ -88,18 +89,18 @@ const Cart = ({ handleLogout }) => {
                   <p>{item.productPrice + " zł"}</p>
                   <p>Ilość: {item.quantity}</p> {}
                   <div className={styles.item_quantity}>
-                  <button
-                    className={styles.decrease_btn}
-                    onClick={() => decreaseQuantity(item._id)}
-                  >
-                    -
-                  </button>
-                  <button
-                    className={styles.increase_btn}
-                    onClick={() => increaseQuantity(item._id)}
-                  >
-                    +
-                  </button>
+                    <button
+                      className={styles.decrease_btn}
+                      onClick={() => decreaseQuantity(item._id)}
+                    >
+                      -
+                    </button>
+                    <button
+                      className={styles.increase_btn}
+                      onClick={() => increaseQuantity(item._id)}
+                    >
+                      +
+                    </button>
                   </div>
                 </div>
               </div>

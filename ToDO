@@ -11,7 +11,7 @@
 [ ] Logowanie przez OAuth?
 [ ] Zabawa QR i NFC - linki przekazujące nr stolików
 [ ] Websocket albo cos podobnego do natychmiastowych aktualizacji zamówień, stolików bez odświeżania
-[ ] Zrobić oddzielne efekty po kliknięciu niektórych buttonów, tak żeby np po dodaniu do koszyka podświetlała się w nav koszyk
+[ ] WALIDACJE NA FRONCIE I TESTY
 
 == Zrobione ==
 [x] Przy każdym/dostarczonym zamówieniu dodać możliwość oceny klikaną gwiazdką
@@ -39,3 +39,4 @@
 [x] : Robienie z usera pracownika (zmiana roli w k user i dodanie do empl)
 [x] Dodanie w .env danych serwera i clienta hosting/nie aby szybko zmieniać między dev a prod
 [x] Panel promocji typu zbieranie punktów za zakupy
+[x] Zrobić oddzielne efekty po kliknięciu niektórych buttonów, tak żeby np po dodaniu do koszyka podświetlała się w nav koszyk

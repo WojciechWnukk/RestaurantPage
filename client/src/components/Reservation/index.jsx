@@ -23,8 +23,7 @@ const Reservation = ({ handleLogout }) => {
   const [chooseTableModal, setChooseTableModal] = useState(false);
   const [tables, setTables] = useState(null);
   const [selectedTable, setSelectedTable] = useState(null);
-  const [alreadyReserved, setAlreadyReserved] = useState([])
-
+  const [alreadyReserved, setAlreadyReserved] = useState([]);
 
   useEffect(() => {
     loadCartItemsFromLocalStorage(setCartItems);
@@ -121,15 +120,11 @@ const Reservation = ({ handleLogout }) => {
       );
       setAlreadyReserved(reservedTableNumbers);
       console.log(alreadyReserved);
-      console.log(reservedTableNumbers)
-
+      console.log(reservedTableNumbers);
     } catch (error) {
       console.error("Error fetching tables: ", error);
     }
-  }
-
-
-
+  };
 
   return (
     <div className={styles.reservation_container}>
@@ -141,6 +136,7 @@ const Reservation = ({ handleLogout }) => {
           <NavigationSelector
             details={details}
             cartItems={cartItems}
+            quantity={cartItems.reduce((acc, item) => acc + item.quantity, 0)}
             handleLogout={handleLogout}
             token={localStorage.getItem("token")}
           />
@@ -204,10 +200,9 @@ const Reservation = ({ handleLogout }) => {
       <Modal
         isOpen={selectedTime !== null}
         onRequestClose={() => {
-          setSelectedTime(null)
-          setSelectedTable(null)
-        }
-        }
+          setSelectedTime(null);
+          setSelectedTable(null);
+        }}
         className={styles.modal}
         overlayClassName={styles.overlay}
       >
@@ -232,11 +227,14 @@ const Reservation = ({ handleLogout }) => {
                   className={styles.table_choose}
                   onClick={() => {
                     setChooseTableModal(true);
-                    checkReservedTables(selectedTime.date, selectedTime.time)
-
+                    checkReservedTables(selectedTime.date, selectedTime.time);
                   }}
                 >
-                  <FontAwesomeIcon icon={faArrowPointer} size="xl" style={{color: "#ffffff",}} />
+                  <FontAwesomeIcon
+                    icon={faArrowPointer}
+                    size="xl"
+                    style={{ color: "#ffffff" }}
+                  />
                 </button>
               </div>
             ) : (
@@ -265,10 +263,9 @@ const Reservation = ({ handleLogout }) => {
             <button
               className={styles.btn_close}
               onClick={() => {
-                setSelectedTime(null)
-                setSelectedTable(null)
-              }
-              }
+                setSelectedTime(null);
+                setSelectedTable(null);
+              }}
             >
               Anuluj
             </button>
@@ -294,9 +291,7 @@ const Reservation = ({ handleLogout }) => {
         )}
         <Modal
           isOpen={chooseTableModal}
-          onRequestClose={() => 
-            setChooseTableModal(false)
-          }
+          onRequestClose={() => setChooseTableModal(false)}
           className={styles.modal_choose_table}
           overlayClassName={styles.overlay_choose_table}
         >
@@ -307,7 +302,8 @@ const Reservation = ({ handleLogout }) => {
                   <div
                     key={table._id}
                     className={
-                      alreadyReserved.includes(table.tableNumber) || table.tableStatus === "Zajęty"
+                      alreadyReserved.includes(table.tableNumber) ||
+                      table.tableStatus === "Zajęty"
                         ? styles.table_occupied
                         : styles.table
                     }
@@ -316,15 +312,13 @@ const Reservation = ({ handleLogout }) => {
                       top: `${table.y}px`,
                     }}
                     onClick={() => {
-                      if(alreadyReserved.includes(table.tableNumber)){
-                        alert("Ten stolik jest już zarezerwowany")
-                        return
+                      if (alreadyReserved.includes(table.tableNumber)) {
+                        alert("Ten stolik jest już zarezerwowany");
+                        return;
                       } else {
                         setSelectedTable(table.tableNumber);
                         setChooseTableModal(false);
-                        
                       }
-                      
                     }}
                     title={"Liczba miejsc " + table.tableCapacity}
                   >

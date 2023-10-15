@@ -1,3 +1,4 @@
+/*
 import React, { useState, useEffect } from "react";
 import styles from "./styles.module.css";
 import Navigation from "../Navigation";
@@ -133,7 +134,7 @@ const UpdateProduct = ({ handleLogout }) => {
                     <label>
                         Kategoria:
                         <select name="productCategory" value={data.productCategory} onChange={handleChange} required>
-                            <option value="">Wybierz kategorie</option> {/* trzeba zrobic integracje z bazą potem */}
+                            <option value="">Wybierz kategorie</option> {/* trzeba zrobic integracje z bazą potem */ /*}
                             <option value="Przystawki">Przystawki</option>
                             <option value="Dania główne">Dania główne</option>
                             <option value="Desery">Desery</option>
@@ -159,3 +160,4 @@ const UpdateProduct = ({ handleLogout }) => {
 };
 
 export default UpdateProduct;
+*/

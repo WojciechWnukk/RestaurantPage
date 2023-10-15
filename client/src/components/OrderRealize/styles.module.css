@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
 }
 
 .order_realize_container h2 {
@@ -26,11 +25,9 @@ form {
   margin-bottom: 20px;
 }
 
-
 .btn_payment:hover {
   background-color: #0069d9;
 }
-
 
 .btn_submit {
   background-color: #28a745;
@@ -79,7 +76,6 @@ form {
   cursor: pointer;
   width: 300px;
 }
-
 
 .order_summary_table {
   width: 100%;
@@ -150,7 +146,7 @@ form {
   width: 600px;
   height: 400px;
   background-image: linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+    linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
   background-size: 40px 40px;
   /* Rozmiar kratki */
   margin-top: 20px;
@@ -206,4 +202,3 @@ form {
   margin: 0 auto;
   margin-top: 20px;
 }
-

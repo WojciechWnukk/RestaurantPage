@@ -30,7 +30,6 @@
   font-size: 20px;
 }
 
-
 .time_ranges {
   display: flex;
   flex-direction: column;
@@ -167,7 +166,7 @@ p {
   width: 600px;
   height: 400px;
   background-image: linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+    linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
   background-size: 40px 40px;
   /* Rozmiar kratki */
   margin-top: 20px;
@@ -208,4 +207,3 @@ p {
   border: 2px solid #000;
   border-radius: 50%;
 }
-

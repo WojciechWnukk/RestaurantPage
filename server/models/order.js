@@ -1,12 +1,10 @@
 const mongoose = require("mongoose");
-const Joi = require("joi")
+const Joi = require("joi");
 const { ObjectId } = mongoose.Schema.Types;
-
-
 
 const orderSchema = new mongoose.Schema({
   orderId: {
-    type: String
+    type: String,
   },
   meals: [
     {
@@ -24,15 +22,15 @@ const orderSchema = new mongoose.Schema({
   userEmail: { type: String, required: true },
   orderDate: { type: Date, default: Date.now },
   orderRate: { type: Number, default: null },
-  paymentStatus: { type: String, required: true }
-})
+  paymentStatus: { type: String, required: true },
+});
 
 orderSchema.pre("save", function (next) {
   this.orderId = this._id;
   next();
-})
+});
 
-const Order = mongoose.model("Order", orderSchema)
+const Order = mongoose.model("Order", orderSchema);
 
 const validate = (data) => {
   const schema = Joi.object({
@@ -52,8 +50,8 @@ const validate = (data) => {
     userEmail: Joi.string().required(),
     orderDate: Joi.date().optional(),
     orderRate: Joi.number().allow(0, null),
-    paymentStatus: Joi.string().required()
-  })
-  return schema.validate(data)
-}
+    paymentStatus: Joi.string().required(),
+  });
+  return schema.validate(data);
+};
 module.exports = { Order, validate };

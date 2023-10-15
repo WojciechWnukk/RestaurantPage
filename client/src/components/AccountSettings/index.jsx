@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styles from "./styles.module.css";
 import Navigation from "../Navigation";
-import { loadCartItemsFromLocalStorage, saveCartItemsToLocalStorage } from "../Scripts/localStorage";
+import {
+  loadCartItemsFromLocalStorage,
+  saveCartItemsToLocalStorage,
+} from "../Scripts/localStorage";
 import axios from "axios";
-import NavigationForAdmin from "../NavigationForAdmin"
+import NavigationForAdmin from "../NavigationForAdmin";
 import CheckRoles from "../CheckRoles";
 import ServerAvailability from "../Scripts/ServerAvailability";
 
@@ -13,8 +16,8 @@ const AccountSettings = ({ handleLogout }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [cartItems, setCartItems] = useState([]);
-  const [currentNumber, setCurrentNumber] = useState("")
-  const [newNumber, setNewNumber] = useState("")
+  const [currentNumber, setCurrentNumber] = useState("");
+  const [newNumber, setNewNumber] = useState("");
 
   useEffect(() => {
     loadCartItemsFromLocalStorage(setCartItems);
@@ -32,7 +35,9 @@ const AccountSettings = ({ handleLogout }) => {
       return;
     }
     if (!validatePassword(newPassword)) {
-      setErrorMessage("Hasło musi zawierać co najmniej 8 znaków i może zawierać tylko litery i cyfry.");
+      setErrorMessage(
+        "Hasło musi zawierać co najmniej 8 znaków i może zawierać tylko litery i cyfry."
+      );
       return;
     }
 
@@ -60,8 +65,6 @@ const AccountSettings = ({ handleLogout }) => {
       console.error("Wystąpił błąd podczas zmiany hasła:", error);
     }
 
-
-
     setCurrentPassword("");
     setNewPassword("");
     setConfirmPassword("");
@@ -71,87 +74,99 @@ const AccountSettings = ({ handleLogout }) => {
   const validatePassword = (password) => {
     const passwordRegex = /^[a-zA-Z0-9.!@#$%^&*()_+-]{8,}$/;
     return passwordRegex.test(password);
-  }
-
+  };
 
   const deleteUser = async (e) => {
-    e.preventDefault()
-    const token = localStorage.getItem("token")
-    console.log("token" + token)
-    const confirmed = window.confirm("Czy na pewno chcesz usunąć swoje konto?")
+    e.preventDefault();
+    const token = localStorage.getItem("token");
+    console.log("token" + token);
+    const confirmed = window.confirm("Czy na pewno chcesz usunąć swoje konto?");
 
     if (confirmed) {
-      const token = localStorage.getItem("token")
+      const token = localStorage.getItem("token");
 
       if (token) {
         try {
           const config = {
-            method: 'delete',
+            method: "delete",
             url: `${process.env.REACT_APP_DEV_SERVER}/api/users`,
             headers: {
-              'Content-Type': 'application/json',
-              'x-access-token': token
-            }
-          }
+              "Content-Type": "application/json",
+              "x-access-token": token,
+            },
+          };
 
-          await axios(config)
-          console.log("Usunieto konto")
-        } catch (error) {
-
-        }
+          await axios(config);
+          console.log("Usunieto konto");
+        } catch (error) {}
       }
-      localStorage.removeItem("token")
-      localStorage.removeItem("cartItems")
-      window.location.reload()
+      localStorage.removeItem("token");
+      localStorage.removeItem("cartItems");
+      window.location.reload();
     }
-
-  }
+  };
 
   const changeNumber = async (e) => {
-    e.preventDefault()
-    const token = localStorage.getItem("token")
-    console.log("token" + token)
-    const confirmed = window.confirm("Czy na pewno chcesz zmienić numer telefonu?")
+    e.preventDefault();
+    const token = localStorage.getItem("token");
+    console.log("token" + token);
+    const confirmed = window.confirm(
+      "Czy na pewno chcesz zmienić numer telefonu?"
+    );
     if (confirmed) {
-      const token = localStorage.getItem("token")
+      const token = localStorage.getItem("token");
       if (token) {
         try {
           const config = {
-            method: 'put',
+            method: "put",
             url: `${process.env.REACT_APP_DEV_SERVER}/api/users/phoneNumber`,
             headers: {
-              'Content-Type': 'application/json',
-              'x-access-token': token
+              "Content-Type": "application/json",
+              "x-access-token": token,
             },
             data: {
               currentNumber: currentNumber,
-              newNumber: newNumber
-            }
-          }
+              newNumber: newNumber,
+            },
+          };
 
-          await axios(config)
-          console.log("Zmieniono numer")
-        } catch (error) {
-
-        }
+          await axios(config);
+          console.log("Zmieniono numer");
+        } catch (error) {}
       }
-      setCurrentNumber("")
-      setNewNumber("")
+      setCurrentNumber("");
+      setNewNumber("");
     }
-  }
+  };
 
   return (
     <div className={styles.account_settings_container}>
       <div>
-        <ServerAvailability>
-        </ServerAvailability>
+        <ServerAvailability></ServerAvailability>
       </div>
       <CheckRoles>
         {(details) => {
           if (details && details.roles === "Admin") {
-            return <NavigationForAdmin handleLogout={handleLogout} />;
+            return (
+              <NavigationForAdmin
+                handleLogout={handleLogout}
+                quantity={cartItems.reduce(
+                  (acc, item) => acc + item.quantity,
+                  0
+                )}
+              />
+            );
           } else {
-            return <Navigation cartItemCount={cartItems.length} handleLogout={handleLogout} />
+            return (
+              <Navigation
+                cartItemCount={cartItems.length}
+                handleLogout={handleLogout}
+                quantity={cartItems.reduce(
+                  (acc, item) => acc + item.quantity,
+                  0
+                )}
+              />
+            );
           }
         }}
       </CheckRoles>
@@ -217,8 +232,6 @@ const AccountSettings = ({ handleLogout }) => {
           <button type="submit">Zmień numer</button>
         </div>
       </form>
-
-
     </div>
   );
 };

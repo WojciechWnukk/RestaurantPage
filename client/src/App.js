@@ -14,7 +14,7 @@ import AddEmployee from "./components/AddEmployee"
 import Reservation from "./components/Reservation"
 import FoodPanel from "./components/FoodPanel"
 import AddProduct from "./components/AddProduct"
-import UpdateProduct from "./components/UpdateProduct"
+//import UpdateProduct from "./components/UpdateProduct"
 import Promotions from "./components/Promotions"
 import Reports from "./components/Reports"
 import TableMap from "./components/TableMap"
@@ -38,7 +38,7 @@ function App() {
             {user && <Route path="/add-employee" element={<AddEmployee />} />}
             {user && <Route path="/food-panel" element={<FoodPanel />} />}
             {user && <Route path="/new-product" element={<AddProduct />} />}
-            {user && <Route path="/update-product" element={<UpdateProduct />} />}
+            {/*user && <Route path="/update-product" element={<UpdateProduct />} />*/}
             {user && <Route path="/promotions" element={<Promotions />} />}
             {user && <Route path="/reports" element={<Reports />} />}
             {user && <Route path="/table-map" element={<TableMap />} />}

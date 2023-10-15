@@ -8,7 +8,6 @@
   margin-bottom: 20px;
 }
 
-
 .permissions_table {
   width: 100%;
   table-layout: fixed;
@@ -35,7 +34,6 @@
 .permissions_table tfoot td:last-child {
   text-align: right;
 }
-
 
 label {
   display: block;

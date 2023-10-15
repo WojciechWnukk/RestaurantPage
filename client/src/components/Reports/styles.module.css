@@ -1,48 +1,47 @@
 .graph_container {
-    width: 60%;
-    height: auto;
-    margin: 0 auto;
-    padding: 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #fff;
-    box-shadow: 0 0 5px #ccc;
-    overflow: hidden;
-    position: relative;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-    margin-top: 80px;
-
+  width: 60%;
+  height: auto;
+  margin: 0 auto;
+  padding: 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  box-shadow: 0 0 5px #ccc;
+  overflow: hidden;
+  position: relative;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-top: 80px;
 }
 
 .graph_title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin: 0;
-    padding: 10px;
-    text-align: center;
-    color: #000000;
-    width: 100%;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0;
+  padding: 10px;
+  text-align: center;
+  color: #000000;
+  width: 100%;
 }
 
 .btn_download {
-    background-color: #1440d3;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 5px 10px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease-in-out;
-    display: inline-block;
-    align-items: center;
-    justify-content: center;
-    color: white;
+  background-color: #1440d3;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+  color: white;
 }
 
 .reports_container {
-    text-align: center;
-    position: relative;
+  text-align: center;
+  position: relative;
 }

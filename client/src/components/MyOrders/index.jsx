@@ -4,7 +4,7 @@ import Navigation from "../Navigation";
 import axios from "axios";
 import NavigationForAdmin from "../NavigationForAdmin";
 import CheckRoles from "../CheckRoles";
-import { loadCartItemsFromLocalStorage, saveCartItemsToLocalStorage } from "../Scripts/localStorage";
+import { loadCartItemsFromLocalStorage } from "../Scripts/localStorage";
 import Modal from "react-modal";
 import ServerAvailability from "../Scripts/ServerAvailability";
 
@@ -15,26 +15,24 @@ const MyOrders = ({ handleLogout }) => {
   const email = localStorage.getItem("email");
   const [cartItems, setCartItems] = useState([]);
   const [ratings, setRatings] = useState({});
-  const [selectedOrderId, setSelectedOrderId] = useState(null)
+  const [selectedOrderId, setSelectedOrderId] = useState(null);
   const [modify, setModify] = useState("");
   const [showPointsModal, setShowPointsModal] = useState(false);
   const [earnedPoints, setEarnedPoints] = useState(0);
-  const [selectedOrderDetails, setSelectedOrderDetails] = useState(null)
-
-
+  const [selectedOrderDetails, setSelectedOrderDetails] = useState(null);
 
   useEffect(() => {
     loadCartItemsFromLocalStorage(setCartItems);
   }, []);
 
-  useEffect(() => {
-    saveCartItemsToLocalStorage(cartItems);
-  }, [cartItems]);
-
   const fetchOrderData = async () => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_DEV_SERVER}/api/orders`);
-      const orders = response.data.data.filter((order) => order.userEmail === email);
+      const response = await axios.get(
+        `${process.env.REACT_APP_DEV_SERVER}/api/orders`
+      );
+      const orders = response.data.data.filter(
+        (order) => order.userEmail === email
+      );
       setOrderData(orders);
 
       const initialRatings = {};
@@ -62,86 +60,106 @@ const MyOrders = ({ handleLogout }) => {
       await axios.put(
         `${process.env.REACT_APP_DEV_SERVER}/api/orders/${orderId}`,
         { orderRate: rating }
-      )
+      );
 
       //pobieranie danych o zalogowanym użytkowniku oraz dodawanie mu punktów o wartości 10% wartości zamówienia
-      putPoints(orderId)
+      putPoints(orderId);
 
-
-      fetchOrderData()
+      fetchOrderData();
     } catch (error) {
       console.error("Error updating order status:", error);
     }
-  }
+  };
 
   const handleRateOrder = (orderId, rating) => {
-    if (!ratings[orderId] && orderData.find((order) => order.orderId === orderId).status === "Zamowienie dostarczone") {
-
+    if (
+      !ratings[orderId] &&
+      orderData.find((order) => order.orderId === orderId).status ===
+        "Zamowienie dostarczone"
+    ) {
       setRatings((prevRatings) => ({
         ...prevRatings,
         [orderId]: rating,
-      }))
+      }));
 
-      handleRateChange(orderId, rating)
+      handleRateChange(orderId, rating);
 
       console.log(rating, orderId);
     }
-  }
+  };
 
   const handleModifyChange = (event) => {
     setModify(event.target.value);
   };
 
   const modifyOrder = async (orderId, newModify) => {
-    console.log("Wchodzi tu")
+    console.log("Wchodzi tu");
     try {
       await axios.put(
         `${process.env.REACT_APP_DEV_SERVER}/api/orders/${orderId}`,
         { modifyOrder: newModify }
-      )
+      );
     } catch (error) {
       console.error("Error updating order comments:", error);
     }
-  }
+  };
 
   const putPoints = async (orderId) => {
     try {
-      const response = await axios.get(`${process.env.REACT_APP_DEV_SERVER}/api/orders/${orderId}`);
+      const response = await axios.get(
+        `${process.env.REACT_APP_DEV_SERVER}/api/orders/${orderId}`
+      );
       const order = response.data.data;
-      const user = await axios.get(`${process.env.REACT_APP_DEV_SERVER}/api/users/${email}`);
-      console.log(user.data.data)
+      const user = await axios.get(
+        `${process.env.REACT_APP_DEV_SERVER}/api/users/${email}`
+      );
+      console.log(user.data.data);
       const points = Math.floor(order.totalPrice * 10);
       const newPoints = user.data.data.points + points;
-      console.log("Po ocenie ", newPoints)
-      console.log("Za zamowienie ", points)
+      console.log("Po ocenie ", newPoints);
+      console.log("Za zamowienie ", points);
       await axios.put(
         `${process.env.REACT_APP_DEV_SERVER}/api/users/points/${email}`,
         { points: newPoints }
-      )
+      );
       showPointsCongratulations(points);
     } catch (error) {
       console.error("Error updating user points:", error);
     }
-  }
+  };
 
   const showPointsCongratulations = (points) => {
     setEarnedPoints(points);
     setShowPointsModal(true);
   };
 
-
   return (
     <div className={styles.order_realize_container}>
       <div>
-        <ServerAvailability>
-        </ServerAvailability>
+        <ServerAvailability></ServerAvailability>
       </div>
       <CheckRoles>
         {(details) => {
           if (details && details.roles === "Admin") {
-            return <NavigationForAdmin handleLogout={handleLogout} />;
+            return (
+              <NavigationForAdmin
+                handleLogout={handleLogout}
+                quantity={cartItems.reduce(
+                  (acc, item) => acc + item.quantity,
+                  0
+                )}
+              />
+            );
           } else {
-            return <Navigation cartItemCount={cartItems.length} handleLogout={handleLogout} />;
+            return (
+              <Navigation
+                handleLogout={handleLogout}
+                quantity={cartItems.reduce(
+                  (acc, item) => acc + item.quantity,
+                  0
+                )}
+              />
+            );
           }
         }}
       </CheckRoles>
@@ -166,8 +184,11 @@ const MyOrders = ({ handleLogout }) => {
                 <td>{new Date(order.orderDate).toLocaleString()}</td>
                 <td>
                   <span
-                    className={`${styles.status} ${order.status === "Zamówiono" ? styles.status_ordered : styles.status_completed
-                      }`}
+                    className={`${styles.status} ${
+                      order.status === "Zamówiono"
+                        ? styles.status_ordered
+                        : styles.status_completed
+                    }`}
                   >
                     {order.status}
                   </span>
@@ -178,7 +199,12 @@ const MyOrders = ({ handleLogout }) => {
                     {[0, 1, 2, 3, 4, 5].map((rating) => (
                       <span
                         key={rating}
-                        className={`${styles.star} ${ratings[order.orderId] >= rating && ratings[order.orderId] > 0 ? styles.selected : ""}`}
+                        className={`${styles.star} ${
+                          ratings[order.orderId] >= rating &&
+                          ratings[order.orderId] > 0
+                            ? styles.selected
+                            : ""
+                        }`}
                         onClick={() => handleRateOrder(order.orderId, rating)}
                       >
                         ★
@@ -188,7 +214,10 @@ const MyOrders = ({ handleLogout }) => {
                 </td>
                 <td>
                   {order.status === "Zamówiono" ? (
-                    <button className={styles.btn_edit} onClick={() => setSelectedOrderId(order.orderId)}>
+                    <button
+                      className={styles.btn_edit}
+                      onClick={() => setSelectedOrderId(order.orderId)}
+                    >
                       Edytuj
                     </button>
                   ) : (
@@ -196,10 +225,12 @@ const MyOrders = ({ handleLogout }) => {
                       Niedostępne
                     </button>
                   )}
-
                 </td>
                 <td>
-                  <button className={styles.btn_edit} onClick={() => setSelectedOrderDetails(order.orderId)}>
+                  <button
+                    className={styles.btn_edit}
+                    onClick={() => setSelectedOrderDetails(order.orderId)}
+                  >
                     Szczegóły
                   </button>
                 </td>
@@ -211,30 +242,41 @@ const MyOrders = ({ handleLogout }) => {
       <Modal
         isOpen={selectedOrderId !== null}
         onRequestClose={() => {
-          setSelectedOrderId(null)
-          setModify("")
+          setSelectedOrderId(null);
+          setModify("");
         }}
         contentLabel="Edycja zamówienia"
         className={styles.modal_content}
         overlayClassName={styles.modal_overlay}
       >
-        <h2>Chcesz coś zmienić w zamówieniu? <br></br>Pisz!</h2>
+        <h2>
+          Chcesz coś zmienić w zamówieniu? <br></br>Pisz!
+        </h2>
         <label htmlFor="comments">Dodatkowe komentarze:</label>
         <textarea
           id="comments"
           value={modify}
           onChange={handleModifyChange}
         ></textarea>
-        <button className={styles.btn_close} onClick={() => {
-          setSelectedOrderId(null)
-          setModify("")
-        }}>Zamknij</button>
-        <button className={styles.btn_send} onClick={() => {
-          setSelectedOrderId(null)
-          modifyOrder(selectedOrderId, modify)
-        }}>Prześlij</button>
+        <button
+          className={styles.btn_close}
+          onClick={() => {
+            setSelectedOrderId(null);
+            setModify("");
+          }}
+        >
+          Zamknij
+        </button>
+        <button
+          className={styles.btn_send}
+          onClick={() => {
+            setSelectedOrderId(null);
+            modifyOrder(selectedOrderId, modify);
+          }}
+        >
+          Prześlij
+        </button>
       </Modal>
-
 
       {/*Modal z gratulacjami za ocenę zamówienia*/}
       <Modal
@@ -245,14 +287,19 @@ const MyOrders = ({ handleLogout }) => {
         overlayClassName={styles.modal_overlay}
       >
         <h2>Gratulacje! Otrzymujesz {earnedPoints} punktów!</h2>
-        <button className={styles.btn_close_points} onClick={() => setShowPointsModal(false)}>Zamknij</button>
+        <button
+          className={styles.btn_close_points}
+          onClick={() => setShowPointsModal(false)}
+        >
+          Zamknij
+        </button>
       </Modal>
 
       {/*Modal z szczegółami zamówienia*/}
       <Modal
         isOpen={selectedOrderDetails !== null}
         onRequestClose={() => {
-          setSelectedOrderDetails(null)
+          setSelectedOrderDetails(null);
         }}
         contentLabel="Szczegóły zamówienia"
         className={styles.modal_content}
@@ -268,26 +315,28 @@ const MyOrders = ({ handleLogout }) => {
             </tr>
           </thead>
           <tbody>
-            {reversedOrderData.map((order) => (
-              order.orderId === selectedOrderDetails ?
-                order.meals.map((meal) => (
-                  <tr key={meal._id}>
-                    <td>{meal.name}</td>
-                    <td>{meal.quantity}</td>
-                    <td>{meal.price}</td>
-                  </tr>
-                )
-
-                ) : null
-            ))}
+            {reversedOrderData.map((order) =>
+              order.orderId === selectedOrderDetails
+                ? order.meals.map((meal) => (
+                    <tr key={meal._id}>
+                      <td>{meal.name}</td>
+                      <td>{meal.quantity}</td>
+                      <td>{meal.price}</td>
+                    </tr>
+                  ))
+                : null
+            )}
           </tbody>
         </table>
-        <button className={styles.btn_close} onClick={() => {
-          setSelectedOrderDetails(null)
-        }}>Zamknij</button>
+        <button
+          className={styles.btn_close}
+          onClick={() => {
+            setSelectedOrderDetails(null);
+          }}
+        >
+          Zamknij
+        </button>
       </Modal>
-
-
     </div>
   );
 };

@@ -185,6 +185,7 @@ const OrderRealize = ({ handleLogout }) => {
           <NavigationSelector
             details={details}
             cartItems={cartItems}
+            quantity={cartItems.reduce((acc, item) => acc + item.quantity, 0)}
             handleLogout={handleLogout}
             token={localStorage.getItem("token")}
           />
