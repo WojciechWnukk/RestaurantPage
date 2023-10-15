@@ -38,9 +38,8 @@ const TableMap = ({ handleLogout }) => {
 
   const handleTableDragEnd = async (tableId, clientX, clientY) => {
     try {
-      const mapElement = document.querySelector(`.${styles.map}`);
-      const mapElementPom = document.querySelector(`.${styles.tableMap_container}`);
-      console.log(mapElementPom + "pom");
+      const mapElement =  document.getElementsByClassName(styles.map);
+      console.log(mapElement);
 
       const mapRect = mapElement.getBoundingClientRect();
       console.log("elooo" + mapRect.left, mapRect.top);
