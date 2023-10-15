@@ -143,8 +143,10 @@ const TableMap = ({ handleLogout }) => {
   }, []);
 
   useEffect(() => {
-    const mapElement1 = document.querySelector(`.${styles.map}`);
-    console.log(mapElement1);
+    window.onload = () => {
+      const mapElement = document.querySelector(`.${styles.map}`);
+      console.log(mapElement);
+    };
   }, []);
 
   return (
