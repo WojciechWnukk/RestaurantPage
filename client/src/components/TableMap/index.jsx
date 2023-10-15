@@ -39,14 +39,17 @@ const TableMap = ({ handleLogout }) => {
   const handleTableDragEnd = async (tableId, clientX, clientY) => {
     try {
       const mapElement = document.querySelector(`.${styles.map}`);
+      const mapElementPom = document.querySelector(`.${styles.tableMap_container}`);
+      console.log(mapElementPom + "pom");
 
       const mapRect = mapElement.getBoundingClientRect();
-      console.log("elooo" + mapRect.left, mapRect.top)
+      console.log("elooo" + mapRect.left, mapRect.top);
       // Szerokość i wysokość kratki
       const gridSize = 40;
 
       // Skalowanie pozycji myszki względem szerokości i wysokości mapy
-      const scaledX = Math.round((clientX - mapRect.left) / gridSize) * gridSize;
+      const scaledX =
+        Math.round((clientX - mapRect.left) / gridSize) * gridSize;
       const scaledY = Math.round((clientY - mapRect.top) / gridSize) * gridSize;
       if (scaledX < 0 || scaledY < 0 || scaledX > 560 || scaledY > 360) {
         console.log("Nie można ustawić poza mapą");
@@ -141,7 +144,6 @@ const TableMap = ({ handleLogout }) => {
     const today = new Date().toISOString().split("T")[0];
     console.log(today);
   }, []);
-
 
   return (
     <div className={styles.tableMap_container}>
