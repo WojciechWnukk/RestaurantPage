@@ -39,9 +39,9 @@ const TableMap = ({ handleLogout }) => {
   const handleTableDragEnd = async (tableId, clientX, clientY) => {
     try {
       const mapElement = document.querySelector(`.${styles.map}`);
-      if (mapElement === null) return;
+
       const mapRect = mapElement.getBoundingClientRect();
-      console.log("elooo")
+      console.log("elooo" + mapRect.left, mapRect.top)
       // Szerokość i wysokość kratki
       const gridSize = 40;
 
@@ -140,6 +140,11 @@ const TableMap = ({ handleLogout }) => {
     fetchReservations();
     const today = new Date().toISOString().split("T")[0];
     console.log(today);
+  }, []);
+
+  useEffect(() => {
+    const mapElement1 = document.querySelector(`.${styles.map}`);
+    console.log(mapElement1);
   }, []);
 
   return (
