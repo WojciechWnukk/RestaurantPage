@@ -39,6 +39,7 @@ const TableMap = ({ handleLogout }) => {
   const handleTableDragEnd = async (tableId, clientX, clientY) => {
     try {
       const mapElement = document.querySelector(`.${styles.map}`);
+      if(mapElement === null) return;
       const mapRect = mapElement.getBoundingClientRect();
 
       // Szerokość i wysokość kratki
