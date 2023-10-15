@@ -1,4 +1,4 @@
-# RestaurantPage - in progress
+# RestaurantPage
 System to support restaurant service - MERN STACK
 
 Some examples of functionality:
