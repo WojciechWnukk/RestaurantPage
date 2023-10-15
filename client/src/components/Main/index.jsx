@@ -47,9 +47,11 @@ const Main = ({ handleLogout }) => {
         return item;
       });
       setCartItems(updatedCartItems);
+      saveCartItemsToLocalStorage(updatedCartItems);
     } else {
       const updatedCartItems = [...cartItems, { ...food, quantity: 1 }];
       setCartItems(updatedCartItems);
+      saveCartItemsToLocalStorage(updatedCartItems);
     }
     console.log(cartItems);
   };
