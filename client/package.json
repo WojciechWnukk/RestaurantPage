@@ -27,6 +27,7 @@
     "react-modal": "^3.16.1",
     "react-router-dom": "^6.11.2",
     "react-scripts": "^5.0.1",
+    "react-test-renderer": "^18.2.0",
     "startbootstrap-shop-homepage": "^5.0.6",
     "stripe": "^12.13.0",
     "uuid": "^9.0.0",
@@ -36,7 +37,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test"
+    "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!axios)/\""
   },
   "eslintConfig": {
     "extends": [
@@ -57,14 +58,15 @@
     ]
   },
   "devDependencies": {
-    "@babel/core": "^7.23.0",
-    "@babel/preset-env": "^7.22.20",
+    "@babel/core": "^7.23.2",
+    "@babel/preset-env": "^7.23.2",
     "@babel/preset-react": "^7.22.15",
-    "babel-jest": "^29.7.0"
+    "babel-jest": "^29.7.0",
+    "jest-localstorage-mock": "^2.4.26"
   },
   "jest": {
     "transform": {
       "^.+\\.jsx?$": "babel-jest"
     }
-  }  
+  }
 }

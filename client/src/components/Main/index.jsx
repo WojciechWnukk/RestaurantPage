@@ -17,7 +17,7 @@ import {
 import NavigationSelector from "../Scripts/NavigationSelector";
 import ServerAvailability from "../Scripts/ServerAvailability";
 
-const Main = ({ handleLogout }) => {
+const Main = ({ }) => {
   const [selectedCategory, setSelectedCategory] = useState(categoriesData[0]);
   const [cartItems, setCartItems] = useState([]);
   const [products, setProducts] = useState([]);
@@ -32,6 +32,12 @@ const Main = ({ handleLogout }) => {
   useEffect(() => {
     loadCartItemsFromLocalStorage(setCartItems);
   }, []);
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("cartItems");
+    localStorage.removeItem("email");
+    window.location.reload();
+  };
 
   useEffect(() => {
     saveCartItemsToLocalStorage(cartItems);
@@ -87,7 +93,7 @@ const Main = ({ handleLogout }) => {
   return (
     <div className={styles.main_container}>
       <div>
-        <ServerAvailability></ServerAvailability>
+        {/*<ServerAvailability></ServerAvailability>*/}
       </div>
       <div>
         <CheckRoles>
@@ -143,6 +149,7 @@ const Main = ({ handleLogout }) => {
           {wantSearch ? null : (
             <button
               className={styles.search_button}
+              data-testid="test-button"
               onClick={() => setWantSearch(!wantSearch)}
             >
               {"🔍"}

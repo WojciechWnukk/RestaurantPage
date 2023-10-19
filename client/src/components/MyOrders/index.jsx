@@ -8,7 +8,7 @@ import { loadCartItemsFromLocalStorage } from "../Scripts/localStorage";
 import Modal from "react-modal";
 import ServerAvailability from "../Scripts/ServerAvailability";
 
-Modal.setAppElement("#root");
+//Modal.setAppElement("#root");
 
 const MyOrders = ({ handleLogout }) => {
   const [orderData, setOrderData] = useState(null);

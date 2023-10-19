@@ -1,10 +1,11 @@
 import { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 import ServerAvailability from "../Scripts/ServerAvailability";
 
 const Login = () => {
+  const navigate = useNavigate()
   const [data, setData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
   const handleChange = ({ currentTarget: input }) => {
@@ -17,7 +18,7 @@ const Login = () => {
       const { data: res } = await axios.post(url, data);
       localStorage.setItem("token", res.data);
       localStorage.setItem("email", data.email);
-      window.location = "/";
+      navigate("/")
     } catch (error) {
       if (
         error.response &&
@@ -39,6 +40,7 @@ const Login = () => {
             <h1>Zaloguj się do konta</h1>
             <input
               type="email"
+              data-testid="email-input"
               placeholder="Email"
               name="email"
               onChange={handleChange}
@@ -56,7 +58,11 @@ const Login = () => {
               className={styles.input}
             />
             {error && <div className={styles.error_msg}>{error}</div>}
-            <button type="submit" className={styles.green_btn}>
+            <button
+              data-testid="login-button"
+              type="submit"
+              className={styles.green_btn}
+              >
               Zaloguj
             </button>
             Dane logowania do kont testowych: Admin@admin.pl Admin123.
