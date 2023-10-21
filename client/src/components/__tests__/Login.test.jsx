@@ -8,7 +8,24 @@ import "jest-localstorage-mock";
 import { act } from "react-dom/test-utils";
 
 
+const localStorageMock = (() => {
+  let store = {};
+  return {
+    getItem: key => store[key],
+    setItem: (key, value) => {
+      store[key] = value.toString();
+    },
+    clear: () => {
+      store = {};
+    },
+  };
+})();
+Object.defineProperty(window, "localStorage", { value: localStorageMock });
+
+
+
 describe(Login, () => {
+
   it("renders correctly", () => {
     const tree = renderer
       .create(
@@ -52,7 +69,7 @@ describe(Login, () => {
   });
 
   it("redirects to signup page on 'Zarejestruj' button click", () => {
-    const { container, getByText } = render(
+    const { container } = render(
       <MemoryRouter initialEntries={["/login"]}>
         <Routes>
           <Route path="/login" element={<Login />} />
@@ -62,14 +79,14 @@ describe(Login, () => {
     );
 
     // Kliknij przycisk "Zarejestruj"
-    const registerButton = getByText("Zarejestruj");
+    const registerButton = screen.getByText("Zarejestruj");
     fireEvent.click(registerButton);
 
     // Sprawdź, czy użytkownik został przekierowany na stronę /signup
     expect(container.innerHTML).toContain("SignUp page");
   });
 
-  it("redirects to main page after successful", async () => {
+  it("redirects to main page after successful login", async () => {
     localStorage.setItem("token", "652bb7770c11a8d9034b8101");
     localStorage.setItem("email", "user@user.pl");
 
@@ -87,10 +104,57 @@ describe(Login, () => {
     fireEvent.change(emailInput, { target: { value: "user@user.pl" } });
     fireEvent.change(passwordInput, { target: { value: "User123." } });
 
-    const loginButton = getByText("Zaloguj");
-    await act(async () => {
+    const loginButton = screen.getByText("Zaloguj");
       fireEvent.click(loginButton);
-    });
     expect(window.location.pathname).toBe("/");
 });
+
+  it("displays error message on failed login", async () => {
+    const { getByText } = render(
+      <MemoryRouter>
+          <Login />
+      </MemoryRouter>
+    );
+
+    const emailInput = screen.getByTestId("email-input");
+    const passwordInput = screen.getByPlaceholderText("Password");
+
+    fireEvent.change(emailInput, { target: { value: "dwada@dad.pl" } });
+    fireEvent.change(passwordInput, { target: { value: "dawdawdawd" } });
+
+    const loginButton = screen.getByText("Zaloguj");
+      fireEvent.click(loginButton);
+    setTimeout(() => {
+      expect(screen.getByTestId("error_msg")).toBeInTheDocument();
+    }, 500);
+  }
+  );
+
+  it("saves data to localStorage on successful login", async () => {
+    const { getByText } = render(
+      <MemoryRouter>
+          <Login />
+      </MemoryRouter>
+    );
+
+    const emailInput = screen.getByTestId("email-input");
+    const passwordInput = screen.getByPlaceholderText("Password");
+
+    fireEvent.change(emailInput, { target: { value: "user@user.pl" } });
+    fireEvent.change(passwordInput, { target: { value: "User123." } });
+
+    const loginButton = screen.getByText("Zaloguj");
+      fireEvent.click(loginButton);
+
+    expect(localStorage.getItem("token")).toBe("652bb7770c11a8d9034b8101");
+    expect(localStorage.getItem("email")).toBe("user@user.pl");
+  }
+  );
+
+  
+
+
+
+
+
 });

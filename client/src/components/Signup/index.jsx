@@ -92,8 +92,8 @@ const Signup = () => {
               required
               className={styles.input}
             />
-            {error && <div className={styles.error_msg}>{error}</div>}
-            <button type="submit" className={styles.green_btn}>
+            {error && <div data-testid="error_msg" className={styles.error_msg}>{error}</div>}
+            <button data-testid="submit-btn" type="submit" className={styles.green_btn}>
               Zarejestruj
             </button>
           </form>
