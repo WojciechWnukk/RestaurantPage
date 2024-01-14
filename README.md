@@ -21,3 +21,6 @@ Some examples of functionality:
 - graph with earning with download option
 - product searching
 - reservation system
+
+
+Integrated with mobile app: https://github.com/Harlack/RestaurantApp
