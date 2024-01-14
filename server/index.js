@@ -45,6 +45,7 @@ app.get("/api/orders/:orderId", orderRoutes);
 app.use("/api/auth", authRoutes);
 
 app.use("/api/payment", paymentRoutes);
+app.use("/api/payment/payment-sheet", paymentRoutes);
 
 app.put("/api/products/:productId", productRoutes);
 app.use("/api/products", productRoutes);
