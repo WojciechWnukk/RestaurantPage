@@ -17,7 +17,7 @@ import {
 import NavigationSelector from "../Scripts/NavigationSelector";
 import ServerAvailability from "../Scripts/ServerAvailability";
 
-const Main = ({ }) => {
+const Main = ({}) => {
   const [selectedCategory, setSelectedCategory] = useState(categoriesData[0]);
   const [cartItems, setCartItems] = useState([]);
   const [products, setProducts] = useState([]);
@@ -56,6 +56,7 @@ const Main = ({ }) => {
     } else {
       const updatedCartItems = [...cartItems, { ...food, quantity: 1 }];
       setCartItems(updatedCartItems);
+      console.log(updatedCartItems);
     }
     console.log(cartItems);
   };
@@ -92,9 +93,7 @@ const Main = ({ }) => {
 
   return (
     <div className={styles.main_container}>
-      <div>
-        {/*<ServerAvailability></ServerAvailability>*/}
-      </div>
+      <div>{/*<ServerAvailability></ServerAvailability>*/}</div>
       <div>
         <CheckRoles>
           {(details) => (

@@ -11,14 +11,13 @@ router.post("/", async (req, res) => {
     const user = await User.findOne({ email: req.body.email });
     if (!user)
       return res.status(401).send({ message: "Niepoprawny email lub hasło" });
-    const validPassword = await bcrypt.compare(
+    const validPassword = bcrypt.compare(
       req.body.password,
       user.password
     );
     if (!validPassword)
       return res.status(401).send({ message: "Invalid Password" });
     const token = user.generateAuthToken();
-    console.log("Loginguje");
     res.status(200).send({ data: token, message: "logged in successfully" });
   } catch (error) {
     res.status(500).send({ message: "Internal Server Errordsds" });

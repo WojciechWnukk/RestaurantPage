@@ -45,4 +45,60 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.post("/payment-sheet", async (req, res) => {
+  try {
+    const {
+      userEmail,
+      userToken,
+      tableNumber,
+      comments,
+      meals,
+      totalPrice
+    } = req.body;
+
+    const customer = await stripe.customers.create();
+
+    const ephemeralKey = await stripe.ephemeralKeys.create(
+      { customer: customer.id },
+      { apiVersion: '2023-10-16' }
+    );
+
+    // Tworzenie zamówienia
+    const orderData = {
+      tableNumber: tableNumber,
+      comments: comments,
+      meals: meals,
+      totalPrice: totalPrice,
+      userToken: userToken,
+      userEmail: userEmail,
+      orderRate: 0,
+      status: "Zamówiono",
+      paymentStatus: "Oplacono",
+    };
+
+    // Zapis zamówienia w bazie danych
+    const order = new Order(orderData);
+    await order.save();
+
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: Math.round(totalPrice * 100),
+      currency: 'pln',
+      customer: customer.id,
+      automatic_payment_methods: {
+        enabled: true,
+      },
+    });
+
+    res.json({
+      paymentIntent: paymentIntent.client_secret,
+      ephemeralKey: ephemeralKey.secret,
+      customer: customer.id,
+      publishableKey: 'pk_test_51NUCO4CTvIeCfZ48NcnZga4vVwWBjMV21jqsmPWuBgc9i6CSHUQIfC3hIgjBrdOiu5uMosaLlwmEhQzrWPEAdqYZ00NcG5v8jk'
+    });
+  } catch (error) {
+    console.error("Błąd podczas tworzenia płatności za pomocą payment-sheet:", error);
+    res.status(500).json({ error: "An error occurred while creating the payment with payment-sheet." });
+  }
+});
+
 module.exports = router;

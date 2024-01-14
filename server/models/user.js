@@ -30,19 +30,13 @@ const validate = (data) => {
     numeric: 1,
     symbol: 1,
   };
-
   const schema = Joi.object({
     firstName: Joi.string().required().label("First Name"),
     lastName: Joi.string().required().label("Last Name"),
     phoneNumber: Joi.string().optional().label("Phone Number"),
     email: Joi.string().email().required().label("Email"),
-    password: passwordComplexity(complexityOptions)
-      .optional()
-      .label("Password"),
-    roles: Joi.string()
-      .valid("User", "Admin", "Employee")
-      .label("Role")
-      .optional(),
+    password: passwordComplexity(complexityOptions).optional().label("Password"),
+    roles: Joi.string().valid("User", "Admin", "Employee").label("Role").optional(),
     points: Joi.number().optional().label("Points"),
   });
   return schema.validate(data);
