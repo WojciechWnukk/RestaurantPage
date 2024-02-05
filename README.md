@@ -1,6 +1,7 @@
 # RestaurantPage
 System to support restaurant service - MERN STACK
 
+Some views from the application:
 ![image](https://github.com/WojciechWnukk/RestaurantPage/assets/131540870/5023806f-beae-4289-9ef7-b0a52cddd96b)
 ![image](https://github.com/WojciechWnukk/RestaurantPage/assets/131540870/4f4325c1-794a-48ae-9907-06c0f76a4d3a)
 ![image](https://github.com/WojciechWnukk/RestaurantPage/assets/131540870/42e39cdd-cfbc-40f4-81cc-98afb342cbaa)
