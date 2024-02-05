@@ -7,8 +7,6 @@ System to support restaurant service - MERN STACK
 ![image](https://github.com/WojciechWnukk/RestaurantPage/assets/131540870/0bdffff2-c4c3-4626-805b-355378449f68)
 ![image](https://github.com/WojciechWnukk/RestaurantPage/assets/131540870/1bbc3f31-0a69-494e-98df-a8871ee34a48)
 ![image](https://github.com/WojciechWnukk/RestaurantPage/assets/131540870/0314498e-53f0-45a3-8126-a1920dd8844a)
-![Uploading image.png…]()
-
 
 
 Some examples of functionality:
