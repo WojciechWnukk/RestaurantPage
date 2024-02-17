@@ -1,4 +1,4 @@
-# RestaurantPage
+# RestaurantPage Engineering project
 System to support restaurant service - MERN STACK
 
 Some views from the application:
